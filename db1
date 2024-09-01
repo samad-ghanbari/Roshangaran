@@ -1,0 +1,112 @@
+users:<staff>
+	id
+	name
+	lastname
+	nat_id
+	passowrd
+	mail
+	position
+	roles
+		mod1
+			read
+			write
+		mod2
+			read
+			write
+	enabled
+	
+
+modules
+	id
+	name
+	description
+
+students
+	id
+	name
+	lastname
+	nat_id
+	father_name
+	birthday
+	password
+	
+parents:
+	id
+	student_id
+	relation
+	name
+	lastname
+	nat_id
+	password
+	telephone
+	
+study_stage
+	id
+	stage
+	
+study_period
+	id
+	years
+	
+stage_period
+	id
+	stage_id
+	period_id
+	
+classes
+	id
+	stage_period_id
+	name
+	
+			student_class:
+				id
+				student_id
+				class_id
+	
+courses
+	id
+	stage_period_id
+	course
+	
+teachers
+	id
+	name
+	lastname
+	nat_id
+	telephone
+	field
+	year
+	enabled
+	
+teacher_courses
+	id
+	teacher_id
+	course_id
+	period_id
+		
+student_courses:
+	id
+	student_id
+	class_id
+	course_id
+	teacher_id
+	
+student_course_status
+	id
+	student_course_id
+	status_key
+	status_value
+	
+	
+coefficients
+	id
+	course_id
+	value
+	
+	
+	
+	
+	
+	
+	
+	
