@@ -21,21 +21,28 @@ modules
 	name
 	description
 
+
+
+
+
+
 students
 	id
 	name
 	lastname
-	nat_id
 	father_name
-	birthday
+	gender
+	nat_id
 	password
+	birthday
+	enabled
 	
 parents:
 	id
 	student_id
-	relation
 	name
 	lastname
+	relationship
 	nat_id
 	password
 	telephone
@@ -52,16 +59,11 @@ stage_period
 	id
 	stage_id
 	period_id
-	
+
 classes
 	id
-	stage_period_id
-	name
+	class
 	
-			student_class:
-				id
-				student_id
-				class_id
 	
 courses
 	id
@@ -72,38 +74,49 @@ teachers
 	id
 	name
 	lastname
-	nat_id
+	email
 	telephone
+	degree
 	field
-	year
+	employed_at
+	end_year
+	nat_id
+	password
 	enabled
+	
+teacher_detail
+	id
+	teacher_id
+	degree
+	field
+	employed_at
+	quit_at
 	
 teacher_courses
 	id
 	teacher_id
 	course_id
-	period_id
+	
 		
 student_courses:
 	id
 	student_id
-	class_id
 	course_id
 	teacher_id
+	class_id
 	
-student_course_status
-	id
-	student_course_id
-	status_key
-	status_value
-	
-	
-coefficients
+exams
 	id
 	course_id
-	value
+	exam
+	max_grade
+	date
 	
-	
+student_exam_result
+	id
+	exam_id
+	student_id
+	grade
 	
 	
 	
