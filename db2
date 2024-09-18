@@ -6,13 +6,21 @@ users:<staff>
 	passowrd
 	mail
 	position
-	roles
+	access
 		mod1
-			read
-			write
-		mod2
-			read
-			write
+			read/write
+			
+	permission:
+		branch
+			id-1
+				read/write
+		step
+			id-1
+				read/write
+		grade
+			id-1
+				read/write
+		
 	enabled
 	
 
@@ -21,44 +29,129 @@ modules
 	name
 	description
 
-students
+logs
 	id
-	name
-	lastname
-	nat_id
-	father_name
-	birthday
-	password
-	parents:
-		id
-		relation
-		name
-		lastname
-		nat_id
-		password
-		telephone
+	user_id
+	branch_id
+	timestamp
+	target
+	action [Create-Update-Delete]
+	detail 
 
+Branches
+	id
+	city
+	branch_name
+	address
+	description
+
+steps_dore
+	id
+	branch_id
+	step_name
+
+grades_payeh:
+	id
+	step_id
+	grade_name
+
+study_period
+	id
+	grade_id
+	period
+	
+classes
+	id
+	period_id
+	class_name
+	
+courses:
+	id
+	class_id
+	course_name
+	
+gradeless_courses
+	id
+	step_id
+	class_name
+	period
+	description
+	
 teachers
 	id
 	name
 	lastname
-	nat_id
+	email
 	telephone
-	field
-	year
+	nat_id
+	password
 	enabled
-	courses
-		id
-		course_id
+	
+teacher_detail
+	id
+	teacher_id
+	degree
+	field
+	employed_at
+	branch_id
+	quit_at
+	
+teacher_course
+	id
+	teacher_detail_id
+	course_id
+	gradeless_course_id	
+	
+students
+	id
+	name
+	lastname
+	father_name
+	gender
+	nat_id
+	password
+	birthday
+	enabled
 
-courses
+parents:
 	id
-	course 
-	study_period
-		
-step
+	student_id
+	name
+	lastname
+	relationship
+	nat_id
+	password
+	telephone
+	enabled
+	
+student_detail
 	id
-	stage
-	period
-	students
+	student_id
+	study_class_id	
 		
+student_course
+	id
+	student_id
+	course_id
+	gradeless_course_id
+	teacher_course_id
+
+evaluations:
+	id
+	course_id
+	gradeless_course_id
+	eval_name
+	maximum_grade
+	date
+	
+student_evaluations
+	id
+	eval_id
+	student_id
+	grade
+	
+	
+	
+	
+	
+	
