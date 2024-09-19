@@ -6,7 +6,7 @@ Page {
 
     Image {
         id: backimageId
-        source: ":/images/background/back1.jpg"
+        source: "qrc:/Assets/Images/background/back1.jpg"
         anchors.fill: parent
         opacity: 1
     }
@@ -56,7 +56,7 @@ Page {
 
             Image {
                 id: loginImageId
-                source: "logo.png"
+                source: "qrc:/Assets/Images/logo/logo64.png"
                 width: 64
                 height: 64
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -138,7 +138,7 @@ Page {
                     {
                         backgroundAnimId.start()
                         console.log("clicked login")
-                        stackview.replace(Qt.createComponent("Home.qml"))
+                        stackview.replace(Qt.createComponent("./../home/Home.qml"))
                     }
                 }
             }

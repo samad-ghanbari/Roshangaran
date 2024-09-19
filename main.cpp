@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QResource>
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +14,7 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
         
-    engine.loadFromModule("Roshangaran", "Login.qml");
+    engine.loadFromModule("Roshangaran", "Main");
 
     return app.exec();
 }
