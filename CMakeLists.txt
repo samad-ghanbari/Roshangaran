@@ -12,12 +12,24 @@ qt_add_executable(appRoshangaran
     main.cpp
 )
 
+# database support
+find_package(Qt6 REQUIRED COMPONENTS Sql)
+target_link_libraries(appRoshangaran PRIVATE Qt6::Sql)
+
+# printsupport
+find_package(Qt6 REQUIRED COMPONENTS PrintSupport)
+
 qt_add_qml_module(appRoshangaran
     URI Roshangaran
     VERSION 1.0
     QML_FILES UI/Main.qml
     QML_FILES UI/login/Login.qml
     QML_FILES UI/home/Home.qml
+    SOURCES Lib/database/dbman.h Lib/database/dbman.cpp
+    SOURCES Backend/backend.h Backend/backend.cpp
+    QML_FILES UI/login/NewRelease.qml UI/login/NoConnection.qml
+    SOURCES Lib/version.h
+    QML_FILES UI/login/OnMaintenance.qml
 )
 
 qt_add_resources(appRoshangaran "assets"
@@ -28,15 +40,19 @@ qt_add_resources(appRoshangaran "assets"
         Assets/icon/logo64.ico
         Assets/icon/logo128.ico
 
-        Assets/Images/background/back1.jpg
-        Assets/Images/background/back2.jpg
-        Assets/Images/background/back3.jpg
-        Assets/Images/background/back4.jpg
+        Assets/images/background/back1.jpg
+        Assets/images/background/back2.jpg
+        Assets/images/background/back3.jpg
+        Assets/images/background/back4.jpg
 
-        Assets/Images/logo/logo64.png
-        Assets/Images/logo/logo128.png
-        Assets/Images/logo/logo512.png
-        Assets/Images/logo/logo1024.png
+        Assets/images/logo/logo64.png
+        Assets/images/logo/logo128.png
+        Assets/images/logo/logo512.png
+        Assets/images/logo/logo1024.png
+
+        Assets/images/login/disconnection.png
+        Assets/images/login/maintenance.png
+        Assets/images/login/release.png
 
 )
 

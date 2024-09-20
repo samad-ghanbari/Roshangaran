@@ -6,7 +6,7 @@ Page {
 
     Image {
         id: backimageId
-        source: "qrc:/Assets/Images/background/back1.jpg"
+        source: "qrc:/Assets/images/background/back1.jpg"
         anchors.fill: parent
         opacity: 1
     }
@@ -56,7 +56,7 @@ Page {
 
             Image {
                 id: loginImageId
-                source: "qrc:/Assets/Images/logo/logo64.png"
+                source: "qrc:/Assets/images/logo/logo64.png"
                 width: 64
                 height: 64
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -73,7 +73,7 @@ Page {
                 color: "#FFF"
                 font.bold: true
                 font.pixelSize: 20
-                font.family: myFont.font.family
+                font.family: yekanFont.font.family
 
                 horizontalAlignment:  Text.AlignHCenter
             }
@@ -108,6 +108,7 @@ Page {
 
                     //anchors.horizontalCenter: parent.horizontalCenter
                     background: Rectangle {
+                        id: cancelBtnId
                         implicitWidth: 100
                         implicitHeight: 50
                         color: closeBtnId.down ? "#FAA" : "#FEE"
@@ -119,6 +120,9 @@ Page {
                         backgroundAnimId.start()
                         appWindowId.close();
                     }
+                    hoverEnabled: true
+                    onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
+
                 }
                 Button {
                     id: button
@@ -128,22 +132,30 @@ Page {
 
                     //anchors.horizontalCenter: parent.horizontalCenter
                     background: Rectangle {
+                        id:loginBtnId
                         implicitWidth: 100
                         implicitHeight: 50
-                        color: button.down ? "#EFE" : "#77bbf7"
+                        color: button.down ? "#3858ff" : "#77bbf7"
                         border.width: 1
                         border.color:"#88F"
                     }
                     onClicked:
                     {
                         backgroundAnimId.start()
-                        console.log("clicked login")
+
                         stackview.replace(Qt.createComponent("./../home/Home.qml"))
                     }
+                    hoverEnabled: true
+                    onHoveredChanged: loginBtnId.color= hovered? "#77aaf7"  : "#77bbf7";
                 }
             }
 
-
+            Item{height:10;width:parent.width}
+            Text {
+                id: versiontxt
+                text: "Version " + dbMan.getAppVersion();
+                color: "gray"
+            }
         }
     }
 
