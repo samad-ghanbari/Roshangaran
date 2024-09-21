@@ -2,18 +2,25 @@
 #define BACKEND_H
 
 #include <QObject>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+
 class DbMan;
 
 class Backend : public QObject
 {
     Q_OBJECT
+
 public:
-    explicit Backend(QObject *parent = nullptr);
-    void setDatabase(DbMan *_dbMan);
+    explicit Backend(QGuiApplication &app, QObject *parent = nullptr);
+public slots:
+    void initiate();
 
 
 private:
     DbMan *dbMan;
+    QQmlApplicationEngine engine;
 };
 
 #endif // BACKEND_H

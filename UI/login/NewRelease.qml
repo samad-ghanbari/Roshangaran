@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls.Basic
 
 Page {
-    id: onMaintenanceId
+    id: newReleaseWindowId
 
     Image {
         id: backgroundNoConnId

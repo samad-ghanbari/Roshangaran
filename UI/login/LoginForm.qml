@@ -4,6 +4,48 @@ import QtQuick.Controls.Basic
 Page {
     id: appLoginForm
 
+    function loginBtnClicked()
+    {
+        incorrectUserPassTxt.text ="";
+        backgroundAnimId.start()
+        var username = usernameField.text
+        var password = passwordField.text
+        if( (username === "") || (password === ""))
+        {
+            incorrectUserPassTxt.text = "نام‌کاربری و پسورد الزامی می‌باشد."
+            incorrectuserPassAnim.start()
+            return;
+        }
+
+        if(dbMan.userAuthenticate(username, password))
+        {
+            var user = dbMan.getUser();
+            // id name lastname nat_id email position access permissions enabled
+            //stackview.replace(Qt.createComponent("./../home/Home.qml"))
+            var access = user["access"];
+            // branch []
+            // step []
+            // grade []
+            // module []
+            var permission = user["permission"];
+            //module
+                // write [] else are read
+            loginInitialItem.visible=false;
+            loginInitialItem.enabled=false;
+            loginInitialItem.destroy();
+            appLoginWindowId.hide();
+            var homeWindowComponent = Qt.createComponent("./../home/HomeWindow.qml");
+            var homeWindow = homeWindowComponent.createObject(backend);
+
+        }
+        else
+        {
+            incorrectUserPassTxt.text = "نام‌کاربری یا پسورد اشتباه می‌باشد."
+            incorrectuserPassAnim.start()
+            return;
+        }
+    }
+
     Image {
         id: backimageId
         source: "qrc:/Assets/images/background/back1.jpg"
@@ -80,19 +122,21 @@ Page {
 
             TextField
             {
-                id: username
+                id: usernameField
                 height: 50
                 width : parent.width
-                placeholderText: "username"
-                focus: true
+                placeholderText: "کد ملی"
+                font.family: yekanFont.font.family
             }
 
             TextField
             {
-                id: password
+                id: passwordField
                 height: 50
                 width : parent.width
-                placeholderText: "password"
+                font.family: yekanFont.font.family
+                placeholderText: "رمز عبور"
+                echoMode: "Password"
             }
 
             Item{height:10;width:parent.width}
@@ -118,7 +162,7 @@ Page {
                     onClicked:
                     {
                         backgroundAnimId.start()
-                        appWindowId.close();
+                        appLoginWindowId.close();
                     }
                     hoverEnabled: true
                     onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
@@ -129,6 +173,8 @@ Page {
                     text: "Login"
                     height: 50
                     width : parent.width/2
+                    focus: true
+                    Keys.onEnterPressed: {loginBtnClicked();}
 
                     //anchors.horizontalCenter: parent.horizontalCenter
                     background: Rectangle {
@@ -141,13 +187,13 @@ Page {
                     }
                     onClicked:
                     {
-                        backgroundAnimId.start()
-
-                        stackview.replace(Qt.createComponent("./../home/Home.qml"))
+                        loginBtnClicked();
                     }
                     hoverEnabled: true
                     onHoveredChanged: loginBtnId.color= hovered? "#77aaf7"  : "#77bbf7";
+
                 }
+
             }
 
             Item{height:10;width:parent.width}
@@ -156,9 +202,23 @@ Page {
                 text: "Version " + dbMan.getAppVersion();
                 color: "gray"
             }
+            Item{height:5;width:parent.width}
+            Text {
+                id: incorrectUserPassTxt
+                text: ""
+                color:"mediumvioletred"
+                font.family: yekanFont.font.family
+                font.pixelSize: 18
+                anchors.horizontalCenter: parent.horizontalCenter
+                ScaleAnimator on scale {
+                        id: incorrectuserPassAnim
+                        from: 1.5;
+                        to: 1;
+                        duration: 1000
+                        running: false
+                    }
+            }
         }
     }
-
-
 
 }

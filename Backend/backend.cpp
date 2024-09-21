@@ -1,11 +1,22 @@
 #include "backend.h"
 #include "Lib/database/dbman.h"
 
-Backend::Backend(QObject *parent)
+Backend::Backend(QGuiApplication &app, QObject *parent)
     : QObject{parent}, dbMan(nullptr)
-{}
-
-void Backend::setDatabase(DbMan *_dbMan)
 {
-    dbMan = _dbMan;
+    dbMan = new DbMan(this);
+    QQmlApplicationEngine engine;
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreationFailed,
+        &app,
+        []() { QCoreApplication::exit(-1); },
+        Qt::QueuedConnection);
+}
+
+void Backend::initiate()
+{
+    engine.rootContext()->setContextProperty("backend", this);
+    engine.rootContext()->setContextProperty("dbMan", dbMan);
+    engine.loadFromModule("Roshangaran", "LoginWindow");
 }

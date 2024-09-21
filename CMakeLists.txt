@@ -22,14 +22,16 @@ find_package(Qt6 REQUIRED COMPONENTS PrintSupport)
 qt_add_qml_module(appRoshangaran
     URI Roshangaran
     VERSION 1.0
-    QML_FILES UI/Main.qml
-    QML_FILES UI/login/Login.qml
-    QML_FILES UI/home/Home.qml
+    QML_FILES UI/login/LoginWindow.qml
+    QML_FILES UI/login/LoginForm.qml
+    QML_FILES UI/home/HomeWindow.qml
     SOURCES Lib/database/dbman.h Lib/database/dbman.cpp
     SOURCES Backend/backend.h Backend/backend.cpp
     QML_FILES UI/login/NewRelease.qml UI/login/NoConnection.qml
     SOURCES Lib/version.h
     QML_FILES UI/login/OnMaintenance.qml
+    QML_FILES UI/login/InitialLogin.qml
+
 )
 
 qt_add_resources(appRoshangaran "assets"

@@ -1,8 +1,9 @@
 import QtQuick
+import QtQuick.Window
 import QtQuick.Controls.Basic
 
-Page {
-    id: appLoginForm
+Window {
+    id: appNoConnWindow
 
     Image {
         id: backgroundNoConnId
