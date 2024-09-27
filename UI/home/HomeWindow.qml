@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
+import QtQuick.Layouts
 
 ApplicationWindow {
 
@@ -10,16 +11,15 @@ ApplicationWindow {
     visibility: Window.Maximized
     visible: true
     color: "lavender"
-    title: qsTr("روشنگران")
+    title: qsTr("مدارس روشنگران")
+    LayoutMirroring.enabled: true
+    LayoutMirroring.childrenInherit: true
     //flags: Qt.WindowSystemMenuHint | ~Qt.WindowCloseButtonHint;
-
 
     FontLoader { id: yekanFont; source: "qrc:/Assets/font/yekan.ttf" }
 
-    Text {
-        id: homeTxtId
-        text: qsTr("Home")
-        anchors.centerIn: parent
-        font.pixelSize: 28
-    }
+    menuBar: MenubarModule{id: menuBarId;}
+    ToolbarModule{id:toolbarId;}
+
+
 }

@@ -31,6 +31,8 @@ qt_add_qml_module(appRoshangaran
     SOURCES Lib/version.h
     QML_FILES UI/login/OnMaintenance.qml
     QML_FILES UI/login/InitialLogin.qml
+    QML_FILES UI/home/ToolbarModule.qml
+    QML_FILES UI/home/MenubarModule.qml
 
 )
 
@@ -55,6 +57,19 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/login/disconnection.png
         Assets/images/login/maintenance.png
         Assets/images/login/release.png
+
+        Assets/images/users.png
+        Assets/images/branch.png
+        Assets/images/school.png
+        Assets/images/school2.png
+        Assets/images/date.png
+        Assets/images/classroom.png
+        Assets/images/course.png
+        Assets/images/teacher.png
+        Assets/images/parents.png
+        Assets/images/student.png
+        Assets/images/evaluation.png
+
 
 )
 

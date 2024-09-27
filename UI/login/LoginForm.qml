@@ -19,24 +19,13 @@ Page {
 
         if(dbMan.userAuthenticate(username, password))
         {
-            var user = dbMan.getUser();
-            // id name lastname nat_id email position access permissions enabled
-            //stackview.replace(Qt.createComponent("./../home/Home.qml"))
-            var access = user["access"];
-            // branch []
-            // step []
-            // grade []
-            // module []
-            var permission = user["permission"];
-            //module
-                // write [] else are read
             loginInitialItem.visible=false;
             loginInitialItem.enabled=false;
             loginInitialItem.destroy();
             appLoginWindowId.hide();
-            var homeWindowComponent = Qt.createComponent("./../home/HomeWindow.qml");
-            var homeWindow = homeWindowComponent.createObject(backend);
-
+            //var homeWindowComponent = Qt.createComponent("./../home/HomeWindow.qml");
+            //var homeWindow = homeWindowComponent.createObject(backend);
+            backend.loadHome();
         }
         else
         {
