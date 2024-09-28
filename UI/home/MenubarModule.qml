@@ -1,5 +1,8 @@
 import QtQuick
 import QtQuick.Controls
+
+import "./../user"
+
 // menuBar: MenubarModule{}
 MenuBar {
     id: menubarId;
@@ -30,7 +33,7 @@ MenuBar {
         title: "کاربران"
         font.family: yekanFont.font.family
         font.pixelSize: 16
-        Action { text: "کاربر جدید"; onTriggered: console.log("new user"); icon.source: "qrc:/Assets/images/newUser.png"; icon.width: 24;icon.height:24; }
+        Action { text: "کاربر جدید"; onTriggered: homeStackViewId.push(newUserPageComponent); icon.source: "qrc:/Assets/images/newUser.png"; icon.width: 24;icon.height:24; }
         MenuSeparator { }
         Action { text: "لیست کاربران"; onTriggered: console.log("users"); icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24; }
     }
@@ -105,5 +108,11 @@ MenuBar {
             icon.source: "qrc:/Assets/images/user.png"; icon.width: 24;icon.height:24;
         }
 
+    }
+
+    Component
+    {
+        id: newUserPageComponent
+        NewUser{}
     }
 }

@@ -3,7 +3,6 @@ import QtQuick.Controls
 
 Page {
     id: homePageId
-    anchors.fill: parent
     background: Image {
         id: bgHomePage
         source: "qrc:/Assets/images/background/back3.jpg"
