@@ -18,12 +18,13 @@ ApplicationWindow {
 
     FontLoader { id: yekanFont; source: "qrc:/Assets/font/yekan.ttf" }
 
-    menuBar: MenubarModule{
-        id: menubarId;
-    }
+    menuBar: MenubarModule{id: menubarId;}
+    header : ToolbarModule{id:toolbarId; }
 
-    ToolbarModule{
-        id:toolbarId;
-    }
+    StackView {
+            id: homeStackViewId
+            initialItem: HomePage{}
+            anchors.fill: parent
+        }
 
 }

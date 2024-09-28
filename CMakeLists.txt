@@ -33,6 +33,7 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/login/InitialLogin.qml
     QML_FILES UI/home/ToolbarModule.qml
     QML_FILES UI/home/MenubarModule.qml
+    QML_FILES UI/home/HomePage.qml
 
 )
 
@@ -59,6 +60,8 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/login/release.png
 
         Assets/images/users.png
+        Assets/images/user.png
+        Assets/images/newUser.png
         Assets/images/branch.png
         Assets/images/school.png
         Assets/images/school2.png
@@ -69,6 +72,7 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/parents.png
         Assets/images/student.png
         Assets/images/evaluation.png
+        Assets/images/toolbox.png
 
 
 )
