@@ -2,9 +2,29 @@ import QtQuick
 import QtQuick.Controls
 // menuBar: MenubarModule{}
 MenuBar {
-    property alias menuSettingId: menuSettingId
+    id: menubarId;
+    property alias menuSettingTBId: menuSettingTBId
+    property bool toolbarView: true
     font.family: yekanFont.font.family
     font.pixelSize: 16
+
+    Connections
+    {
+        target: toolbarId
+        function onToolBarShow()
+        {
+            menuSettingTBId.text="حذف نوار‌ابزار";
+            toolbarView=true
+            toolbarId.visible=true;
+        }
+
+        function onToolBarHide()
+        {
+            menuSettingTBId.text="نمایش نوار‌ابزار";
+            toolbarView=false
+            toolbarId.visible=false;
+        }
+    }
 
     Menu {
         title: "کاربران"
@@ -54,12 +74,29 @@ MenuBar {
         font.pixelSize: 16
         Action { text: "ارزیابی‌ها"; onTriggered: console.log("new user"); }
     }
+
     Menu {
         id: menuSettingId
         title: "تنظیمات"
         font.family: yekanFont.font.family
         font.pixelSize: 16
-        Action { text: "نمایش نوار‌ابزار"; onTriggered:  toolbarId.visible=true;  }
+        Action {
+            id:menuSettingTBId; text: "حذف نوار‌ابزار";
+            onTriggered:
+                if(toolbarView)
+                {
+                    menuSettingTBId.text="نمایش نوار‌ابزار";
+                    toolbarView=false
+                    toolbarId.visible=false;
+                }
+                else
+                {
+                    menuSettingTBId.text="حذف نوار‌ابزار";
+                    toolbarView=true
+                    toolbarId.visible=true;
+
+                }
+        }
 
     }
 }

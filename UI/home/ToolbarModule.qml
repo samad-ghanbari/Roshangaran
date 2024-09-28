@@ -5,7 +5,8 @@ import QtQuick.Layouts
 
 
 ToolBar {
-    property alias switchId : toolbarSwitchId
+    id:toolbarId;
+    property alias toolbarSwitchId : toolbarSwitchId
     position: ToolBar.Header
     width: parent.width
     onWidthChanged: appWidthChanged();
@@ -32,17 +33,17 @@ ToolBar {
             menuParentId.icon.width=1
             menuEvalId.icon.width=1
 
-            menuUserId.font.pixelSize=12
-            menuBranchId.font.pixelSize=12
-            menuStepId.font.pixelSize=12
-            menuBaseId.font.pixelSize=12
-            menuPeriodId.font.pixelSize=12
-            menuClassId.font.pixelSize=12
-            menuCourseId.font.pixelSize=12
-            menuTeacherId.font.pixelSize=12
-            menuStudentId.font.pixelSize=12
-            menuParentId.font.pixelSize=12
-            menuEvalId.font.pixelSize=12
+            menuUserId.font.pixelSize=14
+            menuBranchId.font.pixelSize=14
+            menuStepId.font.pixelSize=14
+            menuBaseId.font.pixelSize=14
+            menuPeriodId.font.pixelSize=14
+            menuClassId.font.pixelSize=14
+            menuCourseId.font.pixelSize=14
+            menuTeacherId.font.pixelSize=14
+            menuStudentId.font.pixelSize=14
+            menuParentId.font.pixelSize=14
+            menuEvalId.font.pixelSize=14
 
 
         }
@@ -73,6 +74,19 @@ ToolBar {
             menuParentId.font.pixelSize=16
             menuEvalId.font.pixelSize=16
         }
+    }
+
+    signal toolBarShow
+    signal toolBarHide
+
+    onToolBarShow:
+    {
+        toolbarId.visible=true
+    }
+
+    onToolBarHide:
+    {
+        toolbarId.visible=false
     }
 
     RowLayout {
@@ -227,7 +241,18 @@ ToolBar {
         {
             id: toolbarSwitchId
             checked: true
-            onClicked: {toolbarId.visible=false; toolbarSwitchId.checked=true; menuSettingId.text="aaa"}
+            onClicked: {
+                if(checked)
+                {
+                    toolbarId.toolBarShow()
+                }
+                else
+                {
+                    toolbarId.toolBarHide()
+                    toolbarSwitchId.checked=true
+                }
+
+            }
         }
     }
 }
