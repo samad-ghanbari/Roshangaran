@@ -1,3 +1,9 @@
+
+# developer:    Samad Ghanbari
+# Email:        ghanbari.Samad@gmail.com
+# Qt Version:   Qt 6.5.2
+# Postgresql:   16.4
+
 cmake_minimum_required(VERSION 3.16)
 
 project(Roshangaran VERSION 0.1 LANGUAGES CXX)
@@ -74,6 +80,11 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/student.png
         Assets/images/evaluation.png
         Assets/images/toolbox.png
+
+        Assets/images/arrow-up.png
+        Assets/images/arrow-down.png
+        Assets/images/arrow-right.png
+        Assets/images/arrow-left.png
 
 
 )

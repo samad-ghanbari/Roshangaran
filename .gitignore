@@ -1,2 +1,8 @@
 
 Lib/database
+
+build
+
+CMakeLists.txt.user
+
+

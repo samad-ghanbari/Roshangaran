@@ -105,7 +105,6 @@ Page {
                 font.bold: true
                 font.pixelSize: 20
                 font.family: yekanFont.font.family
-
                 horizontalAlignment:  Text.AlignHCenter
             }
 
@@ -116,6 +115,8 @@ Page {
                 width : parent.width
                 placeholderText: "کد ملی"
                 font.family: yekanFont.font.family
+                KeyNavigation.tab: passwordField
+                focus: true
             }
 
             TextField
@@ -126,6 +127,7 @@ Page {
                 font.family: yekanFont.font.family
                 placeholderText: "رمز عبور"
                 echoMode: "Password"
+                KeyNavigation.tab: loginBtnId
             }
 
             Item{height:10;width:parent.width}
@@ -135,7 +137,9 @@ Page {
                 width: parent.width
                 Button {
                     id: closeBtnId
-                    text: "Cancel"
+                    text: "خروج"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 14
                     height: 50
                     width : parent.width/2
 
@@ -158,19 +162,21 @@ Page {
 
                 }
                 Button {
-                    id: button
-                    text: "Login"
+                    id: loginBtnId
+                    text: "ورود به سامانه"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 14
                     height: 50
                     width : parent.width/2
                     focus: true
-                    Keys.onEnterPressed: {loginBtnClicked();}
+
 
                     //anchors.horizontalCenter: parent.horizontalCenter
                     background: Rectangle {
-                        id:loginBtnId
+                        id:loginBtnBg
                         implicitWidth: 100
                         implicitHeight: 50
-                        color: button.down ? "#3858ff" : "#77bbf7"
+                        color: loginBtnId.down ? "skyblue" : "#powderblue"
                         border.width: 1
                         border.color:"#88F"
                     }
@@ -178,8 +184,10 @@ Page {
                     {
                         loginBtnClicked();
                     }
+
+                    onFocusChanged: loginBtnBg.color= activeFocus? "skyblue"  : "powderblue";
                     hoverEnabled: true
-                    onHoveredChanged: loginBtnId.color= hovered? "#77aaf7"  : "#77bbf7";
+                    onHoveredChanged: loginBtnBg.color= hovered? "skyblue"  : "powderblue";
 
                 }
 
@@ -210,4 +218,5 @@ Page {
         }
     }
 
+    Component.onCompleted: usernameField.forceActiveFocus();
 }

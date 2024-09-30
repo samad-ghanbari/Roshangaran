@@ -34,10 +34,10 @@ Page {
         font.family: yekanFont.font.family
         font.pixelSize: 16
         font.bold: true
-        color: "mediumvioletred"
+        color: "black"
         horizontalAlignment: Text.AlignHCenter
         style: Text.Outline
-        styleColor: "white"
+        styleColor: "silver"
     }
 
 }
