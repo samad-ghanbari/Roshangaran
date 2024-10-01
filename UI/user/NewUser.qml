@@ -6,6 +6,11 @@ import "newUserJS.js" as UserMethods
 
 Page {
     id: addNewUserPageId
+    property var accessBranch: [{id:1, branch:"mir", }]
+    // property var accessStep:[]
+    // property var accessBasis
+    // property var permission
+
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
@@ -342,34 +347,27 @@ Page {
                     color: "royalblue"
                 }
 
-
-
-
-
-                ListView
+                Flow
                 {
-                    id: newUserAccessBranchId
                     Layout.columnSpan: 2
-                    model:                     ListModel {
-                        id: myModel
-                        ListElement { type: "Dog"; age: 8 }
-                        ListElement { type: "Cat"; age: 5 }
+                    Repeater
+                    {
+                        id: newUserAccessBranchId
+                        model: ListModel {id: accessBranchModel }
+                        delegate:
+                            Switch{
+                            property int branchId: id
+                            text: city + " - " + branch_name
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                            //onCheckedChanged:  accessBranch.append({"id": id, "address": address})
+                        }
                     }
-                    // ListModel{ ListElement{id:1; city:"تهران"; branch_name:"شعبه میرداماد"; address:"منطقه۳ - میرداماد، میدان مادر (محسنی)، خیابان رودبار غربی"; description:"دوره اول میرداماد"}}
-                    delegate:
-                        Text{
-                        //id: model.id
-                        text: model.type + " - " + model.age
-                        font.family: yekanFont.font.family
-                        font.pixelSize: 14
-                    }
-
                     Component.onCompleted:
                     {
-                        //UserMethods.updateAccessBranch()
+                        UserMethods.updateAccessBranch()
                     }
                 }
-
 
                 // step
                 Text {
@@ -626,7 +624,10 @@ Page {
                     Layout.preferredWidth: 200
                     Layout.preferredHeight: 50
                     Layout.alignment: Qt.AlignHCenter
-                    onClicked: {id1.scale=2}
+                    onClicked:
+                    {
+                        console.log(accessBranch[0].id)
+                    }
                 }
 
                 Item

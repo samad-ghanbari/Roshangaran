@@ -1,14 +1,14 @@
 
 //access
 function updateAccessBranch() {
-    //accessBranchModel.clear();
+    accessBranchModel.clear();
     //var jsondata = '[{"id":1, "city":"تهران", "branch_name":"شعبه میرداماد", "address":"منطقه۳ - میرداماد، میدان مادر (محسنی)، خیابان رودبار غربی", "description":"دوره اول میرداماد"}]';
     var jsondata = dbMan.getBranchesJson();
     jsondata = JSON.parse(jsondata);
 
     for(var obj of jsondata)
     {
-        //accessBranchModel.append({ id: obj.id, city: obj.city, branch_name: obj.branch_name, address: obj.address, description: obj.description})
+        accessBranchModel.append({ id: obj.id, city: obj.city, branch_name: obj.branch_name, address: obj.address, description: obj.description})
     }
 
 
@@ -56,6 +56,10 @@ function updateAccessAppModule() {
     }
 }
 
+// update access
+function updateAccess()
+{
+}
 
 //Permissions
 function updatePermissionBranch()
@@ -96,4 +100,8 @@ function updatePermissionBasis()
     }
 }
 
+//update permission
+function updatePermission()
+{
+}
 
