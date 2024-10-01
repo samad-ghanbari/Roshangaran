@@ -35,7 +35,7 @@ MenuBar {
         font.pixelSize: 16
         Action { text: "کاربر جدید"; onTriggered: homeStackViewId.push(newUserPageComponent); icon.source: "qrc:/Assets/images/newUser.png"; icon.width: 24;icon.height:24; }
         MenuSeparator { }
-        Action { text: "لیست کاربران"; onTriggered: console.log("users"); icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24; }
+        Action { text: "لیست کاربران"; onTriggered: homeStackViewId.push(listUserPageComponent); icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24; }
     }
 
     Menu {
@@ -114,5 +114,11 @@ MenuBar {
     {
         id: newUserPageComponent
         NewUser{}
+    }
+
+    Component
+    {
+        id: listUserPageComponent
+        ListUser{}
     }
 }

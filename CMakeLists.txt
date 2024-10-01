@@ -40,7 +40,11 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/home/ToolbarModule.qml
     QML_FILES UI/home/MenubarModule.qml
     QML_FILES UI/home/HomePage.qml
+
     QML_FILES UI/user/NewUser.qml
+    QML_FILES UI/user/newUserJS.js
+
+    QML_FILES UI/user/ListUser.qml
 
 )
 

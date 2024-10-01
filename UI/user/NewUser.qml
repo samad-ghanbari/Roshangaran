@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "newUserJS.js" as UserMethods
+
 Page {
     id: addNewUserPageId
 
@@ -66,7 +68,6 @@ Page {
         // access       object  branch[]-step[]-grade[]-app-module[]
         // permission   object  branch[]-step[]-grade[]-app-module[] this is write permissions
 
-
         ScrollView
         {
             id: newUserSV
@@ -78,6 +79,7 @@ Page {
             ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
             background: Rectangle{anchors.fill: parent; color:"white"; anchors.margins: -20; radius: 10}
+
 
             GridLayout
             {
@@ -278,6 +280,35 @@ Page {
                     checked: true
                 }
 
+                //enabled
+                Text {
+                    text: "ادمین سامانه"
+                    Layout.minimumWidth: 150
+                    Layout.maximumWidth: 150
+                    Layout.preferredHeight: 50
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    font.bold: true
+                    color: "crimson"
+                }
+                Switch
+                {
+                    id: newUserAdminId
+                    checked: false
+                }
+                Text {
+                    text: "هشدار! کاربر ادمین، دسترسی کامل به مدیریت سامانه دارد"
+                    Layout.columnSpan: 2
+                    Layout.alignment: Qt.AlignLeft
+                    font.family: yekanFont.font.family
+                    Layout.topMargin: -10
+                    font.pixelSize: 14
+                    font.bold: true
+                    color: "orange"
+                }
+
+
 
                 // access
                 Text {
@@ -310,31 +341,36 @@ Page {
                     font.bold: true
                     color: "royalblue"
                 }
-                Flow
-                {
-                id: newUserAccessBranchId
-                Layout.columnSpan: 2
 
-                function getBranchJson()
-                {
-                    var jsondata = '[{"id":1, "city":"تهران", "branch_name":"شعبه میرداماد", "address":"منطقه۳ - میرداماد، میدان مادر (محسنی)، خیابان رودبار غربی", "description":"دوره اول میرداماد"}]';
-                    jsondata = JSON.parse(jsondata);
-                    return jsondata;
-                }
 
-                Repeater
-                {
-                    model: newUserAccessBranchId.getBranchJson();
 
-                    Text
+
+
+                ListView
+                {
+                    id: newUserAccessBranchId
+                    Layout.columnSpan: 2
+                    model:                     ListModel {
+                        id: myModel
+                        ListElement { type: "Dog"; age: 8 }
+                        ListElement { type: "Cat"; age: 5 }
+                    }
+                    // ListModel{ ListElement{id:1; city:"تهران"; branch_name:"شعبه میرداماد"; address:"منطقه۳ - میرداماد، میدان مادر (محسنی)، خیابان رودبار غربی"; description:"دوره اول میرداماد"}}
+                    delegate:
+                        Text{
+                        //id: model.id
+                        text: model.type + " - " + model.age
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 14
+                    }
+
+                    Component.onCompleted:
                     {
-                        required property var branch
-
-                        text: branch["tehran"]
+                        //UserMethods.updateAccessBranch()
                     }
                 }
 
-                }
+
                 // step
                 Text {
                     text: "دسترسی‌ به دوره‌ها"
@@ -344,6 +380,48 @@ Page {
                     font.pixelSize: 18
                     font.bold: true
                     color: "royalblue"
+                }
+                Flow
+                {
+                    id: newUserAccessStepId
+                    Layout.columnSpan: 2
+
+                    ListView
+                    {
+                        id: newUserAccesssteId
+                        model:ListModel{id:accessStepModel}
+                        delegate:
+                            Text{
+                            //id: model.id
+                            text: step_name
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                        }
+                    }
+
+
+                    Component.onCompleted:
+                    {
+                        UserMethods.updateAccessStep()
+                    }
+
+
+                    // Repeater
+                    // {
+                    //     model: ListModel{id:accessStepModel}
+                    //     Switch
+                    //     {
+                    //         checked: false
+                    //         text: model.step_name
+                    //         font.family: yekanFont.font.family
+                    //         font.pixelSize: 14
+                    //     }
+
+                    //     Component.onCompleted:
+                    //     {
+                    //         UserMethods.updateAccessStep()
+                    //     }
+                    // }
                 }
                 // basis
                 Text {
@@ -355,6 +433,30 @@ Page {
                     font.bold: true
                     color: "royalblue"
                 }
+                Flow
+                {
+                    id: newUserAccessBasisId
+                    Layout.columnSpan: 2
+
+
+                    Repeater
+                    {
+                        model: ListModel{id:accessBasisModel}
+                        Switch
+                        {
+                            checked: false
+                            text: model.basis_name
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                        }
+
+                        Component.onCompleted:
+                        {
+                            UserMethods.updateAccessBasis()
+                        }
+                    }
+                }
+
                 //app-module
                 Text {
                     text: "دسترسی‌ به ماژول‌های برنامه"
@@ -367,16 +469,32 @@ Page {
                 }
                 Flow
                 {
-                id: newUserAccessId
-                Layout.columnSpan: 2
+                    id: newUserAccessAppModuleId
+                    Layout.columnSpan: 2
 
 
+                    Repeater
+                    {
+                        model: ListModel{id:accessappModuleModel}
+                        Switch
+                        {
+                            checked: false
+                            text: model.description
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                        }
+
+                        Component.onCompleted:
+                        {
+                            UserMethods.updateAccessAppModule();
+                        }
+                    }
                 }
 
 
                 // permissions
                 Text {
-                    text: "مجوزهای کاربر"
+                    text: "مجوزهای اعمال تغییرات"
                     Layout.columnSpan: 2
                     Layout.alignment: Qt.AlignHCenter
                     font.family: yekanFont.font.family
@@ -395,13 +513,103 @@ Page {
                 }
 
                 // branch
-                // step
-                // grade
-                //app-module
+                Text {
+                    text: "مجوز اعمال تغییرات در شعبه‌ها"
+                    Layout.columnSpan: 2
+                    Layout.alignment: Qt.AlignLeft
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 18
+                    font.bold: true
+                    color: "royalblue"
+                }
                 Flow
                 {
-                id: newUserPermissionId
-                Layout.columnSpan: 2
+                    id: newUserPermBranchId
+                    Layout.columnSpan: 2
+
+
+                    Repeater
+                    {
+                        model: ListModel{id:permBranchModel}
+                        Switch
+                        {
+                            checked: false
+                            text: model.city + " " + model.branch_name
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                        }
+
+                        Component.onCompleted:
+                        {
+                            UserMethods.updatePermissionBranch()
+                        }
+                    }
+                }
+                // step
+                Text {
+                    text: "مجوز اعمال تغییرات در دوره‌ها"
+                    Layout.columnSpan: 2
+                    Layout.alignment: Qt.AlignLeft
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 18
+                    font.bold: true
+                    color: "royalblue"
+                }
+                Flow
+                {
+                    id: newUserPermStepId
+                    Layout.columnSpan: 2
+
+
+                    Repeater
+                    {
+                        model: ListModel{id:permStepModel}
+                        Switch
+                        {
+                            checked: false
+                            text: model.step_name
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                        }
+
+                        Component.onCompleted:
+                        {
+                            UserMethods.updatePermissionStep()
+                        }
+                    }
+                }
+                // basis
+                Text {
+                    text: "مجوز اعمال تغییرات در پایه‌ها"
+                    Layout.columnSpan: 2
+                    Layout.alignment: Qt.AlignLeft
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 18
+                    font.bold: true
+                    color: "royalblue"
+                }
+                Flow
+                {
+                    id: newUserPermBasisId
+                    Layout.columnSpan: 2
+
+
+                    Repeater
+                    {
+                        model: ListModel{id:permBasisModel}
+                        Switch
+                        {
+                            checked: false
+                            text: model.basis_name
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 14
+                        }
+
+                        Component.onCompleted:
+                        {
+                            UserMethods.updatePermissionBasis()
+                        }
+                    }
                 }
 
                 Item
@@ -418,7 +626,7 @@ Page {
                     Layout.preferredWidth: 200
                     Layout.preferredHeight: 50
                     Layout.alignment: Qt.AlignHCenter
-                    onClicked: console.log(newUserAccessBranchId.getBranchJson()[0]['city']);
+                    onClicked: {id1.scale=2}
                 }
 
                 Item
@@ -429,7 +637,6 @@ Page {
                 }
 
             }
-
         }
     }
 
