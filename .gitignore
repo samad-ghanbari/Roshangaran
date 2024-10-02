@@ -1,8 +1,6 @@
 
-Lib/database
-
-build
-
-CMakeLists.txt.user
-
-
+/Lib/database
+/build
+/CMakeLists.txt.user
+/CMakeLists.*.user
+/CMakeLists.*.user*
