@@ -6,6 +6,10 @@ import "newUserJS.js" as UserMethods
 
 Page {
     id: addNewUserPageId
+    property var branchJson: ({})
+    property var stepJson: ({})
+    property var basisJson: ({})
+
     property var accessBranch:[]
     property var accessStep:[]
     property var accessBasis:[]
@@ -87,575 +91,672 @@ Page {
 
             background: Rectangle{anchors.fill: parent; color:"white"; anchors.margins: -20; radius: 10}
 
-
-            GridLayout
+            ColumnLayout
             {
-                id: newUserFormId
-                columns: 2
-                rows: 11
-                rowSpacing: 20
-                columnSpacing: 10
                 width: newUserSV.width
 
-
-                Text {
-                    id: newUserNameId
-                    text: "نام کاربر "
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
+                GridLayout
                 {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "نام کاربر"
-                }
-
-                Text {
-                    id: newUserFamilyId
-                    text: "نام خانوادگی"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "نام خانوادگی"
-                }
-
-                Text {
-                    id: newUserNatidId
-                    text: "کد ملی"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "کد ملی کاربر"
-                }
-
-                Text {
-                    id: newUserPassId
-                    text: "رمز عبور کاربر"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "رمز عبور"
-                    echoMode: TextField.Password
-                }
-                Text {
-                    id: newUserPassRepeatId
-                    text: "تکرار رمز عبور"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "تکرار رمز عبور"
-                    echoMode: TextField.Password
-                }
+                    id: newUserBasicsId
+                    columns: 2
+                    rows: 11
+                    rowSpacing: 20
+                    columnSpacing: 10
+                    width: newUserSV.width
 
 
-                Text {
-                    id: newUserEmailId
-                    text: "پست الکترونیکی"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "پست الکترونیکی"
-                }
-
-                Text {
-                    id: newUserPositionId
-                    text: "پست کاربر"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "پست کاربر"
-                }
-
-                Text {
-                    id: newUserTelId
-                    text: "شماره تماس"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                TextField
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 50
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    placeholderText: "شماره تماس"
-                }
-
-
-                //enabled
-                Text {
-                    text: "فعال بودن کاربر"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Switch
-                {
-                    id: newUserEnabledId
-                    checked: true
-                }
-
-                //enabled
-                Text {
-                    text: "ادمین سامانه"
-                    Layout.minimumWidth: 150
-                    Layout.maximumWidth: 150
-                    Layout.preferredHeight: 50
-                    verticalAlignment: Text.AlignVCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 16
-                    font.bold: true
-                    color: "crimson"
-                }
-                Switch
-                {
-                    id: newUserAdminId
-                    checked: false
-                }
-                Text {
-                    text: "هشدار! کاربر ادمین، دسترسی کامل به مدیریت سامانه دارد"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    Layout.topMargin: -10
-                    font.pixelSize: 14
-                    font.bold: true
-                    color: "orange"
-                }
-
-
-
-                // access
-                Text {
-                    text: "دسترسی‌های کاربر"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignHCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 24
-                    font.bold: true
-                    color: "royalblue"
-                    style: Text.Outline
-                    styleColor: "gray"
-                }
-
-                Rectangle
-                {
-                    Layout.columnSpan: 2
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 1
-                    color: "dodgerblue"
-                }
-
-                // branch
-                Text {
-                    text: "دسترسی‌ به شعبه‌ها"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-
-                Flow
-                {
-                    spacing: 20
-                    Layout.columnSpan: 2
-
-                    Repeater
+                    Text {
+                        id: newUserNameId
+                        text: "نام کاربر "
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
                     {
-                        id: newUserAccessBranchId
-                        model: ListModel {id: accessBranchModel }
-                        delegate:
-                            Switch{
-                            objectName: "'branch"+id+"'"
-                            checked: (accessBranch.indexOf(id) > -1)? true : false;
-                            text: city + " - " + branch_name
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
-                            onToggled:
-                            {
-                                accessBasisModel.clear();
-                                accessStepModel.clear();
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "نام کاربر"
+                    }
 
-                                var branchId = id;
-                                var index = accessBranch.indexOf(branchId)
+                    Text {
+                        id: newUserFamilyId
+                        text: "نام خانوادگی"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "نام خانوادگی"
+                    }
 
-                                if(this.checked)
+                    Text {
+                        id: newUserNatidId
+                        text: "کد ملی"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "کد ملی کاربر"
+                    }
+
+                    Text {
+                        id: newUserPassId
+                        text: "رمز عبور کاربر"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "رمز عبور"
+                        echoMode: TextField.Password
+                    }
+                    Text {
+                        id: newUserPassRepeatId
+                        text: "تکرار رمز عبور"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "تکرار رمز عبور"
+                        echoMode: TextField.Password
+                    }
+
+
+                    Text {
+                        id: newUserEmailId
+                        text: "پست الکترونیکی"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "پست الکترونیکی"
+                    }
+
+                    Text {
+                        id: newUserPositionId
+                        text: "پست کاربر"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "پست کاربر"
+                    }
+
+                    Text {
+                        id: newUserTelId
+                        text: "شماره تماس"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    TextField
+                    {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 50
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        placeholderText: "شماره تماس"
+                    }
+
+
+                    //enabled
+                    Text {
+                        text: "فعال بودن کاربر"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Switch
+                    {
+                        id: newUserEnabledId
+                        checked: true
+                    }
+
+                    //enabled
+                    Text {
+                        text: "ادمین سامانه"
+                        Layout.minimumWidth: 150
+                        Layout.maximumWidth: 150
+                        Layout.preferredHeight: 50
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "crimson"
+                    }
+                    Switch
+                    {
+                        id: newUserAdminId
+                        checked: false
+                        onCheckedChanged: newUserAccPermId.visible=(checked)? false : true;
+                    }
+                    Text {
+                        text: "هشدار! کاربر ادمین، دسترسی کامل به مدیریت سامانه دارد"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        Layout.topMargin: -10
+                        font.pixelSize: 14
+                        font.bold: true
+                        color: "orange"
+                    }
+
+                }
+
+                GridLayout
+                {
+                    id: newUserAccPermId
+                    columns: 2
+                    rows: 11
+                    rowSpacing: 20
+                    columnSpacing: 10
+                    width: parent.width
+
+
+                    // access
+                    Text {
+                        text: "دسترسی‌های کاربر"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignHCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 24
+                        font.bold: true
+                        color: "royalblue"
+                        style: Text.Outline
+                        styleColor: "gray"
+                    }
+
+                    Rectangle
+                    {
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 1
+                        color: "dodgerblue"
+                    }
+
+                    // branch
+                    Text {
+                        text: "دسترسی‌ به شعبه‌ها"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+
+                    Flow
+                    {
+                        spacing: 20
+                        Layout.columnSpan: 2
+                        //flow: Flow.TopToBottom
+
+                        Repeater
+                        {
+                            id: newUserAccessBranchId
+                            model: ListModel {id: accessBranchModel }
+                            delegate:
+                                Switch{
+                                objectName: "'branch"+id+"'"
+                                checked: (accessBranch.indexOf(id) > -1)? true : false;
+                                text: city + " - " + branch_name
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                                onToggled:
                                 {
-                                    if(index < 0)
-                                        accessBranch.push(branchId);
-                                }
-                                else
-                                {
-                                    if(index > -1)
-                                        accessBranch.splice(index, 1);
+                                    permissionBranchModel.clear();
+                                    accessBasisModel.clear();
+                                    accessStepModel.clear();
+                                    accessStep = []
+                                    accessBasis = []
 
-                                }
+                                    var branchId = id;
+                                    var index = accessBranch.indexOf(branchId)
 
-                                UserMethods.updateAccessStep()
+                                    if(this.checked)
+                                    {
+                                        if(index < 0)
+                                            accessBranch.push(branchId);
+                                    }
+                                    else
+                                    {
+                                        if(index > -1)
+                                            accessBranch.splice(index, 1);
+
+                                    }
+
+                                    UserMethods.updateAccessStep()
+                                    UserMethods.updatePermissionBranch();
+                                }
                             }
                         }
-                    }
-                    Component.onCompleted:
-                    {
-                        UserMethods.updateAccessBranch()
-                    }
-                }
-
-                // step
-                Text {
-                    text: "دسترسی‌ به دوره‌ها"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Flow
-                {
-                    Repeater
-                    {
-                        id: newUserAccessStepId
-                        model: ListModel {id: accessStepModel }
-                        delegate:
-                            Switch{
-                            text: branch_name +"-"+step_name
-                            checked: (accessStep.indexOf(id) > -1)? true : false;
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
-                            onToggled:
-                            {
-                                accessBasisModel.clear();
-                                var stepId = id;
-                                var index = accessStep.indexOf(stepId)
-
-                                if(this.checked)
-                                {
-                                    if(index < 0)
-                                        accessStep.push(stepId);
-                                }
-                                else
-                                {
-                                    if(index > -1)
-                                        accessStep.splice(index, 1);
-
-                                }
-
-                                UserMethods.updateAccessBasis()
-                            }
+                        Component.onCompleted:
+                        {
+                            UserMethods.updateAccessBranch()
                         }
                     }
-                    Component.onCompleted:
-                    {
-                        UserMethods.updateAccessStep()
-                    }
-                }
-                // basis
-                Text {
-                    text: "دسترسی‌ به پایه‌ها"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Flow
-                {
-                    Repeater
-                    {
-                        id: newUserAccessBasisId
-                        model: ListModel {id: accessBasisModel }
-                        delegate:
-                            Switch{
-                            text: branch_name +"-"+step_name+"-"+basis_name
-                            checked: (accessBasis.indexOf(id) > -1)? true : false;
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
-                            onToggled:
-                            {
-                                var basisId = id;
-                                var index = accessBasis.indexOf(basisId)
 
-                                if(this.checked)
+                    // step
+                    Text {
+                        text: "دسترسی‌ به دوره‌ها"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Flow
+                    {
+                        spacing: 20
+                        Layout.columnSpan: 2
+
+                        Repeater
+                        {
+                            id: newUserAccessStepId
+                            model: ListModel {id: accessStepModel }
+                            delegate:
+                                Switch{
+                                text: branch_name +"-"+step_name
+                                checked: (accessStep.indexOf(id) > -1)? true : false;
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                                onToggled:
                                 {
-                                    if(index < 0)
-                                        accessBasis.push(basisId);
-                                }
-                                else
-                                {
-                                    if(index > -1)
-                                        accessBasis.splice(index, 1);
+                                    accessBasisModel.clear();
+                                    permissionStepModel.clear();
+                                    accessBasis = [];
+                                    permissionBasis=[]
+                                    var stepId = id;
+                                    var index = accessStep.indexOf(stepId)
+
+                                    if(this.checked)
+                                    {
+                                        if(index < 0)
+                                            accessStep.push(stepId);
+                                    }
+                                    else
+                                    {
+                                        if(index > -1)
+                                            accessStep.splice(index, 1);
+
+                                    }
+
+                                    UserMethods.updateAccessBasis();
+                                    UserMethods.updatePermissionStep();
 
                                 }
                             }
                         }
-                    }
-                    Component.onCompleted:
-                    {
-                        UserMethods.updateAccessBasis()
-                    }
-                }
-
-                //app-module
-                Text {
-                    text: "دسترسی‌ به ماژول‌های برنامه"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Flow
-                {
-                    id: newUserAccessAppModuleId
-                    Layout.columnSpan: 2
-
-
-                    Repeater
-                    {
-                        model: ListModel{id:accessappModuleModel}
-                        Switch
+                        Component.onCompleted:
                         {
-                            checked: false
-                            text: model.description
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
+                            UserMethods.updateAccessStep()
+                        }
+                    }
+                    // basis
+                    Text {
+                        text: "دسترسی‌ به پایه‌ها"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Flow
+                    {
+                        spacing: 20
+                        Layout.columnSpan: 2
+
+                        Repeater
+                        {
+                            id: newUserAccessBasisId
+                            model: ListModel {id: accessBasisModel }
+                            delegate:
+                                Switch{
+                                text: branch_name +"-"+step_name+"-"+basis_name
+                                checked: (accessBasis.indexOf(id) > -1)? true : false;
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                                onToggled:
+                                {
+                                    permissionBasisModel.clear();
+                                    permissionBasis=[]
+
+                                    var basisId = id;
+                                    var index = accessBasis.indexOf(basisId)
+
+                                    if(this.checked)
+                                    {
+                                        if(index < 0)
+                                            accessBasis.push(basisId);
+                                    }
+                                    else
+                                    {
+                                        if(index > -1)
+                                            accessBasis.splice(index, 1);
+
+                                    }
+
+                                    UserMethods.updatePermissionBasis();
+                                }
+                            }
+                        }
+                        Component.onCompleted:
+                        {
+                            UserMethods.updateAccessBasis()
+                        }
+                    }
+
+                    //app-module
+                    Text {
+                        text: "دسترسی‌ به ماژول‌های برنامه"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Flow
+                    {
+                        id: newUserAccessAppModuleId
+                        Layout.columnSpan: 2
+                        spacing: 20
+                        width: parent.width
+                        //flow: Flow.LeftToRight  // Flow.TopToBottom
+                        //layoutDirection: Qt.LeftToRight  //Qt.RightToLeft
+
+                        Repeater
+                        {
+                            model: ListModel{id:accessappModuleModel}
+                            Switch
+                            {
+                                checked: false
+                                text: model.description
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                            }
+
+                            Component.onCompleted:
+                            {
+                                UserMethods.updateAccessAppModule();
+                            }
+                        }
+                    }
+
+
+                    // permissions
+                    Text {
+                        text: "مجوزهای اعمال تغییرات"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignHCenter
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 24
+                        font.bold: true
+                        color: "royalblue"
+                        style: Text.Outline
+                        styleColor: "gray"
+                    }
+                    Rectangle
+                    {
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 1
+                        color: "dodgerblue"
+                    }
+
+                    // branch
+                    Text {
+                        text: "مجوز اعمال تغییرات در شعبه‌ها"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Flow
+                    {
+                        spacing: 20
+                        Layout.columnSpan: 2
+                        //flow: Flow.TopToBottom
+
+                        Repeater
+                        {
+                            id: newUserPermissionBranchId
+                            model: ListModel {id: permissionBranchModel }
+                            delegate:
+                                Switch{
+                                checked: (permissionBranch.indexOf(id) > -1)? true : false;
+                                text: city + " - " + branch_name
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                                onToggled:
+                                {
+                                    var branchId = id;
+                                    var index = permissionBranch.indexOf(branchId)
+
+                                    if(this.checked)
+                                    {
+                                        if(index < 0)
+                                            permissionBranch.push(branchId);
+                                    }
+                                    else
+                                    {
+                                        if(index > -1)
+                                            permissionBranch.splice(index, 1);
+
+                                    }
+                                }
+                            }
                         }
 
                         Component.onCompleted:
                         {
-                            UserMethods.updateAccessAppModule();
+                            permissionBranch=[]
+                            permissionBranchModel.clear();
+                            UserMethods.updatePermissionBranch();
                         }
                     }
-                }
-
-
-                // permissions
-                Text {
-                    text: "مجوزهای اعمال تغییرات"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignHCenter
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 24
-                    font.bold: true
-                    color: "royalblue"
-                    style: Text.Outline
-                    styleColor: "gray"
-                }
-                Rectangle
-                {
-                    Layout.columnSpan: 2
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 1
-                    color: "dodgerblue"
-                }
-
-                // branch
-                Text {
-                    text: "مجوز اعمال تغییرات در شعبه‌ها"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Flow
-                {
-                    id: newUserPermBranchId
-                    Layout.columnSpan: 2
-
-
-                    Repeater
+                    // step
+                    Text {
+                        text: "مجوز اعمال تغییرات در دوره‌ها"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Flow
                     {
-                        model: ListModel{id:permBranchModel}
-                        Switch
+                        spacing: 20
+                        Layout.columnSpan: 2
+                        //flow: Flow.TopToBottom
+
+                        Repeater
                         {
-                            checked: false
-                            text: model.city + " " + model.branch_name
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
+                            id: newUserPermissionStepId
+                            model: ListModel {id: permissionStepModel }
+                            delegate:
+                                Switch{
+                                checked: (permissionStep.indexOf(id) > -1)? true : false;
+                                text: branch_name + " - " + step_name
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                                onToggled:
+                                {
+                                    var stepId = id;
+                                    var index = permissionStep.indexOf(stepId)
+
+                                    if(this.checked)
+                                    {
+                                        if(index < 0)
+                                            permissionStep.push(stepId);
+                                    }
+                                    else
+                                    {
+                                        if(index > -1)
+                                            permissionStep.splice(index, 1);
+
+                                    }
+                                }
+                            }
                         }
 
                         Component.onCompleted:
                         {
-                            UserMethods.updatePermissionBranch()
+                            permissionStep=[]
+                            permissionStepModel.clear();
+                            UserMethods.updatePermissionStep();
                         }
                     }
-                }
-                // step
-                Text {
-                    text: "مجوز اعمال تغییرات در دوره‌ها"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Flow
-                {
-                    id: newUserPermStepId
-                    Layout.columnSpan: 2
-
-
-                    Repeater
+                    // basis
+                    Text {
+                        text: "مجوز اعمال تغییرات در پایه‌ها"
+                        Layout.columnSpan: 2
+                        Layout.alignment: Qt.AlignLeft
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "royalblue"
+                    }
+                    Flow
                     {
-                        model: ListModel{id:permStepModel}
-                        Switch
+                        spacing: 20
+                        Layout.columnSpan: 2
+                        //flow: Flow.TopToBottom
+
+                        Repeater
                         {
-                            checked: false
-                            text: model.step_name
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
+                            id: newUserPermissionBasisId
+                            model: ListModel {id: permissionBasisModel }
+                            delegate:
+                                Switch{
+                                checked: (permissionBasis.indexOf(id) > -1)? true : false;
+                                text: branch_name + " - " + step_name + " - " + basis_name
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 14
+                                onToggled:
+                                {
+                                    var basisId = id;
+                                    var index = permissionStep.indexOf(basisId)
+
+                                    if(this.checked)
+                                    {
+                                        if(index < 0)
+                                            permissionBasis.push(basisId);
+                                    }
+                                    else
+                                    {
+                                        if(index > -1)
+                                            permissionBasis.splice(index, 1);
+                                    }
+                                }
+                            }
                         }
 
                         Component.onCompleted:
                         {
-                            UserMethods.updatePermissionStep()
+                            permissionBasis=[]
+                            permissionBasisModel.clear();
+                            UserMethods.updatePermissionBasis();
                         }
                     }
                 }
-                // basis
-                Text {
-                    text: "مجوز اعمال تغییرات در پایه‌ها"
-                    Layout.columnSpan: 2
-                    Layout.alignment: Qt.AlignLeft
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 18
-                    font.bold: true
-                    color: "royalblue"
-                }
-                Flow
-                {
-                    id: newUserPermBasisId
-                    Layout.columnSpan: 2
 
-
-                    Repeater
-                    {
-                        model: ListModel{id:permBasisModel}
-                        Switch
-                        {
-                            checked: false
-                            text: model.basis_name
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 14
-                        }
-
-                        Component.onCompleted:
-                        {
-                            UserMethods.updatePermissionBasis()
-                        }
-                    }
-                }
 
                 Item
                 {
-                    Layout.columnSpan: 2
                     Layout.fillWidth: true
                     Layout.preferredHeight: 50
                 }
 
                 Button
                 {
-                    Layout.columnSpan: 2
                     text: "تایید"
                     Layout.preferredWidth: 200
                     Layout.preferredHeight: 50
@@ -668,7 +769,6 @@ Page {
 
                 Item
                 {
-                    Layout.columnSpan: 2
                     Layout.fillWidth: true
                     Layout.preferredHeight: 50
                 }
