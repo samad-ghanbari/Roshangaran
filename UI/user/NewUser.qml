@@ -6,10 +6,12 @@ import "newUserJS.js" as UserMethods
 
 Page {
     id: addNewUserPageId
-    property var accessBranch: [{id:1, branch:"mir", }]
-    // property var accessStep:[]
-    // property var accessBasis
-    // property var permission
+    property var accessBranch:[]
+    property var accessStep:[]
+    property var accessBasis:[]
+    property var permissionBranch:[]
+    property var permissionStep:[]
+    property var permissionBasis:[]
 
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
@@ -349,18 +351,42 @@ Page {
 
                 Flow
                 {
+                    spacing: 20
                     Layout.columnSpan: 2
+
                     Repeater
                     {
                         id: newUserAccessBranchId
                         model: ListModel {id: accessBranchModel }
                         delegate:
                             Switch{
-                            property int branchId: id
+                            objectName: "'branch"+id+"'"
+                            checked: (accessBranch.indexOf(id) > -1)? true : false;
                             text: city + " - " + branch_name
                             font.family: yekanFont.font.family
                             font.pixelSize: 14
-                            //onCheckedChanged:  accessBranch.append({"id": id, "address": address})
+                            onToggled:
+                            {
+                                accessBasisModel.clear();
+                                accessStepModel.clear();
+
+                                var branchId = id;
+                                var index = accessBranch.indexOf(branchId)
+
+                                if(this.checked)
+                                {
+                                    if(index < 0)
+                                        accessBranch.push(branchId);
+                                }
+                                else
+                                {
+                                    if(index > -1)
+                                        accessBranch.splice(index, 1);
+
+                                }
+
+                                UserMethods.updateAccessStep()
+                            }
                         }
                     }
                     Component.onCompleted:
@@ -381,45 +407,42 @@ Page {
                 }
                 Flow
                 {
-                    id: newUserAccessStepId
-                    Layout.columnSpan: 2
-
-                    ListView
+                    Repeater
                     {
-                        id: newUserAccesssteId
-                        model:ListModel{id:accessStepModel}
+                        id: newUserAccessStepId
+                        model: ListModel {id: accessStepModel }
                         delegate:
-                            Text{
-                            //id: model.id
-                            text: step_name
+                            Switch{
+                            text: branch_name +"-"+step_name
+                            checked: (accessStep.indexOf(id) > -1)? true : false;
                             font.family: yekanFont.font.family
                             font.pixelSize: 14
+                            onToggled:
+                            {
+                                accessBasisModel.clear();
+                                var stepId = id;
+                                var index = accessStep.indexOf(stepId)
+
+                                if(this.checked)
+                                {
+                                    if(index < 0)
+                                        accessStep.push(stepId);
+                                }
+                                else
+                                {
+                                    if(index > -1)
+                                        accessStep.splice(index, 1);
+
+                                }
+
+                                UserMethods.updateAccessBasis()
+                            }
                         }
                     }
-
-
                     Component.onCompleted:
                     {
                         UserMethods.updateAccessStep()
                     }
-
-
-                    // Repeater
-                    // {
-                    //     model: ListModel{id:accessStepModel}
-                    //     Switch
-                    //     {
-                    //         checked: false
-                    //         text: model.step_name
-                    //         font.family: yekanFont.font.family
-                    //         font.pixelSize: 14
-                    //     }
-
-                    //     Component.onCompleted:
-                    //     {
-                    //         UserMethods.updateAccessStep()
-                    //     }
-                    // }
                 }
                 // basis
                 Text {
@@ -433,25 +456,38 @@ Page {
                 }
                 Flow
                 {
-                    id: newUserAccessBasisId
-                    Layout.columnSpan: 2
-
-
                     Repeater
                     {
-                        model: ListModel{id:accessBasisModel}
-                        Switch
-                        {
-                            checked: false
-                            text: model.basis_name
+                        id: newUserAccessBasisId
+                        model: ListModel {id: accessBasisModel }
+                        delegate:
+                            Switch{
+                            text: branch_name +"-"+step_name+"-"+basis_name
+                            checked: (accessBasis.indexOf(id) > -1)? true : false;
                             font.family: yekanFont.font.family
                             font.pixelSize: 14
-                        }
+                            onToggled:
+                            {
+                                var basisId = id;
+                                var index = accessBasis.indexOf(basisId)
 
-                        Component.onCompleted:
-                        {
-                            UserMethods.updateAccessBasis()
+                                if(this.checked)
+                                {
+                                    if(index < 0)
+                                        accessBasis.push(basisId);
+                                }
+                                else
+                                {
+                                    if(index > -1)
+                                        accessBasis.splice(index, 1);
+
+                                }
+                            }
                         }
+                    }
+                    Component.onCompleted:
+                    {
+                        UserMethods.updateAccessBasis()
                     }
                 }
 
@@ -626,7 +662,7 @@ Page {
                     Layout.alignment: Qt.AlignHCenter
                     onClicked:
                     {
-                        console.log(accessBranch[0].id)
+                        console.log(accessBranch,accessStep, accessBasis)
                     }
                 }
 
@@ -640,5 +676,4 @@ Page {
             }
         }
     }
-
 }

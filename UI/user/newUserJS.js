@@ -1,16 +1,13 @@
 
-//access
+// //access
 function updateAccessBranch() {
-    accessBranchModel.clear();
+
     //var jsondata = '[{"id":1, "city":"تهران", "branch_name":"شعبه میرداماد", "address":"منطقه۳ - میرداماد، میدان مادر (محسنی)، خیابان رودبار غربی", "description":"دوره اول میرداماد"}]';
     var jsondata = dbMan.getBranchesJson();
     jsondata = JSON.parse(jsondata);
 
     for(var obj of jsondata)
-    {
         accessBranchModel.append({ id: obj.id, city: obj.city, branch_name: obj.branch_name, address: obj.address, description: obj.description})
-    }
-
 
     //update
     updateAccessStep();
@@ -18,14 +15,14 @@ function updateAccessBranch() {
 }
 
 function updateAccessStep() {
-    accessStepModel.clear();
+
     // should get steps of enabled branch
-    var jsondata = '[{"id":1, "branch_id":"1", "step_name":"دوره اول میرداماد"}, {"id":1, "branch_id":"1", "step_name":"دوره دوم میرداماد"}]';
+    var jsondata = dbMan.getStepsJson(accessBranch);
     jsondata = JSON.parse(jsondata);
 
     for(var obj of jsondata)
     {
-        accessStepModel.append({ id: obj.id, branch_id: obj.branch_id, step_name: obj.step_name})
+        accessStepModel.append({ id: obj.id, branch_id: obj.branch_id, step_name: obj.step_name, branch_name: obj.branch_name})
     }
 
     //update
@@ -33,14 +30,13 @@ function updateAccessStep() {
 }
 
 function updateAccessBasis() {
-    accessBasisModel.clear();
-    // should get steps of enabled branch
-    var jsondata = '[{"id":1, "step_id":"1", "basis_name":"پایه ۷"}, {"id":2, "step_id":"1", "basis_name":"پایه ۸"}, {"id":3, "step_id":"1", "basis_name":"پایه ۹"}]';
+
+    var jsondata = dbMan.getBasisJson(accessStep);
     jsondata = JSON.parse(jsondata);
 
     for(var obj of jsondata)
     {
-        accessBasisModel.append({ id: obj.id, step_id: obj.step_id, basis_name: obj.basis_name})
+        accessBasisModel.append({ id: obj.id, step_id: obj.step_id, basis_name: obj.basis_name, step_name: obj.step_name, branch_name: obj.branch_name })
     }
 }
 
