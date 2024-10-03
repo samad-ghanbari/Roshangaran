@@ -135,34 +135,7 @@ Page {
             Row
             {
                 width: parent.width
-                spacing: 5
-                Button {
-                    id: closeBtnId
-                    text: "خروج"
-                    font.family: yekanFont.font.family
-                    font.pixelSize: 14
-                    height: 50
-                    width : parent.width/2
-                    Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "crimson"}
-
-                    //anchors.horizontalCenter: parent.horizontalCenter
-                    // background: Rectangle {
-                    //     id: cancelBtnId
-                    //     implicitWidth: 100
-                    //     implicitHeight: 50
-                    //     color: closeBtnId.down ? "#FAA" : "#FEE"
-                    //     border.width: 1
-                    //     border.color:"#f99"
-                    // }
-                    onClicked:
-                    {
-                        backgroundAnimId.start()
-                        appLoginWindowId.close();
-                    }
-                    hoverEnabled: true
-                    //onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
-
-                }
+                spacing: 3
                 Button {
                     id: loginBtnId
                     text: "ورود به سامانه"
@@ -171,7 +144,7 @@ Page {
                     height: 50
                     width : parent.width/2
                     focus: true
-                    Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "forestgreen"}
+                    Rectangle{width:parent.width; height:5; anchors.bottom: parent.bottom; color: "forestgreen"}
 
 
                     //anchors.horizontalCenter: parent.horizontalCenter
@@ -193,7 +166,33 @@ Page {
                     //onHoveredChanged: loginBtnBg.color= hovered? "skyblue"  : "powderblue";
 
                 }
+                Button {
+                    id: closeBtnId
+                    text: "خروج"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 14
+                    height: 50
+                    width : parent.width/2
+                    Rectangle{width:parent.width; height:5; anchors.bottom: parent.bottom; color: "crimson"}
 
+                    //anchors.horizontalCenter: parent.horizontalCenter
+                    // background: Rectangle {
+                    //     id: cancelBtnId
+                    //     implicitWidth: 100
+                    //     implicitHeight: 50
+                    //     color: closeBtnId.down ? "#FAA" : "#FEE"
+                    //     border.width: 1
+                    //     border.color:"#f99"
+                    // }
+                    onClicked:
+                    {
+                        backgroundAnimId.start()
+                        appLoginWindowId.close();
+                    }
+                    hoverEnabled: true
+                    //onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
+
+                }
             }
 
             Item{height:10;width:parent.width}
