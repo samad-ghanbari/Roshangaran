@@ -14,53 +14,54 @@ Page {
         RowLayout
         {
             width: parent.width
+            height: 64
             Button
             {
-                id: newUserBackBtnId
-                font.family: yekanFont.font.family
-                font.pixelSize: 48
+                id: userListBackBtnId
                 background: Item{}
                 icon.source: "qrc:/Assets/images/arrow-right.png"
                 icon.width: 64
                 icon.height: 64
                 opacity: 0.5
-                palette.buttonText: "steelblue"
-                font.bold: true
                 onClicked: homeStackViewId.pop();
                 hoverEnabled: true
-                //onHoveredChanged: newUserBackBtnId.palette.buttonText=(hovered)? "royalblue" : "steelblue";
-                onHoveredChanged: newUserBackBtnId.opacity=(hovered)? 1 : 0.5;
+                onHoveredChanged: userListBackBtnId.opacity=(hovered)? 1 : 0.5;
             }
             Item
             {
                 Layout.fillWidth: true
             }
+
+            Text {
+                id: userListTitle
+                text: "لیست کاربران سامانه"
+                Layout.alignment: Qt.AlignHCenter
+                font.family: yekanFont.font.family
+                font.pixelSize: 24
+                font.bold: true
+                color: "mediumvioletred"
+                style: Text.Outline
+                styleColor: "black"
+            }
+
+            Item
+            {
+                Layout.fillWidth: true
+            }
+            Button
+            {
+                id: userListSearchBtnId
+                background: Item{}
+                icon.source: "qrc:/Assets/images/search.png"
+                icon.width: 64
+                icon.height: 64
+                opacity: 0.5
+                onClicked: userSearchDrawer.open();
+                hoverEnabled: true
+                onHoveredChanged: userListSearchBtnId.opacity=(hovered)? 1 : 0.5;
+            }
         }
 
-        Text {
-            id: newUserTitle
-            text: "لیست کاربران سامانه"
-            width: parent.width
-            Layout.alignment: Qt.AlignHCenter
-            font.family: yekanFont.font.family
-            font.pixelSize: 24
-            font.bold: true
-            color: "mediumvioletred"
-            style: Text.Outline
-            styleColor: "black"
-
-        }
-        Image {
-            id: newUserIcon
-            source: "qrc:/Assets/images/users.png"
-            Layout.alignment: Qt.AlignHCenter
-            Layout.maximumHeight: 128
-            Layout.maximumWidth: 128
-            Layout.margins: 20
-            width: 128
-            height: 128
-            NumberAnimation on scale { from: 0; to: 1; duration: 2000;}
-        }
 
         ListView {
             id: lv
@@ -69,19 +70,62 @@ Page {
             Layout.alignment: Qt.AlignHCenter
             Layout.fillHeight: true
 
-            model:     ListModel { id: myModel }
-            delegate: Switch {text: type + ", " + age; onCheckedChanged: console.log(item_id) }
-            Component.onCompleted:
-            {
-                myModel.append({item_id:"a1",  type: "Dog", age: 8 });
-                myModel.append({ item_id:"a2",  type: "cat", age: 2 });
-            }
         }
+    }
 
-        Button
+    Drawer
+    {
+        id: userSearchDrawer
+        modal: true
+        height: parent.height
+        width: 300 //(parent.width > 300)? 300 : parent.width;
+
+        ScrollView
         {
-            text: "click"
-            // onClicked: lv.model. ;
+            id: userListDrawerSV
+            anchors.fill: parent
+
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+
+            ColumnLayout
+            {
+                anchors.fill: parent
+                width:parent.width
+
+                Rectangle
+                {
+                    Layout.preferredWidth: parent.width
+                    Layout.preferredHeight: 110
+                    color: "lavender"
+
+                    Image {
+                        id: searchUserListImage
+                        source: "qrc:/Assets/images/search.png"
+                        width: 64
+                        height: 64
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                    Text {
+                        width: parent.width
+                        height: 40
+                        anchors.top: searchUserListImage.bottom
+                        horizontalAlignment: Qt.AlignHCenter
+                        anchors.topMargin: 10
+                        text: "جستجوی کاربران"
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        Layout.alignment: Qt.AlignHCenter
+                        font.bold: true
+                        color:"royalblue"
+                    }
+                }
+
+                Rectangle{Layout.fillWidth: true; height: 4; color:"royalblue"}
+
+                // name lastname natid tel email position admin en admin
+            }
         }
     }
 }
+

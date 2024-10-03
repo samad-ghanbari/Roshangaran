@@ -91,6 +91,8 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/arrow-right.png
         Assets/images/arrow-left.png
 
+        Assets/images/search.png
+
 
 )
 
