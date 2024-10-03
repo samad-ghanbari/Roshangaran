@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick.Controls
 
 Page {
     id: appLoginForm
@@ -135,6 +135,7 @@ Page {
             Row
             {
                 width: parent.width
+                spacing: 5
                 Button {
                     id: closeBtnId
                     text: "خروج"
@@ -142,23 +143,24 @@ Page {
                     font.pixelSize: 14
                     height: 50
                     width : parent.width/2
+                    Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "crimson"}
 
                     //anchors.horizontalCenter: parent.horizontalCenter
-                    background: Rectangle {
-                        id: cancelBtnId
-                        implicitWidth: 100
-                        implicitHeight: 50
-                        color: closeBtnId.down ? "#FAA" : "#FEE"
-                        border.width: 1
-                        border.color:"#f99"
-                    }
+                    // background: Rectangle {
+                    //     id: cancelBtnId
+                    //     implicitWidth: 100
+                    //     implicitHeight: 50
+                    //     color: closeBtnId.down ? "#FAA" : "#FEE"
+                    //     border.width: 1
+                    //     border.color:"#f99"
+                    // }
                     onClicked:
                     {
                         backgroundAnimId.start()
                         appLoginWindowId.close();
                     }
                     hoverEnabled: true
-                    onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
+                    //onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
 
                 }
                 Button {
@@ -169,25 +171,26 @@ Page {
                     height: 50
                     width : parent.width/2
                     focus: true
+                    Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "forestgreen"}
 
 
                     //anchors.horizontalCenter: parent.horizontalCenter
-                    background: Rectangle {
-                        id:loginBtnBg
-                        implicitWidth: 100
-                        implicitHeight: 50
-                        color: loginBtnId.down ? "skyblue" : "#powderblue"
-                        border.width: 1
-                        border.color:"#88F"
-                    }
+                    // background: Rectangle {
+                    //     id:loginBtnBg
+                    //     implicitWidth: 100
+                    //     implicitHeight: 50
+                    //     color: loginBtnId.down ? "skyblue" : "#powderblue"
+                    //     border.width: 1
+                    //     border.color:"#88F"
+                    // }
                     onClicked:
                     {
                         loginBtnClicked();
                     }
 
-                    onFocusChanged: loginBtnBg.color= activeFocus? "skyblue"  : "powderblue";
+                    //onFocusChanged: loginBtnBg.color= activeFocus? "skyblue"  : "powderblue";
                     hoverEnabled: true
-                    onHoveredChanged: loginBtnBg.color= hovered? "skyblue"  : "powderblue";
+                    //onHoveredChanged: loginBtnBg.color= hovered? "skyblue"  : "powderblue";
 
                 }
 

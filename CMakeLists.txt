@@ -45,6 +45,7 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/newUserJS.js
 
     QML_FILES UI/user/ListUser.qml
+    QML_FILES UI/user/BaseDialog.qml
 
 )
 

@@ -1,21 +1,19 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 import "newUserJS.js" as UserMethods
 
 Page {
     id: addNewUserPageId
-    property var branchJson: ({})
-    property var stepJson: ({})
-    property var basisJson: ({})
-
     property var accessBranch:[]
     property var accessStep:[]
     property var accessBasis:[]
     property var permissionBranch:[]
     property var permissionStep:[]
     property var permissionBasis:[]
+
 
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
@@ -89,6 +87,7 @@ Page {
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
             ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
+
             background: Rectangle{anchors.fill: parent; color:"white"; anchors.margins: -20; radius: 10}
 
             ColumnLayout
@@ -106,7 +105,6 @@ Page {
 
 
                     Text {
-                        id: newUserNameId
                         text: "نام کاربر "
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -119,15 +117,16 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserNameId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
                         font.pixelSize: 16
                         placeholderText: "نام کاربر"
+
                     }
 
                     Text {
-                        id: newUserFamilyId
                         text: "نام خانوادگی"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -140,6 +139,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserLastNameId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -148,7 +148,6 @@ Page {
                     }
 
                     Text {
-                        id: newUserNatidId
                         text: "کد ملی"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -161,6 +160,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserNatidId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -169,7 +169,6 @@ Page {
                     }
 
                     Text {
-                        id: newUserPassId
                         text: "رمز عبور کاربر"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -182,6 +181,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserPassId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -190,7 +190,6 @@ Page {
                         echoMode: TextField.Password
                     }
                     Text {
-                        id: newUserPassRepeatId
                         text: "تکرار رمز عبور"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -203,6 +202,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserPassConfirmId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -213,7 +213,6 @@ Page {
 
 
                     Text {
-                        id: newUserEmailId
                         text: "پست الکترونیکی"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -226,6 +225,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserEmailId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -234,7 +234,6 @@ Page {
                     }
 
                     Text {
-                        id: newUserPositionId
                         text: "پست کاربر"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -247,6 +246,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserPositionId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -255,7 +255,6 @@ Page {
                     }
 
                     Text {
-                        id: newUserTelId
                         text: "شماره تماس"
                         Layout.minimumWidth: 150
                         Layout.maximumWidth: 150
@@ -268,6 +267,7 @@ Page {
                     }
                     TextField
                     {
+                        id: newUserTelId
                         Layout.fillWidth: true
                         Layout.preferredHeight: 50
                         font.family: yekanFont.font.family
@@ -294,7 +294,7 @@ Page {
                         checked: true
                     }
 
-                    //enabled
+                    //admin
                     Text {
                         text: "ادمین سامانه"
                         Layout.minimumWidth: 150
@@ -310,15 +310,21 @@ Page {
                     {
                         id: newUserAdminId
                         checked: false
-                        onCheckedChanged: newUserAccPermId.visible=(checked)? false : true;
+                        onCheckedChanged:
+                        {
+                            newUserAccPermId.visible=(checked)? false : true;
+                            adminWarningMessage.visible=(checked)? true : false;
+                        }
                     }
                     Text {
+                        id: adminWarningMessage
+                        visible: false
                         text: "هشدار! کاربر ادمین، دسترسی کامل به مدیریت سامانه دارد"
                         Layout.columnSpan: 2
                         Layout.alignment: Qt.AlignLeft
                         font.family: yekanFont.font.family
                         Layout.topMargin: -10
-                        font.pixelSize: 14
+                        font.pixelSize: 16
                         font.bold: true
                         color: "orange"
                     }
@@ -530,42 +536,42 @@ Page {
                         }
                     }
 
-                    //app-module
-                    Text {
-                        text: "دسترسی‌ به ماژول‌های برنامه"
-                        Layout.columnSpan: 2
-                        Layout.alignment: Qt.AlignLeft
-                        font.family: yekanFont.font.family
-                        font.pixelSize: 18
-                        font.bold: true
-                        color: "royalblue"
-                    }
-                    Flow
-                    {
-                        id: newUserAccessAppModuleId
-                        Layout.columnSpan: 2
-                        spacing: 20
-                        width: parent.width
-                        //flow: Flow.LeftToRight  // Flow.TopToBottom
-                        //layoutDirection: Qt.LeftToRight  //Qt.RightToLeft
+                    // //app-module
+                    // Text {
+                    //     text: "دسترسی‌ به ماژول‌های برنامه"
+                    //     Layout.columnSpan: 2
+                    //     Layout.alignment: Qt.AlignLeft
+                    //     font.family: yekanFont.font.family
+                    //     font.pixelSize: 18
+                    //     font.bold: true
+                    //     color: "royalblue"
+                    // }
+                    // Flow
+                    // {
+                    //     id: newUserAccessAppModuleId
+                    //     Layout.columnSpan: 2
+                    //     spacing: 20
+                    //     width: parent.width
+                    //     //flow: Flow.LeftToRight  // Flow.TopToBottom
+                    //     //layoutDirection: Qt.LeftToRight  //Qt.RightToLeft
 
-                        Repeater
-                        {
-                            model: ListModel{id:accessappModuleModel}
-                            Switch
-                            {
-                                checked: false
-                                text: model.description
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 14
-                            }
+                    //     Repeater
+                    //     {
+                    //         model: ListModel{id:accessappModuleModel}
+                    //         Switch
+                    //         {
+                    //             checked: false
+                    //             text: model.description
+                    //             font.family: yekanFont.font.family
+                    //             font.pixelSize: 14
+                    //         }
 
-                            Component.onCompleted:
-                            {
-                                UserMethods.updateAccessAppModule();
-                            }
-                        }
-                    }
+                    //         Component.onCompleted:
+                    //         {
+                    //             UserMethods.updateAccessAppModule();
+                    //         }
+                    //     }
+                    // }
 
 
                     // permissions
@@ -761,9 +767,59 @@ Page {
                     Layout.preferredWidth: 200
                     Layout.preferredHeight: 50
                     Layout.alignment: Qt.AlignHCenter
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "forestgreen"}
                     onClicked:
                     {
-                        console.log(accessBranch,accessStep, accessBasis)
+                        var user = {};
+                        user["name"] = newUserNameId.text;
+                        user["lastname"] = newUserLastNameId.text;
+                        user["natid"] = newUserNatidId.text;
+                        user["password"] = newUserPassId.text;
+                        user["passwordConfirm"] = newUserPassConfirmId.text;
+                        user["email"] = newUserEmailId.text;
+                        user["position"] = newUserPositionId.text
+                        user["telephone"] = newUserTelId.text;
+
+                        user["accessBranch"] = accessBranch;
+                        user["accessStep"] = accessStep;
+                        user["accessBasis"] = accessBasis;
+
+                        user["permissionBranch"] = permissionBranch;
+                        user["accessStep"] = permissionStep;
+                        user["accessBasis"] = permissionBasis;
+
+                        user["enabled"] = newUserEnabledId.checked
+                        user["admin"] = newUserAdminId.checked
+
+                        var check = true
+                        // check entries
+                        if(!UserMethods.checkFormEntries(user))
+                        {
+                            newUserInfoDialogId.open();
+                            return;
+                        }
+
+                        if(dbMan.insertUser(user))
+                        {
+                            newUserInfoDialogId.dialogSuccess = true
+                            newUserInfoDialogId.dialogTitle = "عملیات موفق"
+                            newUserInfoDialogId.dialogText = "کاربر جدید با موفقیت به دیتابیس افزوده شد"
+                            newUserInfoDialogId.acceptAction = function(){newUserInfoDialogId.close(); homeStackViewId.pop();}
+                            newUserInfoDialogId.open();
+
+                        }
+                        else
+                        {
+                            var errorString = dbMan.getLastError();
+                            newUserInfoDialogId.dialogTitle = "خطا"
+                            newUserInfoDialogId.dialogText = errorString
+                            newUserInfoDialogId.width = parent.width
+                            newUserInfoDialogId.height = 500
+                            newUserInfoDialogId.dialogSuccess = false
+                            newUserInfoDialogId.open();
+                        }
                     }
                 }
 
@@ -772,8 +828,14 @@ Page {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 50
                 }
-
             }
         }
+    }
+    BaseDialog
+    {
+        id: newUserInfoDialogId
+        dialogTitle: "خطا"
+        dialogText: "ورود فیلد الزامی می‌باشد"
+        dialogSuccess: false
     }
 }
