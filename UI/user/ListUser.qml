@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "ListUser.js" as ListUserJS
+
 
 Page {
 
@@ -41,7 +43,7 @@ Page {
                 font.bold: true
                 color: "mediumvioletred"
                 style: Text.Outline
-                styleColor: "black"
+                styleColor: "white"
             }
 
             Item
@@ -65,10 +67,16 @@ Page {
 
         ListView {
             id: lv
-            Layout.maximumWidth: (parent.width < 700)? parent.width : 700
-            Layout.minimumWidth: (parent.width < 700)? parent.width : 700
             Layout.alignment: Qt.AlignHCenter
             Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.margins: 20
+            spacing: 10
+            model: ListModel{id: userListModel}
+            delegate: UsersListWidget{userId: Id; userName: Name; userLastname: Lastname; userNatId: Nat_id; userJobPosition: Job_position; userEnabled: Enabled; userAdmin: Admin; userIsFemale: UserFemale  }
+            layoutDirection: Qt.LeftToRight
+            orientation: ListView.Horizontal
+            Component.onCompleted: { ListUserJS.updateUsersModel();}
 
         }
     }
@@ -92,6 +100,7 @@ Page {
             {
                 anchors.fill: parent
                 width:parent.width
+                spacing: 10
 
                 Rectangle
                 {
@@ -121,9 +130,157 @@ Page {
                     }
                 }
 
-                Rectangle{Layout.fillWidth: true; height: 4; color:"royalblue"}
-
+                //Rectangle{Layout.fillWidth: true; height: 4; color:"royalblue"}
                 // name lastname natid tel email position admin en admin
+                //name
+                Text {
+                    text: "نام کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    color: "royalblue"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignLeft
+                    Layout.leftMargin: 10
+                }
+                TextField
+                {
+                    id: searchUserNameTF
+                    placeholderText: "نام کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    Layout.margins: 10
+                    Layout.topMargin: -10
+                }
+
+                //lastname
+                Text {
+                    text: "نام‌خانوادگی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    color: "royalblue"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignLeft
+                    Layout.leftMargin: 10
+                }
+                TextField
+                {
+                    id: searchUserLastNameTF
+                    placeholderText: "نام‌خانوادگی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    Layout.margins: 10
+                    Layout.topMargin: -10
+                }
+
+                //natid
+                Text {
+                    text: "کد‌ملی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    color: "royalblue"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignLeft
+                    Layout.leftMargin: 10
+                }
+                TextField
+                {
+                    id: searchUserNatidTF
+                    placeholderText: "کد‌ملی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    Layout.margins: 10
+                    Layout.topMargin: -10
+                }
+
+                //tel
+                Text {
+                    text: "شماره‌تماس کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    color: "royalblue"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignLeft
+                    Layout.leftMargin: 10
+                }
+                TextField
+                {
+                    id: searchUserTelTF
+                    placeholderText: "شماره‌تماس کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    Layout.margins: 10
+                    Layout.topMargin: -10
+                }
+                //email
+                Text {
+                    text: "پست‌الکترونیکی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    color: "royalblue"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignLeft
+                    Layout.leftMargin: 10
+                }
+                TextField
+                {
+                    id: searchUserEmailTF
+                    placeholderText: "پست‌الکترونیکی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    Layout.margins: 10
+                    Layout.topMargin: -10
+                }
+
+                //Positioner
+                Text {
+                    text: "سمت‌شغلی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    color: "royalblue"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignLeft
+                    Layout.leftMargin: 10
+                }
+                TextField
+                {
+                    id: searchUserPositionTF
+                    placeholderText: "سمت‌شغلی کاربر"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 16
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    Layout.margins: 10
+                    Layout.topMargin: -10
+                }
+
+                // button
+
+                Button
+                {
+                    text: "جستجو"
+                    font.family: yekanFont.font.family
+                    font.pixelSize: 14
+                    Layout.preferredHeight: 40
+                    Layout.preferredWidth: 100
+                    Layout.alignment: Qt.AlignHCenter
+                    icon.source: "qrc:/Assets/images/search.png"
+                    icon.width: 32
+                    icon.height: 32
+
+                    onClicked: {}
+
+                    Rectangle{width: parent.width; height: 4; color:"royalblue"; anchors.bottom: parent.bottom}
+                }
             }
         }
     }

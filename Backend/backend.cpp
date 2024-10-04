@@ -26,7 +26,7 @@ void Backend::initiate()
 
 void Backend::loadHome()
 {
-    QJsonObject user = dbMan->getUser();
+    QJsonObject user = dbMan->getUserJson();
     engine.rootContext()->setContextProperty("user", user);
     engine.loadFromModule("Roshangaran", "HomeWindow");
 }

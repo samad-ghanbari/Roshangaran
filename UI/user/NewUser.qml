@@ -55,7 +55,7 @@ Page {
                 font.bold: true
                 color: "mediumvioletred"
                 style: Text.Outline
-                styleColor: "black"
+                styleColor: "white"
             }
 
             Item
@@ -115,7 +115,7 @@ Page {
 
 
                         Text {
-                            text: "نام کاربر "
+                            text: "نام‌کاربر "
                             Layout.minimumWidth: 150
                             Layout.maximumWidth: 150
                             Layout.preferredHeight: 50
@@ -132,12 +132,12 @@ Page {
                             Layout.preferredHeight: 50
                             font.family: yekanFont.font.family
                             font.pixelSize: 16
-                            placeholderText: "نام کاربر"
+                            placeholderText: "نام‌کاربر"
 
                         }
 
                         Text {
-                            text: "نام خانوادگی"
+                            text: "نام‌خانوادگی"
                             Layout.minimumWidth: 150
                             Layout.maximumWidth: 150
                             Layout.preferredHeight: 50
@@ -158,7 +158,7 @@ Page {
                         }
 
                         Text {
-                            text: "کد ملی"
+                            text: "کدملی"
                             Layout.minimumWidth: 150
                             Layout.maximumWidth: 150
                             Layout.preferredHeight: 50
@@ -176,6 +176,26 @@ Page {
                             font.family: yekanFont.font.family
                             font.pixelSize: 16
                             placeholderText: "کد ملی کاربر"
+                        }
+
+                        Text {
+                            text: "جنسیت"
+                            Layout.minimumWidth: 150
+                            Layout.maximumWidth: 150
+                            Layout.preferredHeight: 50
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 16
+                            font.bold: true
+                            color: "royalblue"
+                        }
+                        ComboBox {
+                            id: newUserGenderId
+                            editable: false
+                            model: ["خانم", "آقا"]
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 16
+                            Layout.preferredHeight: 50
                         }
 
                         Text {
@@ -798,6 +818,7 @@ Page {
 
                             user["enabled"] = newUserEnabledId.checked
                             user["admin"] = newUserAdminId.checked
+                            user["gender"] = newUserGenderId.currentText
 
                             var check = true
                             // check entries

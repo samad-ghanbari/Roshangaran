@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "./../user"
 
 
 ToolBar {
@@ -97,7 +98,7 @@ ToolBar {
             text: "کاربران سامانه"
             font.family: yekanFont.font.family
             font.pixelSize: 16
-            onClicked: console.log(menuUserId.children)
+            onClicked: homeStackViewId.push(listUserPageComponent)
             icon.source: "qrc:/Assets/images/users.png"
             icon.width: 32
             icon.height: 32
@@ -255,5 +256,13 @@ ToolBar {
             }
         }
     }
+
+
+    Component
+    {
+        id: listUserPageComponent
+        ListUser{}
+    }
+
 }
 

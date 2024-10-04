@@ -1,8 +1,6 @@
 
 // //access
 function updateAccessBranch() {
-
-    //var jsondata = '[{"id":1, "city":"تهران", "branch_name":"شعبه میرداماد", "address":"منطقه۳ - میرداماد، میدان مادر (محسنی)، خیابان رودبار غربی", "description":"دوره اول میرداماد"}]';
     var jsondata = dbMan.getBranchesJson();
     jsondata = JSON.parse(jsondata);
     for(var obj of jsondata)

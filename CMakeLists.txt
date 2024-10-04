@@ -46,6 +46,10 @@ qt_add_qml_module(appRoshangaran
 
     QML_FILES UI/user/ListUser.qml
     QML_FILES UI/user/BaseDialog.qml
+    QML_FILES UI/user/ListUser.js
+    QML_FILES UI/user/UsersListWidget.qml
+    QML_FILES UI/user/User.qml
+    QML_FILES UI/user/User.js
 
 )
 
@@ -73,6 +77,8 @@ qt_add_resources(appRoshangaran "assets"
 
         Assets/images/users.png
         Assets/images/user.png
+        Assets/images/userLady.png
+        Assets/images/female.png
         Assets/images/newUser.png
         Assets/images/branch.png
         Assets/images/school.png
@@ -92,6 +98,12 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/arrow-left.png
 
         Assets/images/search.png
+
+        Assets/images/tick.png
+        Assets/images/cross.png
+
+        Assets/images/setting.png
+        Assets/images/setting2.png
 
 
 )
