@@ -1,4 +1,15 @@
 
+function updateAccessPermission()
+{
+    accessBranchModel();
+    accessStepModel();
+    accessBasisModel();
+
+    permissionBranchModel();
+    permissionStepModel();
+    permissionBasisModel();
+}
+
 //a access
 function accessBranchModel()
 {

@@ -14,6 +14,8 @@ Page {
     property var permissionStep:user["write_permission"]["step"]
     property var permissionBasis: user["write_permission"]["basis"]
 
+    signal updated(var userObject);
+
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
     ColumnLayout
@@ -381,6 +383,7 @@ Page {
                                             accessBasisModel.clear();
                                             accessStepModel.clear();
 
+                                            permissionBranch = [];
                                             permissionStep = [];
                                             permissionBasis = [];
 
@@ -739,8 +742,8 @@ Page {
                                 User["accessBasis"] = accessBasis;
 
                                 User["permissionBranch"] = permissionBranch;
-                                User["accessStep"] = permissionStep;
-                                User["accessBasis"] = permissionBasis;
+                                User["permissionStep"] = permissionStep;
+                                User["permissionBasis"] = permissionBasis;
 
                                 User["enabled"] = userEnabledId.checked
                                 User["admin"] = userAdminId.checked
@@ -759,7 +762,9 @@ Page {
                                     userInfoDialogId.dialogSuccess = true
                                     userInfoDialogId.dialogTitle = "عملیات موفق"
                                     userInfoDialogId.dialogText = "اطلاعات کاربر با موفقیت بروزرسانی شد"
-                                    updated();
+                                    User = dbMan.getUserJson(User["id"]);
+                                    //User = JSON.parse(User);
+                                    updated(User);
                                     userInfoDialogId.acceptAction = function(){userInfoDialogId.close(); homeStackViewId.pop();}
                                     userInfoDialogId.open();
 

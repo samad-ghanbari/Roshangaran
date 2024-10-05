@@ -14,6 +14,7 @@ Page {
     property var permissionStep:[]
     property var permissionBasis:[]
 
+    signal newUserSignal();
 
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
@@ -800,11 +801,11 @@ Page {
                             var user = {};
                             user["name"] = newUserNameId.text;
                             user["lastname"] = newUserLastNameId.text;
-                            user["natid"] = newUserNatidId.text;
+                            user["nat_id"] = newUserNatidId.text;
                             user["password"] = newUserPassId.text;
                             user["passwordConfirm"] = newUserPassConfirmId.text;
                             user["email"] = newUserEmailId.text;
-                            user["position"] = newUserPositionId.text
+                            user["job_position"] = newUserPositionId.text
                             user["telephone"] = newUserTelId.text;
 
                             user["accessBranch"] = accessBranch;
@@ -812,8 +813,8 @@ Page {
                             user["accessBasis"] = accessBasis;
 
                             user["permissionBranch"] = permissionBranch;
-                            user["accessStep"] = permissionStep;
-                            user["accessBasis"] = permissionBasis;
+                            user["permissionStep"] = permissionStep;
+                            user["permissionBasis"] = permissionBasis;
 
                             user["enabled"] = newUserEnabledId.checked
                             user["admin"] = newUserAdminId.checked
@@ -832,6 +833,7 @@ Page {
                                 newUserInfoDialogId.dialogSuccess = true
                                 newUserInfoDialogId.dialogTitle = "عملیات موفق"
                                 newUserInfoDialogId.dialogText = "کاربر جدید با موفقیت به دیتابیس افزوده شد"
+                                newUserSignal();
                                 newUserInfoDialogId.acceptAction = function(){newUserInfoDialogId.close(); homeStackViewId.pop();}
                                 newUserInfoDialogId.open();
 

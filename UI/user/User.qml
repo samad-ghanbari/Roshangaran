@@ -9,14 +9,14 @@ Page {
     property var userId;
     property var user: dbMan.getUserJson(userId)
 
-    Connections
+    signal update(var User);
+
+    function updateUser(User)
     {
-        target: userModifyPage;
-        function onUpdated()
-        {
-            //user = dbMan.getUserJson(userId);
-            console.log("updated")
-        }
+        user = User;
+        UserMethods.updateAccessPermission();
+        update(User);
+
     }
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
@@ -388,7 +388,7 @@ Page {
                             delegate:
                                 Rectangle
                             {
-                                width: parent.width;
+                                width: userBox.width
                                 height: 40;
                                 color: "white"
                                 Text
@@ -429,7 +429,7 @@ Page {
                             delegate:
                                 Rectangle
                             {
-                                width: parent.width;
+                                width: userBox.width;
                                 height: 40;
                                 color: "white"
                                 Text
@@ -470,7 +470,7 @@ Page {
                             delegate:
                                 Rectangle
                             {
-                                width: parent.width;
+                                width: userBox.width;
                                 height: 40;
                                 color: "white"
                                 Text
@@ -528,7 +528,7 @@ Page {
                             delegate:
                                 Rectangle
                             {
-                                width: parent.width;
+                                width: userBox.width;
                                 height: 40;
                                 color: "white"
                                 Text
@@ -568,7 +568,7 @@ Page {
                             delegate:
                                 Rectangle
                             {
-                                width: parent.width;
+                                width: userBox.width;
                                 height: 40;
                                 color: "white"
                                 Text
@@ -609,7 +609,7 @@ Page {
                             delegate:
                                 Rectangle
                             {
-                                width: parent.width;
+                                width: userBox.width;
                                 height: 40;
                                 color: "white"
                                 Text
@@ -646,8 +646,9 @@ Page {
     Component
     {
         id: userModifyComponent
-
-        UserModify{id: userModifyPage; }
+        UserModify{
+        onUpdated: (User)=>updateUser(User);
+        }
     }
 
     Component

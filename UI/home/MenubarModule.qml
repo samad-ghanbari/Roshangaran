@@ -113,12 +113,14 @@ MenuBar {
     Component
     {
         id: newUserPageComponent
-        NewUser{}
+        NewUser{
+        onNewUserSignal: listUserPage.refreshPage();
+        }
     }
 
     Component
     {
         id: listUserPageComponent
-        ListUser{}
+        ListUser{ id: listUserPage;}
     }
 }

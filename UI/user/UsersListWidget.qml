@@ -20,6 +20,16 @@ PaddedRectangle {
     padding: -5
     radius: 10
 
+    function updatePage(User)
+    {
+        userName = User["name"];
+        userLastname = User["lastname"]
+        userNatId = User["nat_id"];
+        userJobPosition = User["job_position"];
+        userEnabled = User["enabled"];
+        userAdmin = User["admin"];
+        userIsFemale = (User["gender"] === "خانم") ? true : false;
+    }
 
     // Image {
     //     source:(userEnabled)?  "qrc:/Assets/images/tick.png" : "qrc:/Assets/images/cross.png";
@@ -90,7 +100,9 @@ PaddedRectangle {
     Component
     {
         id: userComponent
-        User{}
+        User{
+        onUpdate:  (User)=> updatePage(User);
+        }
     }
 
 }

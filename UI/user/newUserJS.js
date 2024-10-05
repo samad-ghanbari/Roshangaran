@@ -108,7 +108,7 @@ function checkFormEntries(user)
         return false;
     }
 
-    if(!user["natid"])
+    if(!user["nat_id"])
     {
         newUserNatidId.placeholderText="ورود فیلد الزامی می‌باشد"
         newUserNatidId.placeholderTextColor = "red"
@@ -148,7 +148,7 @@ function checkFormEntries(user)
     }
 
 
-    if(!user["position"])
+    if(!user["job_position"])
     {
         newUserNameId.placeholderText="ورود فیلد الزامی می‌باشد"
         newUserNameId.placeholderTextColor = "red"
