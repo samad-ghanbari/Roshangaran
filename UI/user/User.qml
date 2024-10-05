@@ -6,7 +6,18 @@ import "User.js" as UserMethods
 
 Page {
 
-    property var user
+    property var userId;
+    property var user: dbMan.getUserJson(userId)
+
+    Connections
+    {
+        target: userModifyPage;
+        function onUpdated()
+        {
+            //user = dbMan.getUserJson(userId);
+            console.log("updated")
+        }
+    }
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
@@ -19,19 +30,14 @@ Page {
             width: parent.width
             Button
             {
-                id: newUserBackBtnId
-                font.family: yekanFont.font.family
-                font.pixelSize: 48
                 background: Item{}
                 icon.source: "qrc:/Assets/images/arrow-right.png"
                 icon.width: 64
                 icon.height: 64
                 opacity: 0.5
-                palette.buttonText: "steelblue"
-                font.bold: true
                 onClicked: homeStackViewId.pop();
                 hoverEnabled: true
-                onHoveredChanged: newUserBackBtnId.opacity=(hovered)? 1 : 0.5;
+                onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
             }
             Item
             {
@@ -79,6 +85,38 @@ Page {
                     id: userManColId
                     width: parent.width
 
+                    RowLayout
+                    {
+                        width: parent.width
+                        Button
+                        {
+                            background: Item{}
+                            icon.source: "qrc:/Assets/images/edit.png"
+                            icon.width: 64
+                            icon.height: 64
+                            opacity: 0.5
+                            onClicked: homeStackViewId.push(userModifyComponent, {user: user})
+                            hoverEnabled: true
+                            onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
+                        }
+                        Item
+                        {
+                            Layout.fillWidth: true
+                        }
+                        Button
+                        {
+                            background: Item{}
+                            icon.source: "qrc:/Assets/images/trash3.png"
+                            icon.width: 64
+                            icon.height: 64
+                            opacity: 0.5
+                            onClicked: homeStackViewId.push(userDeleteComponent, {user: user})
+                            hoverEnabled: true
+                            onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
+                        }
+
+
+                    }
                     //id, name, lastname, nat_id, password, email, job_position, telephone, access, write_permission, enabled, admin, gender
                     GridLayout
                     {
@@ -343,14 +381,26 @@ Page {
                             id: userAccessBrancheLV
                             spacing: 20
                             Layout.columnSpan: 2
-                            model: ListModel{id: userBranchListModel; ListElement{city:"aaa"; branchName:"111"}}
-                            delegate: Text{
-                            width: parent.width;
-                            height: 40;
-                            text: city + " - " + branchName
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 16
+                            Layout.fillWidth: true
+                            Layout.maximumHeight: 200
+                            Layout.minimumHeight: 100
+                            model: ListModel{id: userBranchListModel;}
+                            delegate:
+                                Rectangle
+                            {
+                                width: parent.width;
+                                height: 40;
+                                color: "white"
+                                Text
+                                {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 40
+                                    text: city + " - " + branch_name
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
                             }
+
                             Component.onCompleted:
                             {
                                 UserMethods.accessBranchModel();
@@ -367,15 +417,29 @@ Page {
                             font.bold: true
                             color: "royalblue"
                         }
-                        Flow
+                        ListView
                         {
+                            id: userAccessStepLV
                             spacing: 20
                             Layout.columnSpan: 2
-
-                            ListView
+                            Layout.fillWidth: true
+                            Layout.maximumHeight: 200
+                            Layout.minimumHeight: 100
+                            model: ListModel{id: userStepListModel;}
+                            delegate:
+                                Rectangle
                             {
-                                id: userAccessStepLV
-                                model: ListModel{id: userStepListModel}
+                                width: parent.width;
+                                height: 40;
+                                color: "white"
+                                Text
+                                {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 40
+                                    text: branch_name + " - " + step_name
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
                             }
 
                             Component.onCompleted:
@@ -383,6 +447,7 @@ Page {
                                 UserMethods.accessStepModel();
                             }
                         }
+
                         // basis
                         Text {
                             text: "دسترسی‌ به پایه‌ها"
@@ -393,15 +458,29 @@ Page {
                             font.bold: true
                             color: "royalblue"
                         }
-                        Flow
+                        ListView
                         {
+                            id: userAccessBasisLV
                             spacing: 20
                             Layout.columnSpan: 2
-
-                            ListView
+                            Layout.fillWidth: true
+                            Layout.maximumHeight: 200
+                            Layout.minimumHeight: 100
+                            model: ListModel{id: userBasisListModel;}
+                            delegate:
+                                Rectangle
                             {
-                                id: userAccessBasisLV
-                                model: ListModel{id: userBasisListModel}
+                                width: parent.width;
+                                height: 40;
+                                color: "white"
+                                Text
+                                {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 40
+                                    text: branch_name + " - " + step_name + " - " + basis_name
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
                             }
 
                             Component.onCompleted:
@@ -437,16 +516,29 @@ Page {
                             font.bold: true
                             color: "royalblue"
                         }
-                        Flow
+                        ListView
                         {
+                            id: userPermissionBranchLV
                             spacing: 20
                             Layout.columnSpan: 2
-                            flow: Flow.TopToBottom
-
-                            ListView
+                            Layout.fillWidth: true
+                            Layout.maximumHeight: 200
+                            Layout.minimumHeight: 100
+                            model: ListModel{id: userPermBranchListModel;}
+                            delegate:
+                                Rectangle
                             {
-                                id: userPermissionBranchLV
-                                model: ListModel{id: userPermissionBranchListModel}
+                                width: parent.width;
+                                height: 40;
+                                color: "white"
+                                Text
+                                {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 40
+                                    text: city + " - " + branch_name
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
                             }
 
                             Component.onCompleted:
@@ -464,16 +556,29 @@ Page {
                             font.bold: true
                             color: "royalblue"
                         }
-                        Flow
+                        ListView
                         {
+                            id: userPermissionStepLV
                             spacing: 20
                             Layout.columnSpan: 2
-                            flow: Flow.TopToBottom
-
-                            ListView
+                            Layout.fillWidth: true
+                            Layout.maximumHeight: 200
+                            Layout.minimumHeight: 100
+                            model: ListModel{id: userPermStepListModel;}
+                            delegate:
+                                Rectangle
                             {
-                                id: userPermissionStepLV
-                                model: ListModel{id: userPermissionStepListModel}
+                                width: parent.width;
+                                height: 40;
+                                color: "white"
+                                Text
+                                {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 40
+                                    text: branch_name + " - " + step_name
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
                             }
 
                             Component.onCompleted:
@@ -492,16 +597,29 @@ Page {
                             font.bold: true
                             color: "royalblue"
                         }
-                        Flow
+                        ListView
                         {
+                            id: userPermissionBasisLV
                             spacing: 20
                             Layout.columnSpan: 2
-                            flow: Flow.TopToBottom
-
-                            ListView
+                            Layout.fillWidth: true
+                            Layout.maximumHeight: 200
+                            Layout.minimumHeight: 100
+                            model: ListModel{id: userPermBasisListModel;}
+                            delegate:
+                                Rectangle
                             {
-                                id: userPermissionBasisLV
-                                model: ListModel{id: userPermissionBasisListModel}
+                                width: parent.width;
+                                height: 40;
+                                color: "white"
+                                Text
+                                {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 40
+                                    text:  branch_name + " - " + step_name + " - " + basis_name
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
                             }
 
                             Component.onCompleted:
@@ -520,9 +638,25 @@ Page {
 
 
                 }
-
             }
 
         }
     }
+
+    Component
+    {
+        id: userModifyComponent
+
+        UserModify{id: userModifyPage; }
+    }
+
+    Component
+    {
+        id: userDeleteComponent
+        UserDelete{}
+    }
+
+
+
 }
+

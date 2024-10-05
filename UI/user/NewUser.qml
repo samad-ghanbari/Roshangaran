@@ -71,7 +71,6 @@ Page {
 
         ScrollView
         {
-            id: newUserSV
             Layout.preferredHeight: parent.height
             Layout.preferredWidth: parent.width
 
@@ -111,7 +110,7 @@ Page {
                         rows: 11
                         rowSpacing: 20
                         columnSpacing: 10
-                        width: newUserSV.width
+                        Layout.preferredWidth:  parent.width
 
 
                         Text {

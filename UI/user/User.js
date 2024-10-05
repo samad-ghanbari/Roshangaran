@@ -2,52 +2,84 @@
 //a access
 function accessBranchModel()
 {
-    // userBranchListModel.clear();
-    // var branchArray = user["access"].branch;
-    // var branches = dbMan.getBranchesJsonById(branchArray);
-    // branches = JSON.parse(branches);
-    // //id, city, branch_name, address, description
-    // for(var br of branches)
-    // {
-    //     userBranchListModel.append({city: br.city, branchName: br.branch_name, address: br.address, description: br.description});
-    // }
+    userBranchListModel.clear();
+    var Array = user["access"].branch;
+    var jsondata = dbMan.getBranchesJsonById(Array);
+    jsondata = JSON.parse(jsondata);
+    //id, city, branch_name, address, description
+    var temp;
+    for(var obj of jsondata)
+    {
+        temp = {id: obj.id, city: obj.city, branch_name: obj.branch_name, address: obj.address, description: obj.description};
+        userBranchListModel.append(temp);
+    }
 }
 
 function accessStepModel()
 {
-    //var stepArray = user["access"]["step"];
-    //var steps = dbMan.getStepsJsonById(stepArray);
+    userStepListModel.clear();
+    var Array = user["access"]["step"];
+    var jsondata = dbMan.getStepsJsonById(Array);
+    jsondata = JSON.parse(jsondata);
     //id, branch_id, step_name, branch_name
+    for(var obj of jsondata)
+    {
+        userStepListModel.append({id: obj.id, branch_id: obj.branch_id, step_name:obj.step_name, branch_name: obj.branch_name});
+    }
 }
 
 function accessBasisModel()
 {
-    //var basisArray = user["access"]["basis"];
-    //var basis = dbMan.getBasisJsonById(basisArray);
+    userBasisListModel.clear();
+    var Array = user["access"]["basis"];
+    var jsondata = dbMan.getBasisJsonById(Array);
+    jsondata = JSON.parse(jsondata);
     //id, step_id, basis_name, step_name, branch_name
+    for(var obj of jsondata)
+    {
+        userBasisListModel.append({id: obj.id, step_id: obj.step_id, basis_name: obj.basis_name, step_name: obj.step_name, branch_name:obj.branch_name});
+    }
 }
 
 //write Permission
 
 function permissionBranchModel()
 {
-    //var branchArray = user["write_permission"]["branch"];
-    //var branches = dbMan.getBranchesJsonById(branchArray);
+    userPermBranchListModel.clear();
+    var Array = user["write_permission"]["branch"];
+    var jsondata = dbMan.getBranchesJsonById(Array);
+    jsondata = JSON.parse(jsondata);
     //id, city, branch_name, address, description
+    for(var obj of jsondata)
+    {
+        userPermBranchListModel.append({id: obj.id, city: obj.city, branch_name: obj.branch_name, address: obj.address, description: obj.description});
+    }
 }
 
 function permissionStepModel()
 {
-    //var stepArray = user["write_permission"]["step"];
-    //var steps = dbMan.getStepsJsonById(stepArray);
+    userPermStepListModel.clear();
+    var Array = user["write_permission"]["step"];
+    var jsondata = dbMan.getStepsJsonById(Array);
+    jsondata = JSON.parse(jsondata);
     //  id, branch_id, step_name, branch_name
+    for(var obj of jsondata)
+    {
+        userPermStepListModel.append({id: obj.id, branch_id: obj.branch_id, step_name:obj.step_name, branch_name: obj.branch_name});
+    }
 
 }
 
 function permissionBasisModel()
 {
-    //var basisArray = user["write_permission"]["basis"];
-    //var basis = dbMan.getBasisJsonById(basisArray);
+    userPermBasisListModel.clear();
+    var Array = user["write_permission"]["basis"];
+    var jsondata = dbMan.getBasisJsonById(Array);
+    jsondata = JSON.parse(jsondata);
     //  id, step_id, basis_name, step_name, branch_name
+    for(var obj of jsondata)
+    {
+        userPermBasisListModel.append({id: obj.id, step_id: obj.step_id, basis_name: obj.basis_name, step_name: obj.step_name, branch_name:obj.branch_name});
+    }
 
 }

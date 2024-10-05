@@ -50,6 +50,9 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/UsersListWidget.qml
     QML_FILES UI/user/User.qml
     QML_FILES UI/user/User.js
+    QML_FILES UI/user/UserDelete.qml
+    QML_FILES UI/user/UserModify.qml
+    QML_FILES UI/user/UserModify.js
 
 )
 
@@ -104,6 +107,11 @@ qt_add_resources(appRoshangaran "assets"
 
         Assets/images/setting.png
         Assets/images/setting2.png
+
+        Assets/images/edit.png
+        Assets/images/trash.png
+        Assets/images/trash2.png
+        Assets/images/trash3.png
 
 
 )

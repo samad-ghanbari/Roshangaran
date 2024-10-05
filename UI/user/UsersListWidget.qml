@@ -83,8 +83,7 @@ PaddedRectangle {
         hoverEnabled: true
         onHoveredChanged: (containsMouse)? parent.opacity=1 : parent.opacity=0.8
         onClicked: {
-            var USER = dbMan.getUserJson(userId);
-            homeStackViewId.push(userComponent, {user: USER});
+            homeStackViewId.push(userComponent, {userId: userId});
         }
     }
 
