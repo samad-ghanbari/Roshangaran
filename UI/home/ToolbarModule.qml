@@ -3,7 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import "./../user"
-
+import "./../branch"
+import "./../step"
+import "./../basis"
+import "./../studyPeriod"
 
 ToolBar {
     id:toolbarId;
@@ -141,7 +144,13 @@ ToolBar {
             icon.source: "qrc:/Assets/images/branch.png"
             icon.width: 32
             icon.height: 32
-            onClicked: console.log("567")
+            onClicked:
+            {
+                if(homeStackViewId.currentItem.objectName === "branchesON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(branchesComponent, {objectName: "branchesON"})
+            }
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuBranchId)
         }
@@ -154,7 +163,14 @@ ToolBar {
             icon.source: "qrc:/Assets/images/school.png"
             icon.width: 32
             icon.height: 32
-            onClicked: console.log("567")
+            onClicked:
+            {
+                if(homeStackViewId.currentItem.objectName === "stepsON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(stepsComponent, {objectName: "stepsON"})
+            }
+
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuStepId)
         }
@@ -167,7 +183,13 @@ ToolBar {
             icon.source: "qrc:/Assets/images/school2.png"
             icon.width: 32
             icon.height: 32
-            onClicked: console.log("567")
+            onClicked:
+            {
+                if(homeStackViewId.currentItem.objectName === "basisON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(basisComponent, {objectName: "basisON"})
+            }
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuBaseId)
         }
@@ -180,7 +202,13 @@ ToolBar {
             icon.source: "qrc:/Assets/images/date.png"
             icon.width: 32
             icon.height: 32
-            onClicked: console.log("567")
+            onClicked:
+            {
+                if(homeStackViewId.currentItem.objectName === "studyBasisON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(studyPeriodComponent, {objectName: "studyBasisON"})
+            }
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuPeriodId)
         }
@@ -288,6 +316,26 @@ ToolBar {
     {
         id: listUserPageComponent
         ListUser{}
+    }
+    Component
+    {
+        id: branchesComponent
+        Branches{}
+    }
+    Component
+    {
+        id: stepsComponent
+        Steps{}
+    }
+    Component
+    {
+        id: basisComponent
+        Basis{}
+    }
+    Component
+    {
+        id: studyPeriodComponent
+        StudyPeriods{}
     }
 
 }

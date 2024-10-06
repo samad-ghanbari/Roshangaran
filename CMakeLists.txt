@@ -55,6 +55,24 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/UserModify.js
     QML_FILES UI/user/ChangePassword.qml
     QML_FILES UI/user/ChangePassDialogBox.qml
+    QML_FILES UI/branch/Branches.qml
+    QML_FILES UI/branch/InsertBranch.qml
+    QML_FILES UI/branch/UpdateBranch.qml
+    QML_FILES UI/branch/DeleteBranch.qml
+    QML_FILES UI/step/Steps.qml
+    QML_FILES UI/step/InsertStep.qml
+    QML_FILES UI/step/UpdateStep.qml
+    QML_FILES UI/step/DeleteStep.qml
+    QML_FILES UI/basis/Basis.qml
+    QML_FILES UI/basis/InsertBasis.qml
+    QML_FILES UI/basis/UpdateBasis.qml
+    QML_FILES UI/basis/DeleteBasis.qml
+    QML_FILES UI/studyPeriod/StudyPeriods.qml
+    QML_FILES UI/studyPeriod/InsertStudyPeriod.qml
+    QML_FILES UI/studyPeriod/UpdateStudyPeriod.qml
+    QML_FILES UI/studyPeriod/DeleteStudyPeriod.qml
+    QML_FILES UI/branch/BranchWidget.qml
+    QML_FILES UI/branch/Branches.js
 
 )
 
