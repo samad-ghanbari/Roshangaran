@@ -5,17 +5,20 @@ import QtQuick.Layouts
 import "User.js" as UserMethods
 
 Page {
-
+    id: userPage
     property var userId;
     property var user: dbMan.getUserJson(userId)
-
-    signal update(var User);
 
     function updateUser(User)
     {
         user = User;
         UserMethods.updateAccessPermission();
-        update(User);
+        userWidget.updatePage(User)
+    }
+
+    function userDeleted()
+    {
+        homeStackViewId.pop();
 
     }
 
@@ -99,6 +102,21 @@ Page {
                             hoverEnabled: true
                             onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
                         }
+                        Button
+                        {
+                            background: Item{}
+                            icon.source: "qrc:/Assets/images/key1.png"
+                            icon.width: 64
+                            icon.height: 64
+                            opacity: 0.5
+                            onClicked:
+                            {
+                                changePasswordInitialDialog.textFieldValue = ""
+                                changePasswordInitialDialog.open();
+                            }
+                            hoverEnabled: true
+                            onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
+                        }
                         Item
                         {
                             Layout.fillWidth: true
@@ -106,7 +124,7 @@ Page {
                         Button
                         {
                             background: Item{}
-                            icon.source: "qrc:/Assets/images/trash3.png"
+                            icon.source: "qrc:/Assets/images/trash.png"
                             icon.width: 64
                             icon.height: 64
                             opacity: 0.5
@@ -122,7 +140,7 @@ Page {
                     {
                         id: userBasicsId
                         columns: 2
-                        rows: 11
+                        rows: 9
                         rowSpacing: 20
                         columnSpacing: 10
                         width: userBox.width
@@ -340,7 +358,7 @@ Page {
                     {
                         id: userAccPermId
                         columns: 2
-                        rows: 11
+                        rows: 16
                         rowSpacing: 20
                         columnSpacing: 10
                         width: parent.width
@@ -646,9 +664,7 @@ Page {
     Component
     {
         id: userModifyComponent
-        UserModify{
-        onUpdated: (User)=>updateUser(User);
-        }
+        UserModify{}
     }
 
     Component
@@ -657,7 +673,79 @@ Page {
         UserDelete{}
     }
 
+    Component
+    {
+        id: changePasswordComponent
+        ChangePassword{}
+    }
 
+    //password
+    BaseDialog {
+        id: changePasswordInitialDialog
+        dialogTitle: "رمز عبور";
+        dialogText: "برای ادامه فرآیند رمز عبور خود را وارد نمایید."
+        acceptVisible: true
+        rejectVisible: true
+        textFieldVisible: true
+        dialogSuccess : true;
+        textFieldEcho : TextField.Password
+        textFieldValue: "";
+        acceptAction : function(){
+            var userPass = changePasswordInitialDialog.textFieldValue;
+            if(dbMan.verifyUserPassword(userPass))
+            {
+                changePasswordDialog.open();
+                changePasswordDialog.textField1Value = ""
+                changePasswordDialog.textField2Value = ""
+            }
+            else
+            {
+                changePasswordErrorDialog.open();
+            }
+        }
+    }
+    BaseDialog {
+        id: changePasswordErrorDialog
+        dialogTitle: "رمز عبور";
+        dialogText: "تغییر رمز عبور کاربر با مشکل مواجه شد."
+        acceptVisible: true
+        rejectVisible: false
+        textFieldVisible: false
+        dialogSuccess : false;
+    }
+    BaseDialog {
+        id: changePasswordSuccessDialog
+        dialogTitle: "رمز عبور";
+        dialogText: "تغییر رمز عبور کاربر با موفقیت انجام شد."
+        acceptVisible: true
+        rejectVisible: false
+        textFieldVisible: false
+        dialogSuccess : true;
+    }
+    ChangePassDialogBox {
+        id: changePasswordDialog
+        textField1Value: ""
+        textField2Value: ""
+
+        acceptAction: function(){
+            var password = textField1Value;
+            var confirmPassword = textField2Value;
+            var ok = false
+            if(password === confirmPassword)
+            {
+                if(dbMan.changeUserPassword(user["id"], password))
+                    ok = true
+                else
+                    ok = false;
+            }
+
+            if(ok)
+                changePasswordSuccessDialog.open();
+            else
+                changePasswordErrorDialog.open();
+
+        }
+    }
 
 }
 

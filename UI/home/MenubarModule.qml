@@ -11,8 +11,6 @@ MenuBar {
     font.family: yekanFont.font.family
     font.pixelSize: 16
 
-    signal updateUserList();
-
     Connections
     {
         target: toolbarId
@@ -135,7 +133,7 @@ MenuBar {
     Component
     {
         id: newUserPageComponent
-        NewUser{ onNewUserSignal: menubarId.updateUserList(); }
+        NewUser{}
     }
 
     Component

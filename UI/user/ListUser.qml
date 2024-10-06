@@ -4,15 +4,19 @@ import QtQuick.Layouts
 
 import "ListUser.js" as ListUserJS
 
-
 Page {
-
+    id: userListPage
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
+
+    function updateUserListModel()
+    {
+        ListUserJS.updateUsersModel();
+    }
 
     Connections
     {
-        target: menubarId
-        function onUpdateUserList()
+        target: appWindowId
+        function onNewUserSignal()
         {
             ListUserJS.updateUsersModel();
         }
@@ -84,7 +88,9 @@ Page {
             cellHeight: 300
             //spacing: 20
             model: ListModel{id: userListModel}
-            delegate: UsersListWidget{userId: Id; userName: Name; userLastname: Lastname; userNatId: Nat_id; userJobPosition: Job_position; userEnabled: Enabled; userAdmin: Admin; userIsFemale: UserFemale; }
+            delegate: UsersListWidget{
+                userId: Id; userName: Name; userLastname: Lastname; userNatId: Nat_id; userJobPosition: Job_position;
+                userEnabled: Enabled; userAdmin: Admin; userIsFemale: UserFemale; }
             layoutDirection: Qt.LeftToRight
             //orientation: ListView.Horizontal
             Component.onCompleted: { ListUserJS.updateUsersModel();}

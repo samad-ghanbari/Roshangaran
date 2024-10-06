@@ -4,26 +4,20 @@ import QtQuick.Layouts
 
 Dialog
 {
-    property string dialogTitle
-    property string dialogText
-    property bool dialogSuccess : false // false : warning
-    property string acceptButtonText: "تایید"
-    property string rejectButtonText: "انصراف"
-    property bool acceptVisible : true
-    property bool rejectVisible : false
     property var acceptAction : function(){close();}
     property var rejectAction : function(){close();}
-    property bool textFieldVisible : false
-    property alias textFieldValue : dialogTextField.text;
-    property alias textFieldEcho: dialogTextField.echoMode
+    property alias textField1Value : dialogTextField1.text;
+    property alias textField1Echo: dialogTextField1.echoMode
+
+    property alias textField2Value : dialogTextField2.text;
+    property alias textField2Echo: dialogTextField2.echoMode
 
 
     width: (parent.width > 400)? 400 : parent.width
-    height: 200
+    height: 300
     modal: true
     anchors.centerIn: parent;
-    //standardButtons: Dialog.Ok
-    title: dialogTitle
+    title: "تغییر رمز عبور"
 
     onAccepted: acceptAction();
     onRejected: rejectAction();
@@ -31,39 +25,58 @@ Dialog
     header: Rectangle{
         width: parent.width;
         height: 50;
-        color: (dialogSuccess)? "forestgreen" : "crimson";
-        Text{ text:dialogTitle; anchors.centerIn: parent; color: "white";font.bold:true; font.family: yekanFont.font.family; font.pixelSize: 16}
+        color:  "forestgreen"
+        Text{ text:"تغییر رمزعبور کاربر"; anchors.centerIn: parent; color: "white";font.bold:true; font.family: yekanFont.font.family; font.pixelSize: 16}
     }
 
     contentItem:
         ColumnLayout
     {
-        id: baseDialogCLId
+        id: dialogCLId
         width: parent.width
         height: Qt.binding(function(){ return (dialogContent.height + 100);})
 
-        Item{Layout.preferredHeight:  10; Layout.preferredWidth: baseDialogCLId.width;}
+        Item{Layout.preferredHeight:  10; Layout.preferredWidth: dialogCLId.width;}
 
         Text {
             id: dialogContent
             Layout.preferredWidth: parent.width
             horizontalAlignment: Text.AlignLeft
-            text: dialogText
+            text: "رمزعبور جدید را وارد نمایید"
             font.family: yekanFont.font.family
             font.pixelSize: 16
-            color: (dialogSuccess)? "forestgreen" : "crimson";
+            color:  "forestgreen"
         }
         TextField
         {
-            id: dialogTextField
+            id: dialogTextField1
             font.family: yekanFont.font.family
             font.bold: true
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 40
-            visible: textFieldVisible
+            echoMode: TextField.Password
         }
 
-        Item{Layout.preferredHeight:  20;  Layout.preferredWidth: baseDialogCLId.width;}
+
+        Text {
+            Layout.preferredWidth: parent.width
+            horizontalAlignment: Text.AlignLeft
+            font.family: yekanFont.font.family
+            text: "رمزعبور جدید را مجدد وارد نمایید"
+            font.pixelSize: 16
+            color:  "forestgreen"
+        }
+        TextField
+        {
+            id: dialogTextField2
+            font.family: yekanFont.font.family
+            font.bold: true
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: 40
+            echoMode: TextField.Password
+        }
+
+        Item{Layout.preferredHeight:  20;  Layout.preferredWidth: dialogCLId.width;}
     }
 
 
@@ -79,7 +92,6 @@ Dialog
                 Layout.preferredWidth:  100
                 font.family: yekanFont.font.family
                 font.pixelSize: 14
-                visible: rejectVisible
                 onClicked: reject();
                 Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "crimson"}
             }
@@ -90,7 +102,6 @@ Dialog
                 Layout.preferredWidth:  100
                 font.family: yekanFont.font.family
                 font.pixelSize: 14
-                visible: acceptVisible
                 onClicked: accept();
                 Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "forestgreen"}
             }

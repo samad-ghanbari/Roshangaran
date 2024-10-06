@@ -14,9 +14,6 @@ Page {
     property var permissionStep:[]
     property var permissionBasis:[]
 
-    signal newUserSignal();
-
-
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
     ColumnLayout
@@ -833,7 +830,7 @@ Page {
                                 newUserInfoDialogId.dialogSuccess = true
                                 newUserInfoDialogId.dialogTitle = "عملیات موفق"
                                 newUserInfoDialogId.dialogText = "کاربر جدید با موفقیت به دیتابیس افزوده شد"
-                                newUserSignal();
+                                appWindowId.newUserSignal();
                                 newUserInfoDialogId.acceptAction = function(){newUserInfoDialogId.close(); homeStackViewId.pop();}
                                 newUserInfoDialogId.open();
 

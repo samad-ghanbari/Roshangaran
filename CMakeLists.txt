@@ -53,6 +53,8 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/UserDelete.qml
     QML_FILES UI/user/UserModify.qml
     QML_FILES UI/user/UserModify.js
+    QML_FILES UI/user/ChangePassword.qml
+    QML_FILES UI/user/ChangePassDialogBox.qml
 
 )
 
@@ -116,6 +118,8 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/trash2.png
         Assets/images/trash3.png
 
+        Assets/images/key1.png
+        Assets/images/key2.png
 
 )
 

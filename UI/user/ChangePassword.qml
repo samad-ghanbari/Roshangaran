@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Page {
-    id: userDeletePage;
+    id: userChangePassPage;
 
     property var user;
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
@@ -327,44 +327,7 @@ Page {
         }
     }
 
-    BaseDialog
-    {
-        id: userDelDialog
-        dialogTitle:  "حذف کاربر"
-        dialogText: "آیا از حذف کاربر از سامانه مطمئن می‌باشید؟"
-        acceptVisible: true
-        rejectVisible: true
 
-        acceptAction: function(){
-            if(dbMan.deleteUser(user["id"]))
-                userSuccessDelDialog.open();
-            else
-                userErrorDelDialog.open();
-        }
-    }
-
-    BaseDialog
-    {
-        id: userSuccessDelDialog
-        dialogTitle:  "حذف کاربر"
-        dialogText: "حذف کاربر با موفقیت صورت پذیرفت"
-        acceptVisible: true
-        dialogSuccess: true
-        acceptAction: function(){
-            homeStackViewId.pop();
-            homeStackViewId.pop();
-            userListPage.updateUserListModel();
-        }
-    }
-
-    BaseDialog
-    {
-        id: userErrorDelDialog
-        dialogTitle:  "حذف کاربر"
-        dialogText: "حذف کاربر با مشکل مواجه شد"
-        acceptVisible: true
-        dialogSuccess: false
-    }
 }
 
 

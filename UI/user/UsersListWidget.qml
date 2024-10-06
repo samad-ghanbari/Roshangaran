@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 PaddedRectangle {
 
+    id: userWidget
     property int userId
     property string userName
     property string userLastname
@@ -30,14 +31,6 @@ PaddedRectangle {
         userAdmin = User["admin"];
         userIsFemale = (User["gender"] === "خانم") ? true : false;
     }
-
-    // Image {
-    //     source:(userEnabled)?  "qrc:/Assets/images/tick.png" : "qrc:/Assets/images/cross.png";
-    //     width: 32
-    //     height: 32
-    //     anchors.top: parent.top
-    //     anchors.left: parent.left
-    // }
 
     Image {
         source:"qrc:/Assets/images/setting2.png";
@@ -100,9 +93,7 @@ PaddedRectangle {
     Component
     {
         id: userComponent
-        User{
-        onUpdate:  (User)=> updatePage(User);
-        }
+        User{}
     }
 
 }

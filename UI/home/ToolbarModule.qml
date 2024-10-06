@@ -22,6 +22,7 @@ ToolBar {
 
         if(w < 1500)
         {
+            menuHomeId.icon.width=1
             menuUserId.icon.width=1
             menuBranchId.icon.width=1
             menuStepId.icon.width=1
@@ -34,6 +35,7 @@ ToolBar {
             menuParentId.icon.width=1
             menuEvalId.icon.width=1
 
+            menuHomeId.font.pixelSize=14
             menuUserId.font.pixelSize=14
             menuBranchId.font.pixelSize=14
             menuStepId.font.pixelSize=14
@@ -50,6 +52,7 @@ ToolBar {
         }
         else
         {
+            menuHomeId.icon.width=32
             menuUserId.icon.width=32
             menuUserId.icon.height=32
             menuBranchId.icon.width=32
@@ -63,6 +66,7 @@ ToolBar {
             menuParentId.icon.width=32
             menuEvalId.icon.width=32
 
+            menuHomeId.font.pixelSize=16
             menuUserId.font.pixelSize=16
             menuBranchId.font.pixelSize=16
             menuStepId.font.pixelSize=16

@@ -14,8 +14,6 @@ Page {
     property var permissionStep:user["write_permission"]["step"]
     property var permissionBasis: user["write_permission"]["basis"]
 
-    signal updated(var userObject);
-
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
     ColumnLayout
@@ -101,7 +99,7 @@ Page {
                         {
                             id: userBasicsId
                             columns: 2
-                            rows: 11
+                            rows: 10
                             rowSpacing: 20
                             columnSpacing: 10
                             Layout.preferredWidth:  parent.width
@@ -322,7 +320,7 @@ Page {
                         {
                             id: userAccPermId
                             columns: 2
-                            rows: 11
+                            rows: 16
                             rowSpacing: 20
                             columnSpacing: 10
                             width: parent.width
@@ -763,8 +761,8 @@ Page {
                                     userInfoDialogId.dialogTitle = "عملیات موفق"
                                     userInfoDialogId.dialogText = "اطلاعات کاربر با موفقیت بروزرسانی شد"
                                     User = dbMan.getUserJson(User["id"]);
-                                    //User = JSON.parse(User);
-                                    updated(User);
+                                    //updated(User);
+                                    userPage.updateUser(User);
                                     userInfoDialogId.acceptAction = function(){userInfoDialogId.close(); homeStackViewId.pop();}
                                     userInfoDialogId.open();
 
