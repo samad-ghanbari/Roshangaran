@@ -9,9 +9,13 @@ Page {
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
-    function refreshPage()
+    Connections
     {
-        ListUserJS.updateUsersModel();
+        target: menubarId
+        function onUpdateUserList()
+        {
+            ListUserJS.updateUsersModel();
+        }
     }
 
     ColumnLayout
@@ -70,19 +74,20 @@ Page {
         }
 
 
-        ListView {
-            id: lv
+        GridView {
+            id: gview
             Layout.alignment: Qt.AlignHCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: 20
-            spacing: 20
+            cellWidth: 300
+            cellHeight: 300
+            //spacing: 20
             model: ListModel{id: userListModel}
             delegate: UsersListWidget{userId: Id; userName: Name; userLastname: Lastname; userNatId: Nat_id; userJobPosition: Job_position; userEnabled: Enabled; userAdmin: Admin; userIsFemale: UserFemale; }
             layoutDirection: Qt.LeftToRight
-            orientation: ListView.Horizontal
+            //orientation: ListView.Horizontal
             Component.onCompleted: { ListUserJS.updateUsersModel();}
-
         }
     }
 

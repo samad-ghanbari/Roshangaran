@@ -74,6 +74,9 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/logo/logo512.png
         Assets/images/logo/logo1024.png
 
+        Assets/images/home1.png
+        Assets/images/home2.png
+
         Assets/images/login/disconnection.png
         Assets/images/login/maintenance.png
         Assets/images/login/release.png

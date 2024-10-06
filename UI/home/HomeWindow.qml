@@ -23,7 +23,7 @@ ApplicationWindow {
 
     StackView {
             id: homeStackViewId
-            initialItem: HomePage{}
+            initialItem: HomePage{ objectName: "homePageON"}
             anchors.fill: parent
         }
 

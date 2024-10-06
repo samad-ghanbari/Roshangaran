@@ -11,6 +11,8 @@ MenuBar {
     font.family: yekanFont.font.family
     font.pixelSize: 16
 
+    signal updateUserList();
+
     Connections
     {
         target: toolbarId
@@ -33,9 +35,29 @@ MenuBar {
         title: "کاربران"
         font.family: yekanFont.font.family
         font.pixelSize: 16
-        Action { text: "کاربر جدید"; onTriggered: homeStackViewId.push(newUserPageComponent); icon.source: "qrc:/Assets/images/newUser.png"; icon.width: 24;icon.height:24; }
+        Action {
+            text: "کاربر جدید";
+            onTriggered:
+            {
+                if(homeStackViewId.currentItem.objectName === "newUserON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(newUserPageComponent, {objectName: "newUserON"});
+            }
+            icon.source: "qrc:/Assets/images/newUser.png"; icon.width: 24;icon.height:24;
+        }
         MenuSeparator { }
-        Action { text: "لیست کاربران"; onTriggered: homeStackViewId.push(listUserPageComponent); icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24; }
+        Action {
+            text: "لیست کاربران";
+            onTriggered:
+            {
+                if(homeStackViewId.currentItem.objectName === "listUserON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(listUserPageComponent,{objectName: "listUserON"});
+            }
+            icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24;
+        }
     }
 
     Menu {
@@ -113,14 +135,12 @@ MenuBar {
     Component
     {
         id: newUserPageComponent
-        NewUser{
-        onNewUserSignal: listUserPage.refreshPage();
-        }
+        NewUser{ onNewUserSignal: menubarId.updateUserList(); }
     }
 
     Component
     {
         id: listUserPageComponent
-        ListUser{ id: listUserPage;}
+        ListUser{}
     }
 }

@@ -94,11 +94,33 @@ ToolBar {
         anchors.fill: parent
 
         ToolButton {
+            id: menuHomeId
+            text: "صفحه‌اصلی"
+            font.family: yekanFont.font.family
+            font.pixelSize: 16
+            onClicked:
+            {
+                homeStackViewId.pop(null);
+            }
+            icon.source: "qrc:/Assets/images/home2.png"
+            icon.width: 32
+            icon.height: 32
+            hoverEnabled: true
+            onHoveredChanged: menuHoverAction(menuHomeId)
+        }
+
+        ToolButton {
             id: menuUserId
             text: "کاربران سامانه"
             font.family: yekanFont.font.family
             font.pixelSize: 16
-            onClicked: homeStackViewId.push(listUserPageComponent)
+            onClicked:
+            {
+                if(homeStackViewId.currentItem.objectName === "listUserON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(listUserPageComponent, {objectName: "listUserON"})
+            }
             icon.source: "qrc:/Assets/images/users.png"
             icon.width: 32
             icon.height: 32
