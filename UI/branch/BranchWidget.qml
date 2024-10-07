@@ -29,9 +29,8 @@ PaddedRectangle {
             font.pixelSize: 16
             font.bold: true
             color: "royalblue"
-            Layout.minimumWidth: 50
-            Layout.minimumHeight: 20
             Layout.preferredHeight: 40
+            Layout.preferredWidth: parent.width /10;
             Layout.alignment: Qt.AlignLeft
             Layout.margins: 5
         }
@@ -41,8 +40,7 @@ PaddedRectangle {
             font.pixelSize: 16
             font.bold: true
             color: "royalblue"
-            Layout.minimumWidth: 50
-            Layout.minimumHeight: 20
+            Layout.preferredWidth: parent.width *25/100;
             Layout.preferredHeight: 40
             Layout.alignment: Qt.AlignLeft
         }
@@ -53,9 +51,8 @@ PaddedRectangle {
             font.bold: true
             color: "royalblue"
             Layout.alignment: Qt.AlignLeft
-            Layout.minimumWidth: 50
-            Layout.minimumHeight: 20
             Layout.preferredHeight: 40
+            Layout.preferredWidth: parent.width *25/100;
             Layout.margins: 5
         }
         Text {
@@ -65,9 +62,8 @@ PaddedRectangle {
             color: "royalblue"
             Layout.alignment: Qt.AlignLeft
             Layout.fillWidth: true
-            Layout.minimumWidth: 50
-            Layout.minimumHeight: 20
             Layout.preferredHeight: 40
+            Layout.preferredWidth: parent.width *40/100;
         }
 
     }
