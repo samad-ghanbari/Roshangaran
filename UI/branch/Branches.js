@@ -6,6 +6,6 @@ function updateBranches()
     //id, city, branch_name, address, description
     for(var obj of jsondata)
     {
-        branchModel.append({ Id: obj.id, City: obj.city, Name: obj.branch_name, Address: obj.address, Description: obj.description })
+        branchModel.appendRow({ Id: obj.id, City: obj.city, Name: obj.branch_name, Address: obj.address, Description: obj.description })
     }
 }

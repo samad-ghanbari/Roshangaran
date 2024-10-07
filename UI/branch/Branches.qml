@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt.labs.qmlmodels
 
 import "Branches.js" as BMethods
 
@@ -51,23 +52,95 @@ Page {
             }
         }
 
-        ListView
+        TableView
         {
             id: branchesListView
-            Layout.alignment: Qt.AlignHCenter
-            Layout.preferredHeight: parent.height
-            Layout.preferredWidth: branchesPage.width
-            //Layout.fillHeight: true
-            //Layout.fillWidth: true
+
+            property var columnWidths: [40, 25, 25, 10] //weights
+            columnWidthProvider: function (column) { var w =  columnWidths[column]*branchesListView.width/100; if(w < 100) return 100; else return w; }
+            // rowHeightProvider: function (row) {
+            //     if (isRowLoaded(row)) {
+            //         var item = loadedRow(row);
+            //         var contentHeight = 0;
+            //         for (var i = 0; i < item.children.length; i++) {
+            //             if (item.children[i].contentHeight > contentHeight) {
+            //                 contentHeight = item.children[i].contentHeight;
+            //             }
+            //         }
+            //         return contentHeight + 10;
+            //     } else {
+            //         return -1;
+            //     }
+            // }
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignLeft
             Layout.margins: 20
-            orientation: ListView.Vertical
-            model: ListModel{id: branchModel}
-            delegate: BranchWidget{branchId: Id; branchCity: City; branchName: Name; branchDescription: Description; branchAddress: Address}
-            layoutDirection: Qt.LeftToRight
-            ScrollBar.horizontal: ScrollBar { active: true; visible: true }
-            ScrollBar.vertical: ScrollBar { active: true; visible: true }
+            rowSpacing: 2
+            columnSpacing: 1
+            alternatingRows: true
+            animate: true
+            resizableColumns: true
+            //resizableRows: true
+            contentWidth: parent.width
+            editTriggers: TableView.DoubleTapped
+            selectionBehavior : TableView.SelectRows
+
+
+            model: TableModel{
+                id: branchModel
+
+                TableModelColumn{ display: "Address"}
+                TableModelColumn{ display: "Description"}
+                TableModelColumn{ display: "Name"}
+                TableModelColumn{ display: "City"}
+
+
+                rows: []
+            }
+
+            delegate: // BranchWidget{branchId: Id; branchCity: City; branchName: Name; branchDescription: Description; branchAddress: Address}
+                      Rectangle
+            {
+                border.width: 1
+                border.color: "lightgray"
+                implicitHeight: 40
+                color: row % 2 == 0 ? "snow" : "whitesmoke"
+                Item
+                {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    Text {
+                        anchors.fill: parent
+                        text: model.display
+                        font.family: yekanFont.font.family
+                        font.pixelSize: 16
+                        //wrapMode: Text.WordWrap
+                        clip: true
+                        elide: Text.ElideRight
+                        verticalAlignment: Qt.AlignVCenter
+                        horizontalAlignment: Qt.AlignLeft
+                    }
+                }
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: {
+                        homeStackViewId.push(updateBranchComponent);
+                    }
+                }
+            }
 
             Component.onCompleted: { BMethods.updateBranches(); }
         }
+    }
+
+    Component
+    {
+        id: updateBranchComponent
+        UpdateBranch{}
     }
 }
