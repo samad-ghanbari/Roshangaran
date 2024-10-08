@@ -1,19 +1,21 @@
-#ifndef BRANCHMODEL_H
-#define BRANCHMODEL_H
+#ifndef STEPMODEL_H
+#define STEPMODEL_H
 
 #include <qqml.h>
 //#include <QSqlQueryModel>
 #include <QAbstractTableModel>
+#include <Lib/database/dbman.h>
 
-class BranchModel : public QAbstractTableModel
+class StepModel : public QAbstractTableModel
 {
     Q_OBJECT
-    //QML_ELEMENT  !
-    //QML_ADDED_IN_VERSION(1, 1)
+    QML_ELEMENT
+    QML_ADDED_IN_VERSION(1, 1)
 
 public:
-    explicit BranchModel(QObject *parent=NULL)
+    explicit StepModel(DbMan *_dbMan, QObject *parent=NULL)
     {
+        dbMan = _dbMan;
     }
 
     int rowCount(const QModelIndex & = QModelIndex()) const override
@@ -63,8 +65,7 @@ public:
     }
 
 private:
-    //DbMan *dbMan;
+    DbMan *dbMan;
 };
 
-
-#endif // BRANCHMODEL_H
+#endif // STEPMODEL_H

@@ -7,6 +7,8 @@
 #include <QQmlContext>
 
 class DbMan;
+//models
+class BranchModel;
 
 class Backend : public QObject
 {
@@ -22,7 +24,6 @@ public slots:
 private:
     DbMan *dbMan;
     QQmlApplicationEngine engine;
-
 };
 
 #endif // BACKEND_H

@@ -18,6 +18,7 @@ qt_add_executable(appRoshangaran
     main.cpp
 )
 
+
 # database support
 find_package(Qt6 REQUIRED COMPONENTS Sql)
 target_link_libraries(appRoshangaran PRIVATE Qt6::Sql)
@@ -32,9 +33,13 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/login/LoginForm.qml
     QML_FILES UI/home/HomeWindow.qml
     SOURCES Lib/database/dbman.h Lib/database/dbman.cpp
-    SOURCES Backend/backend.h Backend/backend.cpp
+    SOURCES Backend/Backend.h Backend/Backend.cpp
     QML_FILES UI/login/NewRelease.qml UI/login/NoConnection.qml
     SOURCES Lib/version.h
+    # models
+    SOURCES Lib/models/BranchModel.h
+
+
     QML_FILES UI/login/OnMaintenance.qml
     QML_FILES UI/login/InitialLogin.qml
     QML_FILES UI/home/ToolbarModule.qml
@@ -74,7 +79,7 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/branch/BranchWidget.qml
     QML_FILES UI/branch/Branches.js
 
-    SOURCES Lib/models/BranchModel.h
+
 
 )
 

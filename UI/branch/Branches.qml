@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import BranchModel
+//import Lib.models.BranchModel
 
-import "Branches.js" as BMethods
+//import "Branches.js" as BMethods
 
 Page {
     id: branchesPage
@@ -62,7 +62,7 @@ Page {
                 clip: true
                 rowSpacing: 10
                 columnSpacing: 5
-                model: BranchModel{}
+                model: BranchModel
                 //HorizontalHeaderView{ syncView: branchesTV; model: ["aa", "bb", "cc", "dd"]; height: 60; width: parent.width; delegate: Rectangle{color:"red"; implicitHeight: 60; implicitWidth: 100} }
                 delegate: Rectangle{
                     property bool row0 : row == 0;

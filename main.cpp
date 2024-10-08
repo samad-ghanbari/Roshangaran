@@ -1,5 +1,5 @@
 #include <QGuiApplication>
-#include "Backend/backend.h"
+#include "Backend/Backend.h"
 
 #include <QDebug>
 
