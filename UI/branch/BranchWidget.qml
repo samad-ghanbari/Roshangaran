@@ -2,8 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-PaddedRectangle {
 
+SwipeDelegate
+{
     //id, city, branch_name, address, description
     id: branchWidget
     property int branchId
@@ -12,76 +13,83 @@ PaddedRectangle {
     property string branchDescription
     property string branchAddress
 
-    color: "white"
-    padding: -5
-    implicitHeight: branchWRL.height
     width: parent.width
-    RowLayout
+    height: gridviewItem.implicitHeight
+    checkable: false
+    checked: swipe.complete
+    onCheckedChanged: if(!checked) swipe.close()
+    highlighted: true
+    clip: true
+
+    GridLayout
     {
-        id: branchWRL
-        width: parent.width
-
-        spacing: 10
-
+        id: gridviewItem
+        columns: 3
         Text {
             text: branchCity
             font.family: yekanFont.font.family
             font.pixelSize: 16
-            font.bold: true
-            color: "royalblue"
-            Layout.preferredHeight: 40
-            Layout.preferredWidth: parent.width /10;
-            Layout.alignment: Qt.AlignLeft
-            Layout.margins: 5
+            width: 50
+            horizontalAlignment: Qt.AlignHCenter
         }
         Text {
             text: branchName
             font.family: yekanFont.font.family
             font.pixelSize: 16
-            font.bold: true
-            color: "royalblue"
-            Layout.preferredWidth: parent.width *25/100;
-            Layout.preferredHeight: 40
-            Layout.alignment: Qt.AlignLeft
+            width: 50
+            horizontalAlignment: Qt.AlignHCenter
         }
         Text {
             text: branchDescription
             font.family: yekanFont.font.family
             font.pixelSize: 16
-            font.bold: true
-            color: "royalblue"
-            Layout.alignment: Qt.AlignLeft
-            Layout.preferredHeight: 40
-            Layout.preferredWidth: parent.width *25/100;
-            Layout.margins: 5
+            Layout.fillWidth: true
+            horizontalAlignment: Qt.AlignHCenter
         }
+
         Text {
+            Layout.columnSpan: 3
             text: branchAddress
             font.family: yekanFont.font.family
-            font.pixelSize: 16
-            color: "royalblue"
-            Layout.alignment: Qt.AlignLeft
+            font.pixelSize: 14
             Layout.fillWidth: true
-            Layout.preferredHeight: 40
-            Layout.preferredWidth: parent.width *40/100;
+            horizontalAlignment: Qt.AlignHCenter
         }
-
     }
 
-    MouseArea
+    swipe.right: Row
     {
-        anchors.fill: parent
-        hoverEnabled: true
-        onHoveredChanged: branchWidget.color = (containsMouse)? "lavender" : "white"
-        onClicked: {
-            homeStackViewId.push(updateBranchComponent, {branchId: branchWidget.branchId, branchCity: branchWidget.branchCity, branchName:branchWidget.branchName, branchDescription: branchWidget.branchDescription, branchAddress: branchWidget.branchAddress });
+        anchors.left: parent.left
+        height: parent.height
+        width: 128
+        Button
+        {
+            background: Item{}
+            icon.source: "qrc:/Assets/images/trash.png"
+            icon.width: 32
+            icon.height: 32
+            onClicked: console.log("del")
+            Layout.alignment: Qt.AlignVCenter
+
         }
+        Button
+        {
+            background: Item{}
+            icon.source: "qrc:/Assets/images/edit.png"
+            icon.width: 32
+            icon.height: 32
+            onClicked: homeStackViewId.push(updateBranchComponent, {branchId: branchWidget.branchId, branchCity: branchWidget.branchCity, branchName:branchWidget.branchName, branchDescription: branchWidget.branchDescription, branchAddress: branchWidget.branchAddress });
+            Layout.alignment: Qt.AlignVCenter
+
+        }
+
     }
+
+    onClicked: {swipe.close();}
 
     Component
     {
         id: updateBranchComponent
         UpdateBranch{}
     }
-
 }

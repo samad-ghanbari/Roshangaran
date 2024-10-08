@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 //import Lib.models.BranchModel
 
-//import "Branches.js" as BMethods
+import "Branches.js" as BMethods
 
 Page {
     id: branchesPage
@@ -51,25 +51,17 @@ Page {
             padding: 10
             color: "ghostwhite"
 
-            TableView
+            ListView
             {
-                id: branchesTV
+                id: branchesLV
                 anchors.fill: parent
-                anchors.topMargin:  100
-                property var columnWidths: [20, 30, 20, 30, 30]
-                columnWidthProvider: function (column) { return columnWidths[column]*branchesTV.width/100; }
                 flickableDirection: Flickable.AutoFlickDirection
                 clip: true
-                rowSpacing: 10
-                columnSpacing: 5
-                model: BranchModel
-                //HorizontalHeaderView{ syncView: branchesTV; model: ["aa", "bb", "cc", "dd"]; height: 60; width: parent.width; delegate: Rectangle{color:"red"; implicitHeight: 60; implicitWidth: 100} }
-                delegate: Rectangle{
-                    property bool row0 : row == 0;
-                    implicitWidth: 200; implicitHeight: 50;
-                    color: row0? "lavender" : "gray";
-                    Text{ anchors.fill: parent; anchors.margins: 10; text:display; font.bold: row0? true: false; horizontalAlignment: row0? Qt.AlignHCenter : Qt.AlignLeft; }}
+                spacing: 5
+                model: ListModel{id: branchModel}
+                delegate: BranchWidget{branchId: Id; branchCity: City; branchName: Name; branchDescription: Description; branchAddress: Address}
             }
+            Component.onCompleted: BMethods.updateBranches();
 
         }
 
