@@ -74,6 +74,8 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/branch/BranchWidget.qml
     QML_FILES UI/branch/Branches.js
 
+    SOURCES Lib/models/BranchModel.h
+
 )
 
 qt_add_resources(appRoshangaran "assets"

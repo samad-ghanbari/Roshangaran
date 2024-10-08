@@ -1,14 +1,18 @@
 #include "backend.h"
 #include "Lib/database/dbman.h"
 #include <QJsonObject>
+#include "Lib/models/BranchModel.h"
 
-#include <QDebug>
 
 Backend::Backend(QGuiApplication &app, QObject *parent)
     : QObject{parent}, dbMan(nullptr)
 {
     dbMan = new DbMan(this);
     QQmlApplicationEngine engine;
+
+    //register
+    qmlRegisterType<BranchModel>("BranchModel",1,0,"BranchModel");
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
@@ -21,6 +25,7 @@ void Backend::initiate()
 {
     engine.rootContext()->setContextProperty("backend", this);
     engine.rootContext()->setContextProperty("dbMan", dbMan);
+
     engine.loadFromModule("Roshangaran", "LoginWindow");
 }
 
