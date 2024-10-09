@@ -6,7 +6,7 @@ import QtQuick.Layouts
 SwipeDelegate
 {
     //id, city, branch_name, address, description
-    id: branchWidget
+    id: branchDelegate
     property int branchId
     property string branchCity
     property string branchName
@@ -14,78 +14,84 @@ SwipeDelegate
     property string branchAddress
 
     width: parent.width
-    height: gridviewItem.implicitHeight
-    checkable: false
+    height: 100
+    checkable: true
     checked: swipe.complete
-    onCheckedChanged: if(!checked) swipe.close()
-    highlighted: true
+    onCheckedChanged: {if(!checked) swipe.close();}
+    highlighted: (index === branchesLV.currentIndex)? true: false;
     clip: true
 
-    GridLayout
-    {
-        id: gridviewItem
-        columns: 3
-        Text {
-            text: branchCity
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            width: 50
-            horizontalAlignment: Qt.AlignHCenter
-        }
-        Text {
-            text: branchName
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            width: 50
-            horizontalAlignment: Qt.AlignHCenter
-        }
-        Text {
-            text: branchDescription
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            Layout.fillWidth: true
-            horizontalAlignment: Qt.AlignHCenter
-        }
+    background: Rectangle{color: (highlighted)? "whitesmoke" : "snow";}
 
-        Text {
-            Layout.columnSpan: 3
-            text: branchAddress
-            font.family: yekanFont.font.family
-            font.pixelSize: 14
-            Layout.fillWidth: true
-            horizontalAlignment: Qt.AlignHCenter
+
+
+    contentItem: Rectangle
+    {
+        color: (highlighted)? "whitesmoke" : "snow";
+        Column
+        {
+            id: branchDelegateCol
+            anchors.fill: parent
+
+            spacing: 0
+            Text {
+                text: branchCity +" - "+ branchName +" - "+ branchDescription
+                padding: 0
+                font.family: yekanFont.font.family
+                font.pixelSize: 16
+                font.bold: true
+                color: "royalblue"
+                horizontalAlignment: Label.AlignHCenter
+                width: parent.width
+                height: 50
+                elide: Text.ElideRight
+            }
+            Label {
+                text: branchAddress
+                padding: 0
+                font.family: yekanFont.font.family
+                font.pixelSize: 14
+                width: parent.width
+                height: 50
+                horizontalAlignment: Label.AlignHCenter
+                elide: Text.ElideRight
+            }
         }
     }
 
-    swipe.right: Row
-    {
+    swipe.right: Row{
+        width: 110
+        height: 100
         anchors.left: parent.left
-        height: parent.height
-        width: 128
+
         Button
         {
-            background: Item{}
+            height: 100
+            width: 50
+            background: Rectangle{id:trashBtnBg; color: "tomato"}
+            hoverEnabled: true
+            onHoveredChanged: trashBtnBg.color=(hovered)? Qt.darker("tomato", 1.1):"tomato"
             icon.source: "qrc:/Assets/images/trash.png"
             icon.width: 32
             icon.height: 32
-            onClicked: console.log("del")
-            Layout.alignment: Qt.AlignVCenter
-
+            SwipeDelegate.onClicked: console.log("del")
         }
         Button
         {
-            background: Item{}
+            height: 100
+            width: 50
+            background:  Rectangle{id:editBtnBg; color: "royalblue"}
+            hoverEnabled: true
+            onHoveredChanged: editBtnBg.color=(hovered)? Qt.darker("royalblue", 1.1):"royalblue"
             icon.source: "qrc:/Assets/images/edit.png"
             icon.width: 32
             icon.height: 32
-            onClicked: homeStackViewId.push(updateBranchComponent, {branchId: branchWidget.branchId, branchCity: branchWidget.branchCity, branchName:branchWidget.branchName, branchDescription: branchWidget.branchDescription, branchAddress: branchWidget.branchAddress });
-            Layout.alignment: Qt.AlignVCenter
-
+            SwipeDelegate.onClicked: homeStackViewId.push(updateBranchComponent, {branchId: branchDelegate.branchId, branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
         }
-
     }
 
-    onClicked: {swipe.close();}
+    onClicked: {swipe.close(); branchesLV.currentIndex = index;}
+    //onPressed: { branchesLV.currentIndex = index;}
 
     Component
     {

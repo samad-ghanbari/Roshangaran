@@ -43,23 +43,30 @@ Page {
             styleColor: "white"
         }
 
-        PaddedRectangle
+        Rectangle
         {
             Layout.columnSpan: 2
             Layout.fillHeight: true
             Layout.fillWidth: true
-            padding: 10
             color: "ghostwhite"
+
+            ButtonGroup
+            {
+                buttons: branchesLV.contentItem.children
+            }
 
             ListView
             {
                 id: branchesLV
                 anchors.fill: parent
+                anchors.margins: 10
                 flickableDirection: Flickable.AutoFlickDirection
                 clip: true
                 spacing: 5
                 model: ListModel{id: branchModel}
+                highlight: Item{}
                 delegate: BranchWidget{branchId: Id; branchCity: City; branchName: Name; branchDescription: Description; branchAddress: Address}
+
             }
             Component.onCompleted: BMethods.updateBranches();
 
