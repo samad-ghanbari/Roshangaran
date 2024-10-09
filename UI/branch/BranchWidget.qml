@@ -28,19 +28,22 @@ SwipeDelegate
     contentItem: Rectangle
     {
         color: (highlighted)? "whitesmoke" : "snow";
+        //border.width: (highlighted)? 1 : 0
+        //border.color: "mediumvioletred"
+
         Column
         {
             id: branchDelegateCol
             anchors.fill: parent
 
             spacing: 0
-            Text {
+            Label {
                 text: branchCity +" - "+ branchName +" - "+ branchDescription
                 padding: 0
                 font.family: yekanFont.font.family
                 font.pixelSize: 16
-                font.bold: true
-                color: "royalblue"
+                font.bold: (highlighted)? true : false
+                color: (highlighted)? "royalblue":"black"
                 horizontalAlignment: Label.AlignHCenter
                 width: parent.width
                 height: 50
@@ -51,6 +54,8 @@ SwipeDelegate
                 padding: 0
                 font.family: yekanFont.font.family
                 font.pixelSize: 14
+                font.bold: (highlighted)? true : false
+                color: (highlighted)? "darkcyan": "black"
                 width: parent.width
                 height: 50
                 horizontalAlignment: Label.AlignHCenter
@@ -60,38 +65,50 @@ SwipeDelegate
     }
 
     swipe.right: Row{
-        width: 110
+        width: 150
         height: 100
         anchors.left: parent.left
 
         Button
         {
             height: 100
-            width: 50
-            background: Rectangle{id:trashBtnBg; color: "tomato"}
+            width: 75
+            background: Rectangle{id:trashBtnBg; color: "crimson"}
             hoverEnabled: true
-            onHoveredChanged: trashBtnBg.color=(hovered)? Qt.darker("tomato", 1.1):"tomato"
+            onHoveredChanged: trashBtnBg.color=(hovered)? Qt.darker("crimson", 1.1):"crimson"
+            text: "حذف"
+            font.bold: true
+            font.family: yekanFont.font.family
+            font.pixelSize: 14
+            palette.buttonText:  "white"
             icon.source: "qrc:/Assets/images/trash.png"
             icon.width: 32
             icon.height: 32
+            display: AbstractButton.TextUnderIcon
             SwipeDelegate.onClicked: console.log("del")
         }
         Button
         {
             height: 100
-            width: 50
+            width: 75
             background:  Rectangle{id:editBtnBg; color: "royalblue"}
             hoverEnabled: true
             onHoveredChanged: editBtnBg.color=(hovered)? Qt.darker("royalblue", 1.1):"royalblue"
+            text: "ویرایش"
+            font.bold: true
+            font.family: yekanFont.font.family
+            font.pixelSize: 14
+            palette.buttonText:  "white"
             icon.source: "qrc:/Assets/images/edit.png"
             icon.width: 32
             icon.height: 32
+            display: AbstractButton.TextUnderIcon
             SwipeDelegate.onClicked: homeStackViewId.push(updateBranchComponent, {branchId: branchDelegate.branchId, branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
         }
     }
 
-    onClicked: {swipe.close(); branchesLV.currentIndex = index;}
-    //onPressed: { branchesLV.currentIndex = index;}
+    onClicked: {swipe.close();}
+    onPressed: { branchesLV.currentIndex = index;}
 
     Component
     {
