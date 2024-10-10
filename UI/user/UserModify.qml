@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "./../public"
+
 import "UserModify.js" as UserMethods
 
 Page {

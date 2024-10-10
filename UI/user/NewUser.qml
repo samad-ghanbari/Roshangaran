@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
 
+import "./../public"
+
 import "newUserJS.js" as UserMethods
 
 Page {

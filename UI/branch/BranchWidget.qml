@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "./Branches.js" as BMethods
 
 SwipeDelegate
 {
@@ -12,6 +13,9 @@ SwipeDelegate
     property string branchName
     property string branchDescription
     property string branchAddress
+
+    signal branchUpdated(var branchObj);
+    onBranchUpdated: (branchObj) => BMethods.updateWidget(branchObj);
 
     width: parent.width
     height: 100
@@ -85,7 +89,12 @@ SwipeDelegate
             icon.width: 32
             icon.height: 32
             display: AbstractButton.TextUnderIcon
-            SwipeDelegate.onClicked: console.log("del")
+            SwipeDelegate.onClicked:
+            {
+                if(swipe.complete)
+                    swipe.close();
+                homeStackViewId.push(deleteBranchComponent, {branchId: branchDelegate.branchId, branchIndex: branchesLV.currentIndex,  branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
+            }
         }
         Button
         {
@@ -103,16 +112,16 @@ SwipeDelegate
             icon.width: 32
             icon.height: 32
             display: AbstractButton.TextUnderIcon
-            SwipeDelegate.onClicked: homeStackViewId.push(updateBranchComponent, {branchId: branchDelegate.branchId, branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
+            SwipeDelegate.onClicked:
+            {
+                if(swipe.complete)
+                    swipe.close();
+                homeStackViewId.push(updateBranchComponent, {branchId: branchDelegate.branchId, branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
+            }
         }
     }
 
     onClicked: {swipe.close();}
     onPressed: { branchesLV.currentIndex = index;}
 
-    Component
-    {
-        id: updateBranchComponent
-        UpdateBranch{}
-    }
 }

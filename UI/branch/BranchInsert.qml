@@ -1,18 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-//import Lib.models.BranchModel
 
 import "./../public"
 import "Branches.js" as BMethods
 
 Page {
-    id: updateBranchPage
-    property int branchId
-    property string branchCity
-    property string branchName
-    property string branchDescription
-    property string branchAddress
+    id: insertBranchPage
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
@@ -39,7 +33,7 @@ Page {
             Layout.preferredHeight: 64
             verticalAlignment: Qt.AlignVCenter
             horizontalAlignment: Qt.AlignHCenter
-            text: "لیست شعبه‌ها"
+            text: "افزودن شعبه‌"
             font.family: yekanFont.font.family
             font.pixelSize: 24
             font.bold: true
@@ -71,16 +65,16 @@ Page {
                     width:  (parent.width < 700)? parent.width : 700
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: 10
-                    implicitHeight: branchUpdateCL.height
+                    implicitHeight: branchInsertCL.height
 
                     radius: 10
 
                     ColumnLayout
                     {
-                        id: branchUpdateCL
+                        id: branchInsertCL
                         width: parent.width
                         Image {
-                            source: "qrc:/Assets/images/edit.png"
+                            source: "qrc:/Assets/images/add.png"
                             Layout.alignment: Qt.AlignHCenter
                             Layout.preferredHeight:  64
                             Layout.preferredWidth:  64
@@ -90,7 +84,7 @@ Page {
 
                         GridLayout
                         {
-                            id: branchUpdateGL
+                            id: branchInsertGL
                             columns: 2
                             rows: 5
                             rowSpacing: 20
@@ -117,7 +111,6 @@ Page {
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
                                 placeholderText: "شهر"
-                                text: updateBranchPage.branchCity
 
                             }
 
@@ -140,7 +133,6 @@ Page {
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
                                 placeholderText: "شعبه"
-                                text: updateBranchPage.branchName
                             }
 
                             Text {
@@ -162,7 +154,6 @@ Page {
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
                                 placeholderText: "توضیحات"
-                                text: updateBranchPage.branchDescription
                             }
 
                             Text {
@@ -184,10 +175,7 @@ Page {
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
                                 placeholderText: "آدرس"
-                                text: updateBranchPage.branchAddress
                             }
-
-
                         }
 
                         Item
@@ -208,7 +196,6 @@ Page {
                             onClicked:
                             {
                                 var Branch = {};
-                                Branch["id"] = updateBranchPage.branchId;
                                 Branch["city"] = branchCityTF.text;
                                 Branch["branch_name"] = branchNameTF.text;
                                 Branch["description"] = branchDescTF.text;
@@ -222,13 +209,12 @@ Page {
                                     return;
                                 }
 
-                                if(dbMan.updateBranch(Branch))
+                                if(dbMan.insertBranch(Branch))
                                 {
                                     branchInfoDialogId.dialogSuccess = true
                                     branchInfoDialogId.dialogTitle = "عملیات موفق"
-                                    branchInfoDialogId.dialogText = "اطلاعات شعبه با موفقیت بروزرسانی شد"
-                                    Branch = dbMan.getBranchJson(Branch["id"]);
-                                    branchDelegate.branchUpdated(Branch);
+                                    branchInfoDialogId.dialogText = "شعبه جدید با موفقیت افزوده شد."
+                                    branchesPage.branchInserted();
                                     branchInfoDialogId.acceptAction = function(){branchInfoDialogId.close(); homeStackViewId.pop();}
                                     branchInfoDialogId.open();
 
@@ -263,7 +249,7 @@ Page {
     {
         id: branchInfoDialogId
         dialogTitle: "خطا"
-        dialogText: "ورود فیلد الزامی می‌باشد"
+        dialogText: "افزودن شعبه جدید با خطا مواجه شد."
         dialogSuccess: false
     }
 }

@@ -1,14 +1,14 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-//import Lib.models.BranchModel
 
 import "./../public"
 import "Branches.js" as BMethods
 
 Page {
-    id: updateBranchPage
+    id: deleteBranchPage
     property int branchId
+    property int branchIndex
     property string branchCity
     property string branchName
     property string branchDescription
@@ -39,7 +39,7 @@ Page {
             Layout.preferredHeight: 64
             verticalAlignment: Qt.AlignVCenter
             horizontalAlignment: Qt.AlignHCenter
-            text: "لیست شعبه‌ها"
+            text: "حذف شعبه"
             font.family: yekanFont.font.family
             font.pixelSize: 24
             font.bold: true
@@ -53,7 +53,7 @@ Page {
             Layout.columnSpan: 2
             Layout.fillHeight: true
             Layout.fillWidth: true
-            color: "honeydew"
+            color: "lavenderblush"
 
             ScrollView
             {
@@ -64,33 +64,63 @@ Page {
 
                 Rectangle
                 {
-                    id: centerBoxId
+                    id: centerBoxBDId
                     color:"snow"
                     border.width: 20
                     border.color: "snow"
                     width:  (parent.width < 700)? parent.width : 700
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: 10
-                    implicitHeight: branchUpdateCL.height
+                    implicitHeight: branchDeleteCL.height
 
                     radius: 10
 
                     ColumnLayout
                     {
-                        id: branchUpdateCL
+                        id: branchDeleteCL
                         width: parent.width
-                        Image {
-                            source: "qrc:/Assets/images/edit.png"
-                            Layout.alignment: Qt.AlignHCenter
-                            Layout.preferredHeight:  64
-                            Layout.preferredWidth:  64
-                            Layout.margins: 20
-                            NumberAnimation on scale { from: 0; to: 1; duration: 2000;}
+                        Text
+                        {
+                            text: "حذف"
+                            font.family: yekanFont.font.family
+                            font.pixelSize: 24
+                            font.bold: true
+                            color: "crimson"
+                            Layout.preferredWidth: parent.width
+                            Layout.preferredHeight: 50
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
+                        }
+                        Button
+                        {
+                            background: Item{}
+                            icon.source: "qrc:/Assets/images/trash3.png"
+                            icon.width: 64
+                            icon.height: 64
+                            Layout.preferredHeight: 64
+                            Layout.preferredWidth: 64
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            opacity: 0.5
+                            onClicked: branchDelDialog.open();
+                            hoverEnabled: true
+                            onHoveredChanged:
+                            {
+                                if(hovered)
+                                {
+                                     this.opacity = 1
+                                     this.scale = 1.1
+                                }
+                                else
+                                {
+                                    this.opacity = 0.8
+                                    this.scale = 1
+                                }
+                            }
                         }
 
                         GridLayout
                         {
-                            id: branchUpdateGL
+                            id: branchDeleteGL
                             columns: 2
                             rows: 5
                             rowSpacing: 20
@@ -109,15 +139,14 @@ Page {
                                 font.bold: true
                                 color: "royalblue"
                             }
-                            TextField
+                            Text
                             {
                                 id: branchCityTF
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 50
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
-                                placeholderText: "شهر"
-                                text: updateBranchPage.branchCity
+                                text: deleteBranchPage.branchCity
 
                             }
 
@@ -132,15 +161,14 @@ Page {
                                 font.bold: true
                                 color: "royalblue"
                             }
-                            TextField
+                            Text
                             {
                                 id: branchNameTF
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 50
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
-                                placeholderText: "شعبه"
-                                text: updateBranchPage.branchName
+                                text: deleteBranchPage.branchName
                             }
 
                             Text {
@@ -154,15 +182,14 @@ Page {
                                 font.bold: true
                                 color: "royalblue"
                             }
-                            TextField
+                            Text
                             {
                                 id: branchDescTF
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 50
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
-                                placeholderText: "توضیحات"
-                                text: updateBranchPage.branchDescription
+                                text: deleteBranchPage.branchDescription
                             }
 
                             Text {
@@ -176,74 +203,17 @@ Page {
                                 font.bold: true
                                 color: "royalblue"
                           }
-                            TextField
+                            Text
                             {
                                 id: branchAddressTF
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 50
                                 font.family: yekanFont.font.family
                                 font.pixelSize: 16
-                                placeholderText: "آدرس"
-                                text: updateBranchPage.branchAddress
+                                text: deleteBranchPage.branchAddress
                             }
 
 
-                        }
-
-                        Item
-                        {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 50
-                        }
-
-                        Button
-                        {
-                            text: "تایید"
-                            Layout.preferredWidth: 200
-                            Layout.preferredHeight: 50
-                            Layout.alignment: Qt.AlignHCenter
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 16
-                            Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "forestgreen"}
-                            onClicked:
-                            {
-                                var Branch = {};
-                                Branch["id"] = updateBranchPage.branchId;
-                                Branch["city"] = branchCityTF.text;
-                                Branch["branch_name"] = branchNameTF.text;
-                                Branch["description"] = branchDescTF.text;
-                                Branch["address"] = branchAddressTF.text;
-
-                                var check = true
-                                // check entries
-                                if(!BMethods.checkBranchEntries(Branch))
-                                {
-                                    branchInfoDialogId.open();
-                                    return;
-                                }
-
-                                if(dbMan.updateBranch(Branch))
-                                {
-                                    branchInfoDialogId.dialogSuccess = true
-                                    branchInfoDialogId.dialogTitle = "عملیات موفق"
-                                    branchInfoDialogId.dialogText = "اطلاعات شعبه با موفقیت بروزرسانی شد"
-                                    Branch = dbMan.getBranchJson(Branch["id"]);
-                                    branchDelegate.branchUpdated(Branch);
-                                    branchInfoDialogId.acceptAction = function(){branchInfoDialogId.close(); homeStackViewId.pop();}
-                                    branchInfoDialogId.open();
-
-                                }
-                                else
-                                {
-                                    var errorString = dbMan.getLastError();
-                                    branchInfoDialogId.dialogTitle = "خطا"
-                                    branchInfoDialogId.dialogText = errorString
-                                    branchInfoDialogId.width = parent.width
-                                    branchInfoDialogId.height = 500
-                                    branchInfoDialogId.dialogSuccess = false
-                                    branchInfoDialogId.open();
-                                }
-                            }
                         }
 
                         Item
@@ -252,7 +222,6 @@ Page {
                             Layout.preferredHeight: 50
                         }
                     }
-
                 }
             }
         }
@@ -261,9 +230,40 @@ Page {
 
     BaseDialog
     {
-        id: branchInfoDialogId
-        dialogTitle: "خطا"
-        dialogText: "ورود فیلد الزامی می‌باشد"
+        id: branchDelDialog
+        dialogTitle:  "حذف شعبه"
+        dialogText: "آیا از حذف شعبه از سامانه مطمئن می‌باشید؟"
+        acceptVisible: true
+        rejectVisible: true
+
+        acceptAction: function(){
+            if(dbMan.deleteBranch(deleteBranchPage.branchIndex))
+                branchSuccessDelDialog.open();
+            else
+                branchErrorDelDialog.open();
+        }
+    }
+
+    BaseDialog
+    {
+        id: branchSuccessDelDialog
+        dialogTitle:  "حذف شعبه"
+        dialogText: "حذف شعبه با موفقیت صورت پذیرفت"
+        acceptVisible: true
+        dialogSuccess: true
+        acceptAction: function(){
+            homeStackViewId.pop();
+            homeStackViewId.pop();
+            branchesPage.branchDeleted(deleteBranchPage.branchId);
+        }
+    }
+
+    BaseDialog
+    {
+        id: branchErrorDelDialog
+        dialogTitle:  "حذف شعبه"
+        dialogText: "حذف شعبه با مشکل مواجه شد"
+        acceptVisible: true
         dialogSuccess: false
     }
 }

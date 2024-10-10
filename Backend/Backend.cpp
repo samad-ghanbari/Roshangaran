@@ -2,7 +2,7 @@
 #include "Lib/database/dbman.h"
 #include <QJsonObject>
 //models
-#include "Lib/models/BranchModel.h"
+//#include "Lib/models/BranchModel.h"
 
 Backend::Backend(QGuiApplication &app, QObject *parent)
     : QObject{parent}, dbMan(nullptr)
@@ -36,12 +36,12 @@ void Backend::loadHome()
 
     //qmlRegisterType<BranchModel>("Lib.models.BranchModel",1,0,"BranchModel");
     //qmlRegisterUncreatableType<BranchModel>("models.BranchModel", 1,0, "BranchModel", "");
-    BranchModel *branchModel = new BranchModel(this);
+    //BranchModel *branchModel = new BranchModel(this);
 
     QJsonObject user = dbMan->getUserJson();
     engine.rootContext()->setContextProperty("user", user);
     //models
-    engine.rootContext()->setContextProperty("BranchModel", branchModel);
+    //-engine.rootContext()->setContextProperty("BranchModel", branchModel);
 
     engine.loadFromModule("Roshangaran", "HomeWindow");
 }

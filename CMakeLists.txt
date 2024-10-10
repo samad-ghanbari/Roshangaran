@@ -37,7 +37,7 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/login/NewRelease.qml UI/login/NoConnection.qml
     SOURCES Lib/version.h
     # models
-    SOURCES Lib/models/BranchModel.h
+    #SOURCES Lib/models/BranchModel.h
 
 
     QML_FILES UI/login/OnMaintenance.qml
@@ -50,7 +50,7 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/newUserJS.js
 
     QML_FILES UI/user/ListUser.qml
-    QML_FILES UI/user/BaseDialog.qml
+    QML_FILES UI/public/BaseDialog.qml
     QML_FILES UI/user/ListUser.js
     QML_FILES UI/user/UsersListWidget.qml
     QML_FILES UI/user/User.qml
@@ -61,9 +61,9 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/ChangePassword.qml
     QML_FILES UI/user/ChangePassDialogBox.qml
     QML_FILES UI/branch/Branches.qml
-    QML_FILES UI/branch/InsertBranch.qml
+    QML_FILES UI/branch/BranchInsert.qml
     QML_FILES UI/branch/UpdateBranch.qml
-    QML_FILES UI/branch/DeleteBranch.qml
+    QML_FILES UI/branch/BranchDelete.qml
     QML_FILES UI/step/Steps.qml
     QML_FILES UI/step/InsertStep.qml
     QML_FILES UI/step/UpdateStep.qml
@@ -78,7 +78,6 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/studyPeriod/DeleteStudyPeriod.qml
     QML_FILES UI/branch/BranchWidget.qml
     QML_FILES UI/branch/Branches.js
-
 
 
 )
@@ -134,6 +133,7 @@ qt_add_resources(appRoshangaran "assets"
 
         Assets/images/tick.png
         Assets/images/cross.png
+        Assets/images/add.png
 
         Assets/images/setting.png
         Assets/images/setting2.png

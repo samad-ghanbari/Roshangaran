@@ -9,14 +9,19 @@ Page {
     id: branchesPage
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
+    signal branchDeleted(int deleteIndex);
+    onBranchDeleted: BMethods.updateBranches();
+
+    signal branchInserted();
+    onBranchInserted:  BMethods.updateBranches();
+
     GridLayout
     {
         anchors.fill: parent
-        columns:2
+        columns:3
 
         Button
         {
-            id: userListBackBtnId
             Layout.preferredHeight: 64
             Layout.preferredWidth: 64
             background: Item{}
@@ -26,10 +31,9 @@ Page {
             opacity: 0.5
             onClicked: homeStackViewId.pop();
             hoverEnabled: true
-            onHoveredChanged: userListBackBtnId.opacity=(hovered)? 1 : 0.5;
+            onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
         }
         Text {
-            id: userListTitle
             Layout.fillWidth: true
             Layout.preferredHeight: 64
             verticalAlignment: Qt.AlignVCenter
@@ -42,10 +46,23 @@ Page {
             style: Text.Outline
             styleColor: "white"
         }
+        Button
+        {
+            Layout.preferredHeight: 64
+            Layout.preferredWidth: 64
+            background: Item{}
+            icon.source: "qrc:/Assets/images/add.png"
+            icon.width: 64
+            icon.height: 64
+            opacity: 0.5
+            onClicked: homeStackViewId.push(branchInsertComponent);
+            hoverEnabled: true
+            onHoveredChanged: this.opacity=(hovered)? 1 : 0.5;
+        }
 
         Rectangle
         {
-            Layout.columnSpan: 2
+            Layout.columnSpan: 3
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: "ghostwhite"
@@ -63,7 +80,7 @@ Page {
                 flickableDirection: Flickable.AutoFlickDirection
                 clip: true
                 spacing: 5
-                model: ListModel{id: branchModel}
+                model: ListModel{id: branchesModel}
                 highlight: Item{}
                 delegate: BranchWidget{branchId: Id; branchCity: City; branchName: Name; branchDescription: Description; branchAddress: Address}
 
@@ -77,5 +94,15 @@ Page {
     {
         id: updateBranchComponent
         UpdateBranch{}
+    }
+    Component
+    {
+        id: deleteBranchComponent
+        BranchDelete{}
+    }
+    Component
+    {
+        id: branchInsertComponent
+        BranchInsert{}
     }
 }
