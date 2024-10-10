@@ -10,7 +10,11 @@ Page {
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
     signal branchDeleted(int deleteIndex);
-    onBranchDeleted: BMethods.updateBranches();
+    onBranchDeleted: (deleteIndex)=>
+    {
+        branchesModel.remove(deleteIndex);
+        //BMethods.updateBranches();
+    }
 
     signal branchInserted();
     onBranchInserted:  BMethods.updateBranches();
@@ -90,16 +94,7 @@ Page {
         }
 
     }
-    Component
-    {
-        id: updateBranchComponent
-        UpdateBranch{}
-    }
-    Component
-    {
-        id: deleteBranchComponent
-        BranchDelete{}
-    }
+
     Component
     {
         id: branchInsertComponent

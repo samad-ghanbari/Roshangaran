@@ -61,11 +61,11 @@ Page {
                     id: centerBoxId
                     color:"snow"
                     border.width: 20
-                    border.color: "snow"
+                    border.color: "red"
                     width:  (parent.width < 700)? parent.width : 700
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: 10
-                    implicitHeight: branchInsertCL.height
+                    implicitHeight: parent.height
 
                     radius: 10
 

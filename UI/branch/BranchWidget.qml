@@ -17,7 +17,7 @@ SwipeDelegate
     signal branchUpdated(var branchObj);
     onBranchUpdated: (branchObj) => BMethods.updateWidget(branchObj);
 
-    width: parent.width
+    width: branchesLV.width
     height: 100
     checkable: true
     checked: swipe.complete
@@ -123,5 +123,16 @@ SwipeDelegate
 
     onClicked: {swipe.close();}
     onPressed: { branchesLV.currentIndex = index;}
+
+    Component
+    {
+        id: updateBranchComponent
+        UpdateBranch{}
+    }
+    Component
+    {
+        id: deleteBranchComponent
+        BranchDelete{}
+    }
 
 }

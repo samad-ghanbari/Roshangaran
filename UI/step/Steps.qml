@@ -1,5 +1,25 @@
-import QtQuick 2.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-Item {
 
+Rectangle
+{
+    width: 500
+    height: 500
+    color: "green"
+
+    border.width: 10
+    border.color: "red"
+
+    Overlay:
+
+    Rectangle
+    {
+        width: 200
+        height: 200
+        color: "blue"
+
+
+    }
 }

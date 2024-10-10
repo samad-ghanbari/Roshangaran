@@ -237,7 +237,7 @@ Page {
         rejectVisible: true
 
         acceptAction: function(){
-            if(dbMan.deleteBranch(deleteBranchPage.branchIndex))
+            if(dbMan.deleteBranch(deleteBranchPage.branchId))
                 branchSuccessDelDialog.open();
             else
                 branchErrorDelDialog.open();
@@ -253,8 +253,7 @@ Page {
         dialogSuccess: true
         acceptAction: function(){
             homeStackViewId.pop();
-            homeStackViewId.pop();
-            branchesPage.branchDeleted(deleteBranchPage.branchId);
+            branchesPage.branchDeleted(deleteBranchPage.branchIndex);
         }
     }
 
