@@ -2,27 +2,28 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "./Branches.js" as BMethods
+import "./Step.js" as Methods
 
 SwipeDelegate
 {
-    //id, city, branch_name, address, description
-    id: branchDelegate
+   //s.id, s.branch_id, s.step_name, b.city, b.branch_name, b.description
+    id: stepDelegate
+    property int stepId
     property int branchId
+    property string stepName
     property string branchCity
     property string branchName
     property string branchDescription
-    property string branchAddress
 
-    signal branchUpdated(var branchObj);
-    onBranchUpdated: (branchObj) => BMethods.updateWidget(branchObj);
+    signal stepUpdated(var stepObj);
+    onStepUpdated: (stepObj) => Methods.updateWidget(stepObj);
 
-    width: branchesLV.width
+    width: stepsLV.width
     height: 110
     checkable: true
     checked: swipe.complete
     onCheckedChanged: {if(!checked) swipe.close();}
-    highlighted: (index === branchesLV.currentIndex)? true: false;
+    highlighted: (index === stepsLV.currentIndex)? true: false;
     clip: true
 
     background: Rectangle{color: (highlighted)? "snow" : "whitesmoke";}
@@ -35,12 +36,12 @@ SwipeDelegate
 
         Column
         {
-            id: branchDelegateCol
+            id: stepDelegateCol
             anchors.fill: parent
 
             spacing: 0
             Label {
-                text: branchCity +" - "+ branchName
+                text: stepName
                 padding: 0
                 font.family: yekanFont.font.family
                 font.pixelSize: (highlighted)? 20 :16
@@ -52,7 +53,7 @@ SwipeDelegate
                 elide: Text.ElideRight
             }
             Label {
-                text: branchAddress
+                text: branchCity + " - " + branchName
                 padding: 0
                 font.family: yekanFont.font.family
                 font.pixelSize: 14
@@ -93,7 +94,7 @@ SwipeDelegate
             {
                 if(swipe.complete)
                     swipe.close();
-                homeStackViewId.push(deleteBranchComponent, {branchId: branchDelegate.branchId, branchIndex: branchesLV.currentIndex,  branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
+                //homeStackViewId.push(deletestepComponent, {stepId: stepDelegate.stepId, stepIndex: stepsLV.currentIndex,  stepCity: stepDelegate.stepCity, stepName:stepDelegate.stepName, stepDescription: stepDelegate.stepDescription, stepAddress: stepDelegate.stepAddress });
             }
         }
         Button
@@ -116,23 +117,23 @@ SwipeDelegate
             {
                 if(swipe.complete)
                     swipe.close();
-                homeStackViewId.push(updateBranchComponent, {branchId: branchDelegate.branchId, branchCity: branchDelegate.branchCity, branchName:branchDelegate.branchName, branchDescription: branchDelegate.branchDescription, branchAddress: branchDelegate.branchAddress });
+                //homeStackViewId.push(updatestepComponent, {stepId: stepDelegate.stepId, stepCity: stepDelegate.stepCity, stepName:stepDelegate.stepName, stepDescription: stepDelegate.stepDescription, stepAddress: stepDelegate.stepAddress });
             }
         }
     }
 
     onClicked: {swipe.close();}
-    onPressed: { branchesLV.currentIndex = index;}
+    onPressed: { stepsLV.currentIndex = index;}
 
-    Component
-    {
-        id: updateBranchComponent
-        UpdateBranch{}
-    }
-    Component
-    {
-        id: deleteBranchComponent
-        BranchDelete{}
-    }
+    // Component
+    // {
+    //     id: updatestepComponent
+    //     Updatestep{}
+    // }
+    // Component
+    // {
+    //     id: deletestepComponent
+    //     stepDelete{}
+    // }
 
 }

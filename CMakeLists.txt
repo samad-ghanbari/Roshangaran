@@ -60,25 +60,33 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/UserModify.js
     QML_FILES UI/user/ChangePassword.qml
     QML_FILES UI/user/ChangePassDialogBox.qml
+
     QML_FILES UI/branch/Branches.qml
     QML_FILES UI/branch/BranchInsert.qml
     QML_FILES UI/branch/UpdateBranch.qml
     QML_FILES UI/branch/BranchDelete.qml
-    QML_FILES UI/step/Steps.qml
-    QML_FILES UI/step/InsertStep.qml
-    QML_FILES UI/step/UpdateStep.qml
-    QML_FILES UI/step/DeleteStep.qml
-    QML_FILES UI/basis/Basis.qml
-    QML_FILES UI/basis/InsertBasis.qml
-    QML_FILES UI/basis/UpdateBasis.qml
-    QML_FILES UI/basis/DeleteBasis.qml
-    QML_FILES UI/studyPeriod/StudyPeriods.qml
-    QML_FILES UI/studyPeriod/InsertStudyPeriod.qml
-    QML_FILES UI/studyPeriod/UpdateStudyPeriod.qml
-    QML_FILES UI/studyPeriod/DeleteStudyPeriod.qml
     QML_FILES UI/branch/BranchWidget.qml
     QML_FILES UI/branch/Branches.js
 
+    QML_FILES UI/step/Steps.qml
+    QML_FILES UI/step/StepInsert.qml
+    #QML_FILES UI/step/StepUpdate.qml
+    #QML_FILES UI/step/StepDelete.qml
+    QML_FILES UI/step/StepWidget.qml
+    QML_FILES UI/step/Step.js
+
+    #QML_FILES UI/basis/Basis.qml
+    #QML_FILES UI/basis/BasisInsert.qml
+    #QML_FILES UI/basis/BasisUpdate.qml
+    #QML_FILES UI/basis/BasisDelete.qml
+    #QML_FILES UI/basis/BasisWidget.qml
+    #QML_FILES UI/basis/Basis.js
+
+    #QML_FILES UI/studyPeriod/StudyPeriods.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodInsert.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodUpdate.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodDelete.qml
+    #QML_FILES UI/studyPeriod/StudyPeriod.js
 
 )
 

@@ -4,8 +4,8 @@ import QtQuick.Controls
 import "./../user"
 import "./../branch"
 import "./../step"
-import "./../basis"
-import "./../studyPeriod"
+//import "./../basis"
+//import "./../studyPeriod"
 
 // menuBar: MenubarModule{}
 MenuBar {
@@ -200,15 +200,15 @@ MenuBar {
         id: stepsComponent
         Steps{}
     }
-    Component
-    {
-        id: basisComponent
-        Basis{}
-    }
-    Component
-    {
-        id: studyPeriodComponent
-        StudyPeriods{}
-    }
+    // Component
+    // {
+    //     id: basisComponent
+    //     Basis{}
+    // }
+    // Component
+    // {
+    //     id: studyPeriodComponent
+    //     StudyPeriods{}
+    // }
 
 }
