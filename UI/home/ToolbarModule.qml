@@ -5,7 +5,7 @@ import QtQuick.Layouts
 import "./../user"
 import "./../branch"
 import "./../step"
-//import "./../basis"
+import "./../basis"
 //import "./../studyPeriod"
 
 ToolBar {
@@ -188,7 +188,7 @@ ToolBar {
                 if(homeStackViewId.currentItem.objectName === "basisON")
                     homeStackViewId.pop();
 
-                //homeStackViewId.push(basisComponent, {objectName: "basisON"})
+                homeStackViewId.push(basisComponent, {objectName: "basisON"})
             }
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuBaseId)
@@ -327,11 +327,11 @@ ToolBar {
         id: stepsComponent
         Steps{}
     }
-    // Component
-    // {
-    //     id: basisComponent
-    //     Basis{}
-    // }
+    Component
+    {
+        id: basisComponent
+        Basis{}
+    }
     // Component
     // {
     //     id: studyPeriodComponent

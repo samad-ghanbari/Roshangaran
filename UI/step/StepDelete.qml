@@ -113,7 +113,6 @@ Page {
                                 }
                                 Text
                                 {
-                                    id: stepCityTF
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: 50
                                     verticalAlignment: Text.AlignVCenter

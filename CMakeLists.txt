@@ -75,12 +75,12 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/step/StepWidget.qml
     QML_FILES UI/step/Step.js
 
-    #QML_FILES UI/basis/Basis.qml
-    #QML_FILES UI/basis/BasisInsert.qml
-    #QML_FILES UI/basis/BasisUpdate.qml
-    #QML_FILES UI/basis/BasisDelete.qml
-    #QML_FILES UI/basis/BasisWidget.qml
-    #QML_FILES UI/basis/Basis.js
+    QML_FILES UI/basis/Basis.qml
+    QML_FILES UI/basis/BasisInsert.qml
+    QML_FILES UI/basis/BasisUpdate.qml
+    QML_FILES UI/basis/BasisDelete.qml
+    QML_FILES UI/basis/BasisWidget.qml
+    QML_FILES UI/basis/Basis.js
 
     #QML_FILES UI/studyPeriod/StudyPeriods.qml
     #QML_FILES UI/studyPeriod/StudyPeriodInsert.qml
