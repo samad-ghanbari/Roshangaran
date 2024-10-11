@@ -12,7 +12,6 @@ Rectangle
     border.width: 10
     border.color: "red"
 
-    Overlay:
 
     Rectangle
     {

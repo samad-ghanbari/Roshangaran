@@ -66,161 +66,164 @@ Page {
                 {
                     id: centerBoxBDId
                     color:"snow"
-                    border.width: 20
-                    border.color: "snow"
                     width:  (parent.width < 700)? parent.width : 700
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: 10
-                    implicitHeight: branchDeleteCL.height
+                    implicitHeight: parent.height
 
                     radius: 10
+                    Item {
+                        anchors.fill: parent
+                        anchors.margins: 10
 
-                    ColumnLayout
-                    {
-                        id: branchDeleteCL
-                        width: parent.width
-                        Text
+                        ColumnLayout
                         {
-                            text: "حذف"
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 24
-                            font.bold: true
-                            color: "crimson"
-                            Layout.preferredWidth: parent.width
-                            Layout.preferredHeight: 50
-                            horizontalAlignment: Qt.AlignHCenter
-                            verticalAlignment: Qt.AlignVCenter
-                        }
-                        Button
-                        {
-                            background: Item{}
-                            icon.source: "qrc:/Assets/images/trash3.png"
-                            icon.width: 64
-                            icon.height: 64
-                            Layout.preferredHeight: 64
-                            Layout.preferredWidth: 64
-                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                            opacity: 0.5
-                            onClicked: branchDelDialog.open();
-                            hoverEnabled: true
-                            onHoveredChanged:
+                            id: branchDeleteCL
+                            width: parent.width
+                            Text
                             {
-                                if(hovered)
+                                text: "حذف"
+                                font.family: yekanFont.font.family
+                                font.pixelSize: 24
+                                font.bold: true
+                                color: "crimson"
+                                Layout.preferredWidth: parent.width
+                                Layout.preferredHeight: 50
+                                horizontalAlignment: Qt.AlignHCenter
+                                verticalAlignment: Qt.AlignVCenter
+                            }
+                            Button
+                            {
+                                background: Item{}
+                                icon.source: "qrc:/Assets/images/trash3.png"
+                                icon.width: 64
+                                icon.height: 64
+                                Layout.preferredHeight: 64
+                                Layout.preferredWidth: 64
+                                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                                opacity: 0.5
+                                onClicked: branchDelDialog.open();
+                                hoverEnabled: true
+                                onHoveredChanged:
                                 {
-                                     this.opacity = 1
-                                     this.scale = 1.1
+                                    if(hovered)
+                                    {
+                                        this.opacity = 1
+                                        this.scale = 1.1
+                                    }
+                                    else
+                                    {
+                                        this.opacity = 0.8
+                                        this.scale = 1
+                                    }
                                 }
-                                else
+                            }
+
+                            GridLayout
+                            {
+                                id: branchDeleteGL
+                                columns: 2
+                                rows: 5
+                                rowSpacing: 20
+                                columnSpacing: 10
+                                Layout.preferredWidth:  parent.width
+
+
+                                Text {
+                                    text: "شهر"
+                                    Layout.minimumWidth: 100
+                                    Layout.maximumWidth: 100
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    font.bold: true
+                                    color: "royalblue"
+                                }
+                                Text
                                 {
-                                    this.opacity = 0.8
-                                    this.scale = 1
+                                    id: branchCityTF
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 50
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    text: deleteBranchPage.branchCity
+
                                 }
+
+                                Text {
+                                    text: "شعبه"
+                                    Layout.minimumWidth: 100
+                                    Layout.maximumWidth: 100
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    font.bold: true
+                                    color: "royalblue"
+                                }
+                                Text
+                                {
+                                    id: branchNameTF
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 50
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    text: deleteBranchPage.branchName
+                                }
+
+                                Text {
+                                    text: "توضیحات"
+                                    Layout.minimumWidth: 100
+                                    Layout.maximumWidth: 100
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    font.bold: true
+                                    color: "royalblue"
+                                }
+                                Text
+                                {
+                                    id: branchDescTF
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 50
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    text: deleteBranchPage.branchDescription
+                                }
+
+                                Text {
+                                    text: "آدرس"
+                                    Layout.minimumWidth: 150
+                                    Layout.maximumWidth: 150
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    font.bold: true
+                                    color: "royalblue"
+                                }
+                                Text
+                                {
+                                    id: branchAddressTF
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 50
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    text: deleteBranchPage.branchAddress
+                                }
+
+
+                            }
+
+                            Item
+                            {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 50
                             }
                         }
 
-                        GridLayout
-                        {
-                            id: branchDeleteGL
-                            columns: 2
-                            rows: 5
-                            rowSpacing: 20
-                            columnSpacing: 10
-                            Layout.preferredWidth:  parent.width
-
-
-                            Text {
-                                text: "شهر"
-                                Layout.minimumWidth: 100
-                                Layout.maximumWidth: 100
-                                Layout.preferredHeight: 50
-                                verticalAlignment: Text.AlignVCenter
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                font.bold: true
-                                color: "royalblue"
-                            }
-                            Text
-                            {
-                                id: branchCityTF
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 50
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                text: deleteBranchPage.branchCity
-
-                            }
-
-                            Text {
-                                text: "شعبه"
-                                Layout.minimumWidth: 100
-                                Layout.maximumWidth: 100
-                                Layout.preferredHeight: 50
-                                verticalAlignment: Text.AlignVCenter
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                font.bold: true
-                                color: "royalblue"
-                            }
-                            Text
-                            {
-                                id: branchNameTF
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 50
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                text: deleteBranchPage.branchName
-                            }
-
-                            Text {
-                                text: "توضیحات"
-                                Layout.minimumWidth: 100
-                                Layout.maximumWidth: 100
-                                Layout.preferredHeight: 50
-                                verticalAlignment: Text.AlignVCenter
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                font.bold: true
-                                color: "royalblue"
-                            }
-                            Text
-                            {
-                                id: branchDescTF
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 50
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                text: deleteBranchPage.branchDescription
-                            }
-
-                            Text {
-                                text: "آدرس"
-                                Layout.minimumWidth: 150
-                                Layout.maximumWidth: 150
-                                Layout.preferredHeight: 50
-                                verticalAlignment: Text.AlignVCenter
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                font.bold: true
-                                color: "royalblue"
-                          }
-                            Text
-                            {
-                                id: branchAddressTF
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 50
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 16
-                                text: deleteBranchPage.branchAddress
-                            }
-
-
-                        }
-
-                        Item
-                        {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 50
-                        }
                     }
                 }
             }

@@ -18,22 +18,20 @@ SwipeDelegate
     onBranchUpdated: (branchObj) => BMethods.updateWidget(branchObj);
 
     width: branchesLV.width
-    height: 100
+    height: 110
     checkable: true
     checked: swipe.complete
     onCheckedChanged: {if(!checked) swipe.close();}
     highlighted: (index === branchesLV.currentIndex)? true: false;
     clip: true
 
-    background: Rectangle{color: (highlighted)? "whitesmoke" : "snow";}
+    background: Rectangle{color: (highlighted)? "snow" : "whitesmoke";}
 
 
 
     contentItem: Rectangle
     {
-        color: (highlighted)? "whitesmoke" : "snow";
-        //border.width: (highlighted)? 1 : 0
-        //border.color: "mediumvioletred"
+        color: (highlighted)? "snow" : "whitesmoke";
 
         Column
         {
@@ -45,7 +43,7 @@ SwipeDelegate
                 text: branchCity +" - "+ branchName +" - "+ branchDescription
                 padding: 0
                 font.family: yekanFont.font.family
-                font.pixelSize: 16
+                font.pixelSize: (highlighted)? 18 :16
                 font.bold: (highlighted)? true : false
                 color: (highlighted)? "royalblue":"black"
                 horizontalAlignment: Label.AlignHCenter
@@ -65,6 +63,8 @@ SwipeDelegate
                 horizontalAlignment: Label.AlignHCenter
                 elide: Text.ElideRight
             }
+
+            Rectangle{width: 400; height:5; color: (highlighted)? "mediumvioletred" : "whitesmoke"; anchors.horizontalCenter: parent.horizontalCenter }
         }
     }
 
