@@ -47,12 +47,33 @@ function checkStepEntries(Step)
     return true;
 }
 
+function checkStepUpdateEntries(Step)
+{
+    if(Step["id"] < 0)
+    {
+        stepInfoDialogId.dialogTitle = "خطا"
+        stepInfoDialogId.dialogText = "انتخاب دوره به درستی صورت نگرفته است."
+        stepInfoDialogId.dialogSuccess = false
+        return false;
+    }
 
-// function updateWidget(branchObj)
-// {
-//     branchDelegate.branchCity = branchObj["city"];
-//     branchDelegate.branchName = branchObj["branch_name"];
-//     branchDelegate.branchDescription = branchObj["description"];
-//     branchDelegate.branchAddress = branchObj["address"];
+    if(!Step["step_name"])
+    {
+        stepNameTF.placeholderText="ورود فیلد الزامی می‌باشد"
+        stepNameTF.placeholderTextColor = "red"
+        stepNameTF.focus = true;
 
-// }
+        stepInfoDialogId.dialogTitle = "خطا"
+        stepInfoDialogId.dialogText = "ورود نام دوره الزامی می‌باشد"
+        stepInfoDialogId.dialogSuccess = false
+        return false;
+    }
+
+    return true;
+}
+
+
+function updateWidget(stepObj)
+{
+    stepDelegate.stepName = stepObj["step_name"];
+}

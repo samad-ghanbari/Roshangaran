@@ -1,18 +1,15 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-//import Lib.models.BranchModel
 
 import "./../public"
-import "Branches.js" as BMethods
+import "Step.js" as Methods
 
 Page {
-    id: updateBranchPage
-    property int branchId
-    property string branchCity
-    property string branchName
-    property string branchDescription
-    property string branchAddress
+    id: updateStepPage
+    property int stepId
+    property string branch
+    property string step
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
@@ -39,7 +36,7 @@ Page {
             Layout.preferredHeight: 64
             verticalAlignment: Qt.AlignVCenter
             horizontalAlignment: Qt.AlignHCenter
-            text: "لیست شعبه‌ها"
+            text: "ویرایش دوره"
             font.family: yekanFont.font.family
             font.pixelSize: 24
             font.bold: true
@@ -77,7 +74,7 @@ Page {
                         anchors.margins: 10
                         ColumnLayout
                         {
-                            id: branchUpdateCL
+                            id: stepUpdateCL
                             width: parent.width
                             Image {
                                 source: "qrc:/Assets/images/edit.png"
@@ -90,36 +87,13 @@ Page {
 
                             GridLayout
                             {
-                                id: branchUpdateGL
+                                id: stepUpdateGL
                                 columns: 2
                                 rows: 5
                                 rowSpacing: 20
                                 columnSpacing: 10
                                 Layout.preferredWidth:  parent.width
 
-
-                                Text {
-                                    text: "شهر"
-                                    Layout.minimumWidth: 100
-                                    Layout.maximumWidth: 100
-                                    Layout.preferredHeight: 50
-                                    verticalAlignment: Text.AlignVCenter
-                                    font.family: yekanFont.font.family
-                                    font.pixelSize: 16
-                                    font.bold: true
-                                    color: "royalblue"
-                                }
-                                TextField
-                                {
-                                    id: branchCityTF
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 50
-                                    font.family: yekanFont.font.family
-                                    font.pixelSize: 16
-                                    placeholderText: "شهر"
-                                    text: updateBranchPage.branchCity
-
-                                }
 
                                 Text {
                                     text: "شعبه"
@@ -132,19 +106,19 @@ Page {
                                     font.bold: true
                                     color: "royalblue"
                                 }
-                                TextField
+                                Text
                                 {
-                                    id: branchNameTF
+                                    id: branchTF
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: 50
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    placeholderText: "شعبه"
-                                    text: updateBranchPage.branchName
+                                    text: updateStepPage.branch
+
                                 }
 
                                 Text {
-                                    text: "توضیحات"
+                                    text: "نام دوره "
                                     Layout.minimumWidth: 100
                                     Layout.maximumWidth: 100
                                     Layout.preferredHeight: 50
@@ -156,38 +130,14 @@ Page {
                                 }
                                 TextField
                                 {
-                                    id: branchDescTF
+                                    id: stepNameTF
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: 50
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    placeholderText: "توضیحات"
-                                    text: updateBranchPage.branchDescription
+                                    placeholderText: "دوره"
+                                    text: updateStepPage.step
                                 }
-
-                                Text {
-                                    text: "آدرس"
-                                    Layout.minimumWidth: 150
-                                    Layout.maximumWidth: 150
-                                    Layout.preferredHeight: 50
-                                    verticalAlignment: Text.AlignVCenter
-                                    font.family: yekanFont.font.family
-                                    font.pixelSize: 16
-                                    font.bold: true
-                                    color: "royalblue"
-                                }
-                                TextField
-                                {
-                                    id: branchAddressTF
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 50
-                                    font.family: yekanFont.font.family
-                                    font.pixelSize: 16
-                                    placeholderText: "آدرس"
-                                    text: updateBranchPage.branchAddress
-                                }
-
-
                             }
 
                             Item
@@ -207,41 +157,38 @@ Page {
                                 Rectangle{width:parent.width; height:2; anchors.bottom: parent.bottom; color: "forestgreen"}
                                 onClicked:
                                 {
-                                    var Branch = {};
-                                    Branch["id"] = updateBranchPage.branchId;
-                                    Branch["city"] = branchCityTF.text;
-                                    Branch["branch_name"] = branchNameTF.text;
-                                    Branch["description"] = branchDescTF.text;
-                                    Branch["address"] = branchAddressTF.text;
+                                    var step = {};
+                                    step["id"] = updateStepPage.stepId;
+                                    step["step_name"] = stepNameTF.text;
 
                                     var check = true
                                     // check entries
-                                    if(!BMethods.checkBranchEntries(Branch))
+                                    if(!Methods.checkStepUpdateEntries(step))
                                     {
-                                        branchInfoDialogId.open();
+                                        stepInfoDialogId.open();
                                         return;
                                     }
 
-                                    if(dbMan.updateBranch(Branch))
+                                    if(dbMan.updateStep(step))
                                     {
-                                        branchInfoDialogId.dialogSuccess = true
-                                        branchInfoDialogId.dialogTitle = "عملیات موفق"
-                                        branchInfoDialogId.dialogText = "اطلاعات شعبه با موفقیت بروزرسانی شد"
-                                        Branch = dbMan.getBranchJson(Branch["id"]);
-                                        branchDelegate.branchUpdated(Branch);
-                                        branchInfoDialogId.acceptAction = function(){branchInfoDialogId.close(); homeStackViewId.pop();}
-                                        branchInfoDialogId.open();
+                                        stepInfoDialogId.dialogSuccess = true
+                                        stepInfoDialogId.dialogTitle = "عملیات موفق"
+                                        stepInfoDialogId.dialogText = "اطلاعات دوره با موفقیت بروزرسانی شد"
+                                        step = dbMan.getStepJson(step["id"]);
+                                        stepDelegate.stepUpdated(step);
+                                        stepInfoDialogId.acceptAction = function(){stepInfoDialogId.close(); homeStackViewId.pop();}
+                                        stepInfoDialogId.open();
 
                                     }
                                     else
                                     {
                                         var errorString = dbMan.getLastError();
-                                        branchInfoDialogId.dialogTitle = "خطا"
-                                        branchInfoDialogId.dialogText = errorString
-                                        branchInfoDialogId.width = parent.width
-                                        branchInfoDialogId.height = 500
-                                        branchInfoDialogId.dialogSuccess = false
-                                        branchInfoDialogId.open();
+                                        stepInfoDialogId.dialogTitle = "خطا"
+                                        stepInfoDialogId.dialogText = errorString
+                                        stepInfoDialogId.width = parent.width
+                                        stepInfoDialogId.height = 500
+                                        stepInfoDialogId.dialogSuccess = false
+                                        stepInfoDialogId.open();
                                     }
                                 }
                             }
@@ -261,7 +208,7 @@ Page {
 
     BaseDialog
     {
-        id: branchInfoDialogId
+        id: stepInfoDialogId
         dialogTitle: "خطا"
         dialogText: "ورود فیلد الزامی می‌باشد"
         dialogSuccess: false

@@ -10,6 +10,7 @@ Page {
     property int stepId
     property int stepIndex
     property string stepName
+    property string branchText
 
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
@@ -77,18 +78,69 @@ Page {
                         {
                             id: stepDeleteCL
                             width: parent.width
-                            Text
+
+                            GridLayout
                             {
-                                text: "حذف"
-                                font.family: yekanFont.font.family
-                                font.pixelSize: 24
-                                font.bold: true
-                                color: "crimson"
-                                Layout.preferredWidth: parent.width
-                                Layout.preferredHeight: 50
-                                horizontalAlignment: Qt.AlignHCenter
-                                verticalAlignment: Qt.AlignVCenter
+                                id: stepDeleteGL
+                                columns: 2
+                                rows: 5
+                                rowSpacing: 20
+                                columnSpacing: 10
+                                Layout.preferredWidth:  parent.width
+
+                                Text {
+                                    Layout.columnSpan: 2
+                                    text: "شعبه " + stepDeletePage.branchText
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 20
+                                    font.bold: true
+                                    color: "royalblue"
+                                }
+
+
+                                Text {
+                                    text: "نام دوره"
+                                    Layout.minimumWidth: 100
+                                    Layout.maximumWidth: 100
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                }
+                                Text
+                                {
+                                    id: stepCityTF
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 50
+                                    verticalAlignment: Text.AlignVCenter
+                                    font.family: yekanFont.font.family
+                                    font.pixelSize: 16
+                                    text: stepDeletePage.stepName
+                                    font.bold: true
+                                }
                             }
+
+                            Item
+                            {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 50
+                            }
+                            // Text
+                            // {
+                            //     text: "حذف"
+                            //     font.family: yekanFont.font.family
+                            //     font.pixelSize: 24
+                            //     font.bold: true
+                            //     color: "crimson"
+                            //     Layout.preferredWidth: parent.width
+                            //     Layout.preferredHeight: 50
+                            //     horizontalAlignment: Qt.AlignHCenter
+                            //     verticalAlignment: Qt.AlignVCenter
+                            // }
                             Button
                             {
                                 background: Item{}
@@ -116,44 +168,6 @@ Page {
                                 }
                             }
 
-                            GridLayout
-                            {
-                                id: stepDeleteGL
-                                columns: 2
-                                rows: 5
-                                rowSpacing: 20
-                                columnSpacing: 10
-                                Layout.preferredWidth:  parent.width
-
-
-                                Text {
-                                    text: ""
-                                    Layout.minimumWidth: 100
-                                    Layout.maximumWidth: 100
-                                    Layout.preferredHeight: 50
-                                    verticalAlignment: Text.AlignVCenter
-                                    font.family: yekanFont.font.family
-                                    font.pixelSize: 16
-                                    font.bold: true
-                                    color: "royalblue"
-                                }
-                                Text
-                                {
-                                    id: stepCityTF
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 50
-                                    font.family: yekanFont.font.family
-                                    font.pixelSize: 16
-                                    text: ""
-
-                                }
-                            }
-
-                            Item
-                            {
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 50
-                            }
                         }
 
                     }
@@ -172,7 +186,7 @@ Page {
         rejectVisible: true
 
         acceptAction: function(){
-            if(dbMan.deletestep(deleteStepPage.stepId))
+            if(dbMan.deleteStep(stepDeletePage.stepId))
                 stepSuccessDelDialog.open();
             else
                 stepErrorDelDialog.open();
@@ -188,7 +202,7 @@ Page {
         dialogSuccess: true
         acceptAction: function(){
             homeStackViewId.pop();
-            stepesPage.stepDeleted(deleteStepPage.stepIndex);
+            stepsPage.stepDeleted(stepDeletePage.stepIndex);
         }
     }
 

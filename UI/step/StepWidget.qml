@@ -6,7 +6,7 @@ import "./Step.js" as Methods
 
 SwipeDelegate
 {
-   //s.id, s.branch_id, s.step_name, b.city, b.branch_name, b.description
+    //s.id, s.branch_id, s.step_name, b.city, b.branch_name, b.description
     id: stepDelegate
     property int stepId
     property int branchId
@@ -41,7 +41,7 @@ SwipeDelegate
 
             spacing: 0
             Label {
-                text: stepName
+                text: stepDelegate.stepName
                 padding: 0
                 font.family: yekanFont.font.family
                 font.pixelSize: (highlighted)? 20 :16
@@ -53,7 +53,7 @@ SwipeDelegate
                 elide: Text.ElideRight
             }
             Label {
-                text: branchCity + " - " + branchName
+                text: stepDelegate.branchCity + " - " + stepDelegate.branchName
                 padding: 0
                 font.family: yekanFont.font.family
                 font.pixelSize: 14
@@ -94,7 +94,8 @@ SwipeDelegate
             {
                 if(swipe.complete)
                     swipe.close();
-                //homeStackViewId.push(deletestepComponent, {stepId: stepDelegate.stepId, stepIndex: stepsLV.currentIndex,  stepCity: stepDelegate.stepCity, stepName:stepDelegate.stepName, stepDescription: stepDelegate.stepDescription, stepAddress: stepDelegate.stepAddress });
+                var branchText =  stepDelegate.branchCity + " - " + stepDelegate.branchName;
+                homeStackViewId.push(deleteStepComponent, {stepId: stepDelegate.stepId, stepIndex: stepsLV.currentIndex,  stepName: stepDelegate.stepName, branchText: branchText});
             }
         }
         Button
@@ -117,7 +118,8 @@ SwipeDelegate
             {
                 if(swipe.complete)
                     swipe.close();
-                //homeStackViewId.push(updatestepComponent, {stepId: stepDelegate.stepId, stepCity: stepDelegate.stepCity, stepName:stepDelegate.stepName, stepDescription: stepDelegate.stepDescription, stepAddress: stepDelegate.stepAddress });
+                var branchText =  stepDelegate.branchCity + " - " + stepDelegate.branchName;
+                homeStackViewId.push(updateStepComponent, {stepId: stepDelegate.stepId, step: stepDelegate.stepName, branch: branchText });
             }
         }
     }
@@ -125,15 +127,15 @@ SwipeDelegate
     onClicked: {swipe.close();}
     onPressed: { stepsLV.currentIndex = index;}
 
-    // Component
-    // {
-    //     id: updatestepComponent
-    //     Updatestep{}
-    // }
-    // Component
-    // {
-    //     id: deletestepComponent
-    //     stepDelete{}
-    // }
+    Component
+    {
+        id: updateStepComponent
+        StepUpdate{}
+    }
+    Component
+    {
+        id: deleteStepComponent
+        StepDelete{}
+    }
 
 }

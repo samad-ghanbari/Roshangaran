@@ -39,7 +39,7 @@ Page {
             Layout.preferredHeight: 64
             verticalAlignment: Qt.AlignVCenter
             horizontalAlignment: Qt.AlignHCenter
-            text: "لیست شعبه‌ها"
+            text: "ویرایش شعبه"
             font.family: yekanFont.font.family
             font.pixelSize: 24
             font.bold: true

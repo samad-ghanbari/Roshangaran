@@ -70,8 +70,8 @@ qt_add_qml_module(appRoshangaran
 
     QML_FILES UI/step/Steps.qml
     QML_FILES UI/step/StepInsert.qml
-    #QML_FILES UI/step/StepUpdate.qml
-    #QML_FILES UI/step/StepDelete.qml
+    QML_FILES UI/step/StepUpdate.qml
+    QML_FILES UI/step/StepDelete.qml
     QML_FILES UI/step/StepWidget.qml
     QML_FILES UI/step/Step.js
 
