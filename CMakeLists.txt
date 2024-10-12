@@ -82,11 +82,12 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/basis/BasisWidget.qml
     QML_FILES UI/basis/Basis.js
 
-    #QML_FILES UI/studyPeriod/StudyPeriods.qml
-    #QML_FILES UI/studyPeriod/StudyPeriodInsert.qml
-    #QML_FILES UI/studyPeriod/StudyPeriodUpdate.qml
-    #QML_FILES UI/studyPeriod/StudyPeriodDelete.qml
-    #QML_FILES UI/studyPeriod/StudyPeriod.js
+    QML_FILES UI/studyPeriod/StudyPeriods.qml
+    QML_FILES UI/studyPeriod/StudyPeriodWidget.qml
+    QML_FILES UI/studyPeriod/StudyPeriodInsert.qml
+    QML_FILES UI/studyPeriod/StudyPeriodUpdate.qml
+    QML_FILES UI/studyPeriod/StudyPeriodDelete.qml
+    QML_FILES UI/studyPeriod/StudyPeriod.js
 
 )
 

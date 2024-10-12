@@ -51,7 +51,7 @@ function checkBasisInsertEntries(Basis)
         basisNameTF.focus = true;
 
         basisInfoDialogId.dialogTitle = "خطا"
-        basisInfoDialogId.dialogText = "ورود نام شهر الزامی می‌باشد"
+        basisInfoDialogId.dialogText = "ورود نام پایه الزامی می‌باشد"
         basisInfoDialogId.dialogSuccess = false
         return false;
     }
@@ -76,7 +76,7 @@ function checkBasisUpdateEntries(Basis)
         basisNameTF.focus = true;
 
         basisInfoDialogId.dialogTitle = "خطا"
-        basisInfoDialogId.dialogText = "ورود نام شهر الزامی می‌باشد"
+        basisInfoDialogId.dialogText = "ورود نام پایه الزامی می‌باشد"
         basisInfoDialogId.dialogSuccess = false
         return false;
     }

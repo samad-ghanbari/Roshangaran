@@ -5,7 +5,7 @@ import "./../user"
 import "./../branch"
 import "./../step"
 import "./../basis"
-//import "./../studyPeriod"
+import "./../studyPeriod"
 
 // menuBar: MenubarModule{}
 MenuBar {
@@ -205,10 +205,10 @@ MenuBar {
         id: basisComponent
         Basis{}
     }
-    // Component
-    // {
-    //     id: studyPeriodComponent
-    //     StudyPeriods{}
-    // }
+    Component
+    {
+        id: studyPeriodComponent
+        StudyPeriods{}
+    }
 
 }

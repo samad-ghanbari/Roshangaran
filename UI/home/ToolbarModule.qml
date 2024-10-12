@@ -6,7 +6,7 @@ import "./../user"
 import "./../branch"
 import "./../step"
 import "./../basis"
-//import "./../studyPeriod"
+import "./../studyPeriod"
 
 ToolBar {
     id:toolbarId;
@@ -207,7 +207,7 @@ ToolBar {
                 if(homeStackViewId.currentItem.objectName === "studyBasisON")
                     homeStackViewId.pop();
 
-                //homeStackViewId.push(studyPeriodComponent, {objectName: "studyBasisON"})
+                homeStackViewId.push(studyPeriodComponent, {objectName: "studyBasisON"})
             }
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuPeriodId)
@@ -332,11 +332,11 @@ ToolBar {
         id: basisComponent
         Basis{}
     }
-    // Component
-    // {
-    //     id: studyPeriodComponent
-    //     StudyPeriods{}
-    // }
+    Component
+    {
+        id: studyPeriodComponent
+        StudyPeriods{}
+    }
 
 }
 
