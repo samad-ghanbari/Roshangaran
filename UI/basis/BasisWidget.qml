@@ -122,7 +122,7 @@ SwipeDelegate
     }
 
     onClicked: {swipe.close();}
-    onPressed: { basissLV.currentIndex = index;}
+    onPressed: { basisLV.currentIndex = index;}
 
     Component
     {

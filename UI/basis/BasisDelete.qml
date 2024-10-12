@@ -104,7 +104,7 @@ Page {
 
                                 Text {
                                     Layout.columnSpan: 2
-                                    text: "دوره " + basisDeletePage.step
+                                    text:  basisDeletePage.step
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: 50
                                     verticalAlignment: Text.AlignVCenter
@@ -204,7 +204,7 @@ Page {
         dialogSuccess: true
         acceptAction: function(){
             homeStackViewId.pop();
-            basissPage.basisDeleted(basisDeletePage.basisIndex);
+            basisPage.basisDeleted(basisDeletePage.basisIndex);
         }
     }
 

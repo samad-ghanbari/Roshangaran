@@ -104,7 +104,6 @@ Page {
                                     verticalAlignment: Text.AlignVCenter
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    font.bold: true
                                 }
                                 Text
                                 {
@@ -112,8 +111,10 @@ Page {
                                     Layout.preferredHeight: 50
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    text: updatebasisPage.branch
+                                    text: updateBasisPage.branch
                                     color: "royalblue"
+                                    font.bold: true
+
                                 }
 
                                 Text {
@@ -124,7 +125,6 @@ Page {
                                     verticalAlignment: Text.AlignVCenter
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    font.bold: true
                                 }
                                 Text
                                 {
@@ -132,8 +132,9 @@ Page {
                                     Layout.preferredHeight: 50
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    text: updatebasisPage.step
+                                    text: updateBasisPage.step
                                     color: "royalblue"
+                                    font.bold: true
                                 }
 
                                 Text {
@@ -144,7 +145,6 @@ Page {
                                     verticalAlignment: Text.AlignVCenter
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    font.bold: true
                                 }
                                 TextField
                                 {
@@ -153,8 +153,9 @@ Page {
                                     Layout.preferredHeight: 50
                                     font.family: yekanFont.font.family
                                     font.pixelSize: 16
-                                    text: updatebasisPage.step
+                                    text: updateBasisPage.basisName
                                     color: "royalblue"
+                                    font.bold: true
                                     placeholderText: "نام پایه"
                                 }
                             }
@@ -177,8 +178,8 @@ Page {
                                 onClicked:
                                 {
                                     var Basis = {};
-                                    basis["id"] = updateBasisPage.basisId;
-                                    basis["basis_name"] = basisNameTF.text;
+                                    Basis["id"] = updateBasisPage.basisId;
+                                    Basis["basis_name"] = basisNameTF.text;
 
                                     var check = true
                                     // check entries
@@ -192,8 +193,8 @@ Page {
                                     {
                                         basisInfoDialogId.dialogSuccess = true
                                         basisInfoDialogId.dialogTitle = "عملیات موفق"
-                                        basisInfoDialogId.dialogText = "اطلاعات دوره با موفقیت بروزرسانی شد"
-                                        basis = dbMan.getBasisJson(Basis["id"]);
+                                        basisInfoDialogId.dialogText = "اطلاعات پایه با موفقیت بروزرسانی شد"
+                                        Basis = dbMan.getBasisById(Basis["id"]);
                                         basisDelegate.basisUpdated(Basis);
                                         basisInfoDialogId.acceptAction = function(){basisInfoDialogId.close(); homeStackViewId.pop();}
                                         basisInfoDialogId.open();

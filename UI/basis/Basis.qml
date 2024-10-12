@@ -15,8 +15,8 @@ Page {
                        basisModel.remove(deleteIndex);
                    }
 
-    signal basisInserted(int bId);
-    onBasisInserted: (bId)=> Methods.basisUpdate(bId);
+    signal basisInserted(int sId);
+    onBasisInserted: (sId)=> Methods.updateBasis(sId);
 
 
     GridLayout
@@ -93,7 +93,7 @@ Page {
         RowLayout{
             Layout.columnSpan: 2
             Layout.preferredHeight:  50
-            Layout.preferredWidth: branchLbl.width + branchCB.width
+            Layout.preferredWidth: stepLbl.width + stepCB.width
             Layout.alignment: Qt.AlignHCenter
 
             Label
@@ -120,7 +120,7 @@ Page {
                 model: ListModel{id: stepCBoxModel}
                 textRole: "text"
                 valueRole: "value"
-                onActivated: Methods.basisUpdate(stepCB.currentValue)
+                onActivated: Methods.updateBasis(stepCB.currentValue)
             }
         }
 
