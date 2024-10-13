@@ -283,30 +283,6 @@ Page {
                         }
 
                         Text {
-                            text: "پست الکترونیکی"
-                            Layout.minimumWidth: 150
-                            Layout.maximumWidth: 150
-                            Layout.preferredHeight: 50
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Qt.AlignLeft
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 16
-                            font.bold: true
-                            color: "royalblue"
-                        }
-                        Text
-                        {
-                            id: userEmailId
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 50
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Qt.AlignLeft
-                            font.family: yekanFont.font.family
-                            font.pixelSize: 16
-                            text: user["email"]
-                        }
-
-                        Text {
                             text: "پست‌کاربر"
                             Layout.minimumWidth: 150
                             Layout.maximumWidth: 150

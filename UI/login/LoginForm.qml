@@ -23,8 +23,6 @@ Page {
             loginInitialItem.enabled=false;
             loginInitialItem.destroy();
             appLoginWindowId.hide();
-            //var homeWindowComponent = Qt.createComponent("./../home/HomeWindow.qml");
-            //var homeWindow = homeWindowComponent.createObject(backend);
             backend.loadHome();
         }
         else
@@ -113,7 +111,7 @@ Page {
                 id: usernameField
                 height: 50
                 width : parent.width
-                placeholderText: "کد ملی"
+                placeholderText: "کد‌ملی"
                 font.family: yekanFont.font.family
                 KeyNavigation.tab: passwordField
                 focus: true
@@ -125,7 +123,7 @@ Page {
                 height: 50
                 width : parent.width
                 font.family: yekanFont.font.family
-                placeholderText: "رمز عبور"
+                placeholderText: "رمز‌عبور"
                 echoMode: "Password"
                 KeyNavigation.tab: loginBtnId
             }
@@ -146,25 +144,12 @@ Page {
                     focus: true
                     Rectangle{width:parent.width; height:5; anchors.bottom: parent.bottom; color: "forestgreen"}
 
-
-                    //anchors.horizontalCenter: parent.horizontalCenter
-                    // background: Rectangle {
-                    //     id:loginBtnBg
-                    //     implicitWidth: 100
-                    //     implicitHeight: 50
-                    //     color: loginBtnId.down ? "skyblue" : "#powderblue"
-                    //     border.width: 1
-                    //     border.color:"#88F"
-                    // }
                     onClicked:
                     {
                         loginBtnClicked();
                     }
 
-                    //onFocusChanged: loginBtnBg.color= activeFocus? "skyblue"  : "powderblue";
                     hoverEnabled: true
-                    //onHoveredChanged: loginBtnBg.color= hovered? "skyblue"  : "powderblue";
-
                 }
                 Button {
                     id: closeBtnId
@@ -175,23 +160,12 @@ Page {
                     width : parent.width/2
                     Rectangle{width:parent.width; height:5; anchors.bottom: parent.bottom; color: "crimson"}
 
-                    //anchors.horizontalCenter: parent.horizontalCenter
-                    // background: Rectangle {
-                    //     id: cancelBtnId
-                    //     implicitWidth: 100
-                    //     implicitHeight: 50
-                    //     color: closeBtnId.down ? "#FAA" : "#FEE"
-                    //     border.width: 1
-                    //     border.color:"#f99"
-                    // }
                     onClicked:
                     {
                         backgroundAnimId.start()
                         appLoginWindowId.close();
                     }
                     hoverEnabled: true
-                    //onHoveredChanged: cancelBtnId.color= hovered? "#fde"  : "#fee";
-
                 }
             }
 
@@ -207,7 +181,7 @@ Page {
                 text: ""
                 color:"mediumvioletred"
                 font.family: yekanFont.font.family
-                font.pixelSize: 18
+                font.pixelSize: 16
                 anchors.horizontalCenter: parent.horizontalCenter
                 ScaleAnimator on scale {
                         id: incorrectuserPassAnim

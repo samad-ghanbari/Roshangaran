@@ -21,12 +21,12 @@ void Backend::initiate()
 {
     engine.rootContext()->setContextProperty("backend", this);
     engine.rootContext()->setContextProperty("dbMan", dbMan);
-    engine.loadFromModule("Roshangaran", "LoginWindow");
+    engine.loadFromModule("School", "LoginWindow");
 }
 
 void Backend::loadHome()
 {
-    QJsonObject user = dbMan->getUserJson();
-    engine.rootContext()->setContextProperty("user", user);
-    engine.loadFromModule("Roshangaran", "HomeWindow");
+    //QJsonObject user = dbMan->getUserJson();
+    //engine.rootContext()->setContextProperty("user", user);
+    engine.loadFromModule("School", "HomeWindow");
 }

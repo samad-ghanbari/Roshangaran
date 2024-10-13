@@ -3,10 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import "./../user"
-import "./../branch"
-import "./../step"
-import "./../basis"
-import "./../studyPeriod"
+//import "./../branch"
+//import "./../step"
+//import "./../base"
+//import "./../studyPeriod"
 
 ToolBar {
     id:toolbarId;
@@ -23,64 +23,43 @@ ToolBar {
     {
         var w = appWindowId.width;
 
-        if(w < 1500)
+        if(w < 1000)
         {
             menuHomeId.icon.width=1
-            menuUserId.icon.width=1
-            menuBranchId.icon.width=1
-            menuStepId.icon.width=1
-            menuBaseId.icon.width=1
             menuPeriodId.icon.width=1
-            menuClassId.icon.width=1
             menuCourseId.icon.width=1
             menuTeacherId.icon.width=1
             menuStudentId.icon.width=1
-            menuParentId.icon.width=1
             menuEvalId.icon.width=1
+            menuRepId.icon.width=1
 
             menuHomeId.font.pixelSize=14
-            menuUserId.font.pixelSize=14
-            menuBranchId.font.pixelSize=14
-            menuStepId.font.pixelSize=14
-            menuBaseId.font.pixelSize=14
             menuPeriodId.font.pixelSize=14
-            menuClassId.font.pixelSize=14
             menuCourseId.font.pixelSize=14
             menuTeacherId.font.pixelSize=14
             menuStudentId.font.pixelSize=14
-            menuParentId.font.pixelSize=14
             menuEvalId.font.pixelSize=14
+            menuRepId.font.pixelSize=14
 
 
         }
         else
         {
             menuHomeId.icon.width=32
-            menuUserId.icon.width=32
-            menuUserId.icon.height=32
-            menuBranchId.icon.width=32
-            menuStepId.icon.width=32
-            menuBaseId.icon.width=32
             menuPeriodId.icon.width=32
-            menuClassId.icon.width=32
             menuCourseId.icon.width=32
             menuTeacherId.icon.width=32
             menuStudentId.icon.width=32
-            menuParentId.icon.width=32
             menuEvalId.icon.width=32
+            menuRepId.icon.width=32
 
             menuHomeId.font.pixelSize=16
-            menuUserId.font.pixelSize=16
-            menuBranchId.font.pixelSize=16
-            menuStepId.font.pixelSize=16
-            menuBaseId.font.pixelSize=16
             menuPeriodId.font.pixelSize=16
-            menuClassId.font.pixelSize=16
             menuCourseId.font.pixelSize=16
             menuTeacherId.font.pixelSize=16
             menuStudentId.font.pixelSize=16
-            menuParentId.font.pixelSize=16
             menuEvalId.font.pixelSize=16
+            menuRepId.font.pixelSize=16
         }
     }
 
@@ -117,86 +96,8 @@ ToolBar {
         }
 
         ToolButton {
-            id: menuUserId
-            text: "کاربران سامانه"
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            onClicked:
-            {
-                if(homeStackViewId.currentItem.objectName === "listUserON")
-                    homeStackViewId.pop();
-
-                homeStackViewId.push(listUserPageComponent, {objectName: "listUserON"})
-            }
-            icon.source: "qrc:/Assets/images/users.png"
-            icon.width: 32
-            icon.height: 32
-            hoverEnabled: true
-            onHoveredChanged: menuHoverAction(menuUserId)
-
-        }
-
-        ToolButton {
-            id: menuBranchId
-            text: "شعبه مدارس"
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            icon.source: "qrc:/Assets/images/branch.png"
-            icon.width: 32
-            icon.height: 32
-            onClicked:
-            {
-                if(homeStackViewId.currentItem.objectName === "branchesON")
-                    homeStackViewId.pop();
-
-                homeStackViewId.push(branchesComponent, {objectName: "branchesON"})
-            }
-            hoverEnabled: true
-            onHoveredChanged: menuHoverAction(menuBranchId)
-        }
-
-        ToolButton {
-            id: menuStepId
-            text: "دوره مدارس"
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            icon.source: "qrc:/Assets/images/school.png"
-            icon.width: 32
-            icon.height: 32
-            onClicked:
-            {
-                if(homeStackViewId.currentItem.objectName === "stepsON")
-                    homeStackViewId.pop();
-
-                homeStackViewId.push(stepsComponent, {objectName: "stepsON"})
-            }
-
-            hoverEnabled: true
-            onHoveredChanged: menuHoverAction(menuStepId)
-        }
-
-        ToolButton {
-            id: menuBaseId
-            text: "پایه‌تحصیلی"
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            icon.source: "qrc:/Assets/images/school2.png"
-            icon.width: 32
-            icon.height: 32
-            onClicked:
-            {
-                if(homeStackViewId.currentItem.objectName === "basisON")
-                    homeStackViewId.pop();
-
-                homeStackViewId.push(basisComponent, {objectName: "basisON"})
-            }
-            hoverEnabled: true
-            onHoveredChanged: menuHoverAction(menuBaseId)
-        }
-
-        ToolButton {
             id: menuPeriodId
-            text: "سال‌تحصیلی"
+            text: "سال‌های ‌تحصیلی"
             font.family: yekanFont.font.family
             font.pixelSize: 16
             icon.source: "qrc:/Assets/images/date.png"
@@ -204,31 +105,19 @@ ToolBar {
             icon.height: 32
             onClicked:
             {
-                if(homeStackViewId.currentItem.objectName === "studyBasisON")
+                if(homeStackViewId.currentItem.objectName === "studyPeriodON")
                     homeStackViewId.pop();
 
-                homeStackViewId.push(studyPeriodComponent, {objectName: "studyBasisON"})
+                //homeStackViewId.push(studyPeriodComponent, {objectName: "studyPeriodON"})
             }
             hoverEnabled: true
             onHoveredChanged: menuHoverAction(menuPeriodId)
         }
 
-        ToolButton {
-            id: menuClassId
-            text: "کلاس‌درس"
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            icon.source: "qrc:/Assets/images/classroom.png"
-            icon.width: 32
-            icon.height: 32
-            onClicked: console.log("567")
-            hoverEnabled: true
-            onHoveredChanged: menuHoverAction(menuClassId)
-        }
 
         ToolButton {
             id: menuCourseId
-            text: "دروس"
+            text: "درس‌ها"
             font.family: yekanFont.font.family
             font.pixelSize: 16
             icon.source: "qrc:/Assets/images/course.png"
@@ -266,24 +155,24 @@ ToolBar {
         }
 
         ToolButton {
-            id: menuParentId
-            text: "والدین"
-            font.family: yekanFont.font.family
-            font.pixelSize: 16
-            icon.source: "qrc:/Assets/images/parents.png"
-            icon.width: 32
-            icon.height: 32
-            onClicked: console.log("567")
-            hoverEnabled: true
-            onHoveredChanged: menuHoverAction(menuParentId)
-        }
-
-        ToolButton {
             id: menuEvalId
             text: "ارزیابی‌ها"
             font.family: yekanFont.font.family
             font.pixelSize: 16
             icon.source: "qrc:/Assets/images/evaluation.png"
+            icon.width: 32
+            icon.height: 32
+            onClicked: console.log("567")
+            hoverEnabled: true
+            onHoveredChanged: menuHoverAction(menuEvalId)
+        }
+
+        ToolButton {
+            id: menuRepId
+            text: "گزارشات"
+            font.family: yekanFont.font.family
+            font.pixelSize: 16
+            icon.source: "qrc:/Assets/images/report.png"
             icon.width: 32
             icon.height: 32
             onClicked: console.log("567")
@@ -317,26 +206,26 @@ ToolBar {
         id: listUserPageComponent
         ListUser{}
     }
-    Component
-    {
-        id: branchesComponent
-        Branches{}
-    }
-    Component
-    {
-        id: stepsComponent
-        Steps{}
-    }
-    Component
-    {
-        id: basisComponent
-        Basis{}
-    }
-    Component
-    {
-        id: studyPeriodComponent
-        StudyPeriods{}
-    }
+    // Component
+    // {
+    //     id: branchesComponent
+    //     Branches{}
+    // }
+    // Component
+    // {
+    //     id: stepsComponent
+    //     Steps{}
+    // }
+    // Component
+    // {
+    //     id: baseComponent
+    //     Base{}
+    // }
+    // Component
+    // {
+    //     id: studyPeriodComponent
+    //     StudyPeriods{}
+    // }
 
 }
 

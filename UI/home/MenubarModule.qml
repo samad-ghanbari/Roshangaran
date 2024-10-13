@@ -2,10 +2,10 @@ import QtQuick
 import QtQuick.Controls
 
 import "./../user"
-import "./../branch"
-import "./../step"
-import "./../basis"
-import "./../studyPeriod"
+//import "./../branch"
+//import "./../step"
+//import "./../base"
+//import "./../studyPeriod"
 
 // menuBar: MenubarModule{}
 MenuBar {
@@ -34,93 +34,64 @@ MenuBar {
     }
 
     Menu {
-        title: "کاربران"
+        title: "مدرسه"
         font.family: yekanFont.font.family
         font.pixelSize: 16
         Action {
-            text: "کاربر جدید";
-            onTriggered:
-            {
-                if(homeStackViewId.currentItem.objectName === "newUserON")
-                    homeStackViewId.pop();
-
-                homeStackViewId.push(newUserPageComponent, {objectName: "newUserON"});
-            }
-            icon.source: "qrc:/Assets/images/newUser.png"; icon.width: 24;icon.height:24;
-        }
-        MenuSeparator { }
-        Action {
-            text: "لیست کاربران";
-            onTriggered:
-            {
-                if(homeStackViewId.currentItem.objectName === "listUserON")
-                    homeStackViewId.pop();
-
-                homeStackViewId.push(listUserPageComponent,{objectName: "listUserON"});
-            }
-            icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24;
-        }
-    }
-
-    Menu {
-        title: "مدارس"
-        font.family: yekanFont.font.family
-        font.pixelSize: 16
-        Action {
-            text: "شعبه مدارس";
+            text: "شعبه‌ها";
             onTriggered:
             {
                 if(homeStackViewId.currentItem.objectName === "branchesON")
                     homeStackViewId.pop();
 
-                homeStackViewId.push(branchesComponent, {objectName: "branchesON"});
+                //homeStackViewId.push(branchesComponent, {objectName: "branchesON"});
             }
 
             icon.source: "qrc:/Assets/images/branch.png"; icon.width: 24;icon.height:24;
         }
         MenuSeparator { }
         Action {
-            text: "دوره مدارس";
+            text: "دوره‌ها";
             onTriggered:
             {
                 if(homeStackViewId.currentItem.objectName === "stepsON")
                     homeStackViewId.pop();
 
-                homeStackViewId.push(stepsComponent, {objectName: "stepsON"});
+                //homeStackViewId.push(stepsComponent, {objectName: "stepsON"});
             }
 
             icon.source: "qrc:/Assets/images/school.png"; icon.width: 24;icon.height:24;
         }
         MenuSeparator { }
         Action {
-            text: "پایه‌تحصیلی";
+            text: "پایه‌های ‌تحصیلی";
             onTriggered:
             {
-                if(homeStackViewId.currentItem.objectName === "basisON")
+                if(homeStackViewId.currentItem.objectName === "baseON")
                     homeStackViewId.pop();
 
-                homeStackViewId.push(basisComponent, {objectName: "basisON"});
+                //homeStackViewId.push(baseComponent, {objectName: "baseON"});
             }
 
             icon.source: "qrc:/Assets/images/school2.png"; icon.width: 24;icon.height:24;
         }
         MenuSeparator { }
         Action {
-            text: "سال‌تحصیلی";
+            text: "سال‌های ‌تحصیلی";
             onTriggered:
             {
-                if(homeStackViewId.currentItem.objectName === "studyBasisON")
+                if(homeStackViewId.currentItem.objectName === "studyPeriodON")
                     homeStackViewId.pop();
 
-                homeStackViewId.push(studyPeriodComponent, {objectName: "studyBasisON"});
+                //homeStackViewId.push(studyPeriodComponent, {objectName: "studyPeriodON"});
             }
 
             icon.source: "qrc:/Assets/images/date.png"; icon.width: 24;icon.height:24;
         }
         MenuSeparator { }
-        Action { text: "کلاس‌درس"; onTriggered: console.log("users");icon.source: "qrc:/Assets/images/classroom.png"; icon.width: 24;icon.height:24; }
+        Action { text: "کلاس‌ها"; onTriggered: console.log("users");icon.source: "qrc:/Assets/images/classroom.png"; icon.width: 24;icon.height:24; }
         MenuSeparator { }
-        Action { text: "دروس"; onTriggered: console.log("users");icon.source: "qrc:/Assets/images/course.png"; icon.width: 24;icon.height:24; }
+        Action { text: "درس‌ها"; onTriggered: console.log("users");icon.source: "qrc:/Assets/images/course.png"; icon.width: 24;icon.height:24; }
     }
 
     Menu {
@@ -135,8 +106,6 @@ MenuBar {
         font.family: yekanFont.font.family
         font.pixelSize: 16
         Action { text: "دانش‌آموزان"; onTriggered: console.log("new user");icon.source: "qrc:/Assets/images/student.png"; icon.width: 24;icon.height:24; }
-        MenuSeparator { }
-        Action { text: "والدین"; onTriggered: console.log("new user");icon.source: "qrc:/Assets/images/parents.png"; icon.width: 24;icon.height:24; }
     }
 
     Menu {
@@ -147,8 +116,26 @@ MenuBar {
     }
 
     Menu {
+        id: menuReportId
+        title: "گزارشات"
+        font.family: yekanFont.font.family
+        font.pixelSize: 16
+        Action {
+            text: "گزارش آماری";
+            onTriggered:
+            {
+                if(homeStackViewId.currentItem.objectName === "listUserON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(listUserPageComponent,{objectName: "listUserON"});
+            }
+            icon.source: "qrc:/Assets/images/report.png"; icon.width: 24;icon.height:24;
+        }
+    }
+
+    Menu {
         id: menuSettingId
-        title: "تنظیمات"
+        title: "تنظیمات کاربر"
         font.family: yekanFont.font.family
         font.pixelSize: 16
         Action {
@@ -178,6 +165,44 @@ MenuBar {
 
     }
 
+    Menu {
+        id: menuAdminSettingId
+        title: "تنظیمات سامانه"
+        font.family: yekanFont.font.family
+        font.pixelSize: 16
+
+        Action {
+            text: "لیست کاربران";
+            onTriggered:
+            {
+                if(homeStackViewId.currentItem.objectName === "listUserON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(listUserPageComponent,{objectName: "listUserON"});
+            }
+            icon.source: "qrc:/Assets/images/users.png"; icon.width: 24;icon.height:24;
+        }
+    }
+
+    Menu {
+        id: menuLogId
+        title: "لاگ کاربران"
+        font.family: yekanFont.font.family
+        font.pixelSize: 16
+
+        Action {
+            text: "مشاهده لاگ‌ها";
+            onTriggered:
+            {
+                if(homeStackViewId.currentItem.objectName === "listUserON")
+                    homeStackViewId.pop();
+
+                homeStackViewId.push(listUserPageComponent,{objectName: "listUserON"});
+            }
+            icon.source: "qrc:/Assets/images/log.png"; icon.width: 24;icon.height:24;
+        }
+    }
+
     Component
     {
         id: newUserPageComponent
@@ -190,25 +215,25 @@ MenuBar {
         ListUser{}
     }
 
-    Component
-    {
-        id: branchesComponent
-        Branches{}
-    }
-    Component
-    {
-        id: stepsComponent
-        Steps{}
-    }
-    Component
-    {
-        id: basisComponent
-        Basis{}
-    }
-    Component
-    {
-        id: studyPeriodComponent
-        StudyPeriods{}
-    }
+    // Component
+    // {
+    //     id: branchesComponent
+    //     Branches{}
+    // }
+    // Component
+    // {
+    //     id: stepsComponent
+    //     Steps{}
+    // }
+    // Component
+    // {
+    //     id: baseComponent
+    //     Base{}
+    // }
+    // Component
+    // {
+    //     id: studyPeriodComponent
+    //     StudyPeriods{}
+    // }
 
 }

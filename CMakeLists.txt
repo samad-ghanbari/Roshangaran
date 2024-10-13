@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(Roshangaran VERSION 0.1 LANGUAGES CXX)
+project(School VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -14,20 +14,20 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
-qt_add_executable(appRoshangaran
+qt_add_executable(appSchool
     main.cpp
 )
 
 
 # database support
 find_package(Qt6 REQUIRED COMPONENTS Sql)
-target_link_libraries(appRoshangaran PRIVATE Qt6::Sql)
+target_link_libraries(appSchool PRIVATE Qt6::Sql)
 
 # printsupport
 find_package(Qt6 REQUIRED COMPONENTS PrintSupport)
 
-qt_add_qml_module(appRoshangaran
-    URI Roshangaran
+qt_add_qml_module(appSchool
+    URI School
     VERSION 1.0
     QML_FILES UI/login/LoginWindow.qml
     QML_FILES UI/login/LoginForm.qml
@@ -48,7 +48,6 @@ qt_add_qml_module(appRoshangaran
 
     QML_FILES UI/user/NewUser.qml
     QML_FILES UI/user/newUserJS.js
-
     QML_FILES UI/user/ListUser.qml
     QML_FILES UI/public/BaseDialog.qml
     QML_FILES UI/user/ListUser.js
@@ -61,37 +60,37 @@ qt_add_qml_module(appRoshangaran
     QML_FILES UI/user/ChangePassword.qml
     QML_FILES UI/user/ChangePassDialogBox.qml
 
-    QML_FILES UI/branch/Branches.qml
-    QML_FILES UI/branch/BranchInsert.qml
-    QML_FILES UI/branch/UpdateBranch.qml
-    QML_FILES UI/branch/BranchDelete.qml
-    QML_FILES UI/branch/BranchWidget.qml
-    QML_FILES UI/branch/Branches.js
+    #QML_FILES UI/branch/Branches.qml
+    #QML_FILES UI/branch/BranchInsert.qml
+    #QML_FILES UI/branch/UpdateBranch.qml
+    #QML_FILES UI/branch/BranchDelete.qml
+    #QML_FILES UI/branch/BranchWidget.qml
+    #QML_FILES UI/branch/Branches.js
 
-    QML_FILES UI/step/Steps.qml
-    QML_FILES UI/step/StepInsert.qml
-    QML_FILES UI/step/StepUpdate.qml
-    QML_FILES UI/step/StepDelete.qml
-    QML_FILES UI/step/StepWidget.qml
-    QML_FILES UI/step/Step.js
+    #QML_FILES UI/step/Steps.qml
+    #QML_FILES UI/step/StepInsert.qml
+    #QML_FILES UI/step/StepUpdate.qml
+    #QML_FILES UI/step/StepDelete.qml
+    #QML_FILES UI/step/StepWidget.qml
+    #QML_FILES UI/step/Step.js
 
-    QML_FILES UI/basis/Basis.qml
-    QML_FILES UI/basis/BasisInsert.qml
-    QML_FILES UI/basis/BasisUpdate.qml
-    QML_FILES UI/basis/BasisDelete.qml
-    QML_FILES UI/basis/BasisWidget.qml
-    QML_FILES UI/basis/Basis.js
+    #QML_FILES UI/base/Base.qml
+    #QML_FILES UI/base/BaseInsert.qml
+    #QML_FILES UI/base/BaseUpdate.qml
+    #QML_FILES UI/base/BaseDelete.qml
+    #QML_FILES UI/base/BaseWidget.qml
+    #QML_FILES UI/base/Base.js
 
-    QML_FILES UI/studyPeriod/StudyPeriods.qml
-    QML_FILES UI/studyPeriod/StudyPeriodWidget.qml
-    QML_FILES UI/studyPeriod/StudyPeriodInsert.qml
-    QML_FILES UI/studyPeriod/StudyPeriodUpdate.qml
-    QML_FILES UI/studyPeriod/StudyPeriodDelete.qml
-    QML_FILES UI/studyPeriod/StudyPeriod.js
+    #QML_FILES UI/studyPeriod/StudyPeriods.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodWidget.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodInsert.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodUpdate.qml
+    #QML_FILES UI/studyPeriod/StudyPeriodDelete.qml
+    #QML_FILES UI/studyPeriod/StudyPeriod.js
 
 )
 
-qt_add_resources(appRoshangaran "assets"
+qt_add_resources(appSchool "assets"
     PREFIX "/"
     FILES
         Assets/font/yekan.ttf
@@ -155,25 +154,28 @@ qt_add_resources(appRoshangaran "assets"
         Assets/images/key1.png
         Assets/images/key2.png
 
+        Assets/images/log.png
+        Assets/images/report.png
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-set_target_properties(appRoshangaran PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appRoshangaran
+set_target_properties(appSchool PROPERTIES
+#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appSchool
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appRoshangaran
+target_link_libraries(appSchool
     PRIVATE Qt6::Quick
 )
 
 include(GNUInstallDirs)
-install(TARGETS appRoshangaran
+install(TARGETS appSchool
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

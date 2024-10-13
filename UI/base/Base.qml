@@ -3,13 +3,13 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import "./../public"
-import "Basis.js" as Methods
+import "Base.js" as Methods
 
 Page {
-    id: basisPage
+    id: basePage
     background: Rectangle{anchors.fill: parent; color: "ghostwhite"}
 
-    signal basisDeleted(int deleteIndex);
+    signal baseDeleted(int deleteIndex);
     onBasisDeleted: (deleteIndex)=>
                    {
                        basisModel.remove(deleteIndex);
@@ -120,7 +120,7 @@ Page {
                 model: ListModel{id: stepCBoxModel}
                 textRole: "text"
                 valueRole: "value"
-                onActivated: Methods.updateBasis(stepCB.currentValue)
+                onActivated: Methods.updateBase(stepCB.currentValue)
             }
         }
 
@@ -149,7 +149,7 @@ Page {
                     {
                         var sid = stepCB.currentValue;
                         if(sid >= 0)
-                            homeStackViewId.push(basisInsertComponent, {stepId: sid, branch: branchCB.currentText, step: stepCB.currentText });
+                            homeStackViewId.push(baseInsertComponent, {stepId: sid, branch: branchCB.currentText, step: stepCB.currentText });
                         else
                             insertInfoDialogId.open();
                     }
@@ -159,27 +159,27 @@ Page {
 
                 ButtonGroup
                 {
-                    buttons: basisLV.contentItem.children
+                    buttons: baseLV.contentItem.children
                 }
 
                 ListView
                 {
-                    id: basisLV
+                    id: baseLV
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     Layout.margins: 10
                     flickableDirection: Flickable.AutoFlickDirection
                     clip: true
                     spacing: 5
-                    model: ListModel{id: basisModel} //Id BranchId basisName BranchName BranchDescription
+                    model: ListModel{id: baseModel} //Id BranchId baseName BranchName BranchDescription
                     highlight: Item{}
-                    // property int basisId
+                    // property int baseId
                     // property int branchId
-                    // property string basisName
+                    // property string baseName
                     // property string branchCity
                     // property string branchName
                     // property string branchDescription
-                    delegate: BasisWidget{basisId: Id; stepId: StepId; basisName: BasisName; branch: Branch; step: Step}
+                    delegate: BaseWidget{baseId: Id; stepId: StepId; baseName: BaseName; branch: Branch; step: Step}
 
                 }
             }
@@ -188,8 +188,8 @@ Page {
 
     Component
     {
-        id: basisInsertComponent
-        BasisInsert{}
+        id: baseInsertComponent
+        BaseInsert{}
     }
     BaseDialog
     {
