@@ -22,64 +22,69 @@ Page {
         }
     }
 
-    ColumnLayout
+    GridLayout
     {
         anchors.fill: parent
+        columns: 3
 
-        RowLayout
+        Button
         {
-            width: parent.width
-            height: 64
-            Button
-            {
-                id: userListBackBtnId
-                background: Item{}
-                icon.source: "qrc:/Assets/images/arrow-right.png"
-                icon.width: 64
-                icon.height: 64
-                opacity: 0.5
-                onClicked: homeStackViewId.pop();
-                hoverEnabled: true
-                onHoveredChanged: userListBackBtnId.opacity=(hovered)? 1 : 0.5;
-            }
-            Item
-            {
-                Layout.fillWidth: true
-            }
+            id: userListBackBtnId
+            Layout.preferredHeight: 64
+            Layout.preferredWidth: 64
+            background: Item{}
+            icon.source: "qrc:/Assets/images/arrow-right.png"
+            icon.width: 64
+            icon.height: 64
+            opacity: 0.5
+            onClicked: homeStackViewId.pop();
+            hoverEnabled: true
+            onHoveredChanged: userListBackBtnId.opacity=(hovered)? 1 : 0.5;
+        }
+        Text {
+            id: userListTitle
+            text: "لیست کاربران سامانه"
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            font.family: yekanFont.font.family
+            font.pixelSize: 24
+            font.bold: true
+            color: "mediumvioletred"
+        }
+        Button
+        {
+            id: userListSearchBtnId
+            Layout.preferredHeight: 64
+            Layout.preferredWidth: 64
+            background: Item{}
+            icon.source: "qrc:/Assets/images/search.png"
+            icon.width: 64
+            icon.height: 64
+            opacity: 0.5
+            onClicked: userSearchDrawer.open();
+            hoverEnabled: true
+            onHoveredChanged: userListSearchBtnId.opacity=(hovered)? 1 : 0.5;
+        }
 
-            Text {
-                id: userListTitle
-                text: "لیست کاربران سامانه"
-                Layout.alignment: Qt.AlignHCenter
-                font.family: yekanFont.font.family
-                font.pixelSize: 24
-                font.bold: true
-                color: "mediumvioletred"
-                style: Text.Outline
-                styleColor: "white"
-            }
-
-            Item
-            {
-                Layout.fillWidth: true
-            }
-            Button
-            {
-                id: userListSearchBtnId
-                background: Item{}
-                icon.source: "qrc:/Assets/images/search.png"
-                icon.width: 64
-                icon.height: 64
-                opacity: 0.5
-                onClicked: userSearchDrawer.open();
-                hoverEnabled: true
-                onHoveredChanged: userListSearchBtnId.opacity=(hovered)? 1 : 0.5;
-            }
+        Button
+        {
+            Layout.columnSpan: 3
+            Layout.preferredHeight: 64
+            Layout.preferredWidth: 64
+            background: Item{}
+            icon.source: "qrc:/Assets/images/add.png"
+            icon.width: 64
+            icon.height: 64
+            opacity: 0.5
+            //onClicked: .open();
+            hoverEnabled: true
+            onHoveredChanged: userListSearchBtnId.opacity=(hovered)? 1 : 0.5;
         }
 
 
         GridView {
             id: gview
+            Layout.columnSpan: 3
             Layout.alignment: Qt.AlignHCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
