@@ -18,8 +18,6 @@ ApplicationWindow {
 
     FontLoader { id: yekanFont; source: "qrc:/Assets/font/yekan.ttf" }
 
-    signal newUserSignal();
-
     menuBar: MenubarModule{id: menubarId;}
     header : ToolbarModule{id:toolbarId; }
 

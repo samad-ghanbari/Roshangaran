@@ -205,12 +205,6 @@ MenuBar {
 
     Component
     {
-        id: newUserPageComponent
-        NewUser{}
-    }
-
-    Component
-    {
         id: listUserPageComponent
         ListUser{}
     }
